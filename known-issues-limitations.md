@@ -37,14 +37,6 @@
 
   **Solution:** The message is benign and can be ignored
 
-* When running the sdxstereo plugin, upon termination, you may sometimes see the message `ERROR: application has performed illegal memory access and is being terminated`.
-
-  **Solution:** This error comes from the sdxstereo plugin, and will be corrected in a future release.
-
-* When attempting to terminate the sdx--- plugins, you may sometimes experience a hang of the linux OS. No message appears and you do not come back to the linux prompt.
-
-  **Solution:** This error comes from the sdx--- plugins, and will be corrected in a future release.
-
 ## 9.2 Limitations 
 
 * Do not connect a DisplayPort cable and HDMI Tx at the same time.
