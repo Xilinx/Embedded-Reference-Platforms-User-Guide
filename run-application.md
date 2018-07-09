@@ -109,9 +109,9 @@ The "top" projects generate shared libraries and the demo app.
 * `./ws_triple/gst/apps/triple/Debug/gstdemo.`
 
 >**:information_source: TIP**
-> * create a lib directory in sdcard's root folder and copy libtriple.so, libgstsdxbase.so and libgstsdxallocator.so in /lib directory.
-> * copy libgstsdxfilter2d.so, libgstsdxstereo.so and libgstsdxopticalflow.so in /gstreamer-1.0 directory.
-> * Rest all images copy directly in sdcard's root folder /.
+> * create a lib directory in sdcard's root folder and copy libtriple.so, libgstsdxbase.so and libgstsdxallocator.so in lib directory.
+> * copy libgstsdxfilter2d.so, libgstsdxstereo.so and libgstsdxopticalflow.so in gstreamer-1.0 directory.
+> * Rest all images copy directly in sdcard's root folder.
 
 
 * insert SD card in the SD card slot on your target board.
@@ -126,41 +126,41 @@ The "top" projects generate shared libraries and the demo app.
   * filter2d case:
 
 	```
-	# cp /lib/libfilter2d.so /usr/lib
-	# cp /gstreamer-1.0/libgstsdxfilter2d.so /usr/lib/gstreamer-1.0
-	# cp /lib/libgstsdxbase.so /usr/lib/gstreamer-1.0
-	# cp /lib/libgstsdxallocator.so /usr/lib/gstreamer-1.0
+	# cp lib/libfilter2d.so /usr/lib
+	# cp gstreamer-1.0/libgstsdxfilter2d.so /usr/lib/gstreamer-1.0
+	# cp lib/libgstsdxbase.so /usr/lib/gstreamer-1.0
+	# cp lib/libgstsdxallocator.so /usr/lib/gstreamer-1.0
 
 	```
   * opticalflow case:
 
 	```
-	# cp /lib/libopticalflow.so /usr/lib
-	# cp /gstreamer-1.0/libgstsdxopticalflow.so /usr/lib/gstreamer-1.0
-	# cp /lib/libgstsdxbase.so /usr/lib/gstreamer-1.0
-	# cp /lib/libgstsdxallocator.so /usr/lib/gstreamer-1.0
+	# cp lib/libopticalflow.so /usr/lib
+	# cp gstreamer-1.0/libgstsdxopticalflow.so /usr/lib/gstreamer-1.0
+	# cp lib/libgstsdxbase.so /usr/lib/gstreamer-1.0
+	# cp lib/libgstsdxallocator.so /usr/lib/gstreamer-1.0
 
 	```
 
   * stereo case:
 	```
 
-	# cp /lib/libstereo.so /usr/lib
-	# cp /gstreamer-1.0/libgstsdxstereo.so /usr/lib/gstreamer-1.0
-	# cp /lib/libgstsdxbase.so /usr/lib/gstreamer-1.0
-	# cp /lib/libgstsdxallocator.so /usr/lib/gstreamer-1.0
+	# cp lib/libstereo.so /usr/lib
+	# cp gstreamer-1.0/libgstsdxstereo.so /usr/lib/gstreamer-1.0
+	# cp lib/libgstsdxbase.so /usr/lib/gstreamer-1.0
+	# cp lib/libgstsdxallocator.so /usr/lib/gstreamer-1.0
 
 	```
 
   * triple case:
 	``` 
 
-	# cp /lib/libtriple.so /usr/lib
-	# cp /gstreamer-1.0/libgstsdxfilter2d.so /usr/lib/gstreamer-1.0
-	# cp /gstreamer-1.0/libgstsdxopticalflow.so /usr/lib/gstreamer-1.0
-	# cp /gstreamer-1.0/libgstsdxstereo.so /usr/lib/gstreamer-1.0
-	# cp /lib/libgstsdxbase.so /usr/lib/gstreamer-1.0
-	# cp /lib/libgstsdxallocator.so /usr/lib/gstreamer-1.0
+	# cp lib/libtriple.so /usr/lib
+	# cp gstreamer-1.0/libgstsdxfilter2d.so /usr/lib/gstreamer-1.0
+	# cp gstreamer-1.0/libgstsdxopticalflow.so /usr/lib/gstreamer-1.0
+	# cp gstreamer-1.0/libgstsdxstereo.so /usr/lib/gstreamer-1.0
+	# cp lib/libgstsdxbase.so /usr/lib/gstreamer-1.0
+	# cp lib/libgstsdxallocator.so /usr/lib/gstreamer-1.0
 
 	```
 
@@ -248,7 +248,7 @@ To create and run the gstreamer pipeline, you can either use the gst demo applic
   * The stereo demo used the USB "ZED" stereo camera input
   * The triple demo uses all of the above
 
-* Here is a gst-launch command to run the filter2d pipeline, from MIPI, 1920x1080, YUY2, to HDMI output via mixer plane 26.
+* Here is a gst-launch command to run the filter2d pipeline, from MIPI, 1920x1080, YUY2, to HDMI output via mixer plane 29.
 ```
 
 gst-launch-1.0 \
@@ -260,7 +260,7 @@ gst-launch-1.0 \
 ```
 
 
-* Here is a gst-launch command to run the opticalflow pipeline, from HDMI, 1920x1080, YUY2, to HDMI output via mixer plane 26.
+* Here is a gst-launch command to run the opticalflow pipeline, from HDMI, 1920x1080, YUY2, to HDMI output via mixer plane 29.
 ```
 
 gst-launch-1.0 \
@@ -272,7 +272,7 @@ gst-launch-1.0 \
 ```
 
 
-* Here is a gst-launch command to run the stereo pipeline, from USB, 3840x1080 side-by-side input, YUY2, 1920x1080 output to HDMI via mixer plane 26. You must substitute your camera serial number for the config-filename property. See section below on "**Particuliarities about the Stereo Demo**".
+* Here is a gst-launch command to run the stereo pipeline, from USB, 3840x1080 side-by-side input, YUY2, 1920x1080 output to HDMI via mixer plane 29. You must substitute your camera serial number for the config-filename property. See section below on "**Particuliarities about the Stereo Demo**".
 ```
 
 gst-launch-1.0 \
