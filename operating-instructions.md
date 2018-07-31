@@ -77,7 +77,7 @@
 
 ## 5.2 Extract the design zip files 
 
-Download and unzip the reference design zip file matching your silicon version (see Section 4.2).
+Download and unzip the reference design zip file matching your silicon version (see Section 3.2).
 * For Linux, use the **unzip** utlity.
 * For Windows, make sure that the reference design zip file is unzipped in a directory path which contains no spaces. Use the **7zip** utility and follow the steps below. If you need 7zip, get it here [7zip](http://www.7-zip.org/).
 
