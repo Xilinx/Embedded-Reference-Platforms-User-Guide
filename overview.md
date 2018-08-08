@@ -1,80 +1,80 @@
 <table style="width:100%">
   <tr>
 
-<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.2</h1>
+<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION 入門ガイド 2018.2</h1>
 </th>
 
   </tr>
   <tr>
-    <td width="17%" align="center"><a href="README.md">1. Introduction</a></td>
-    <td width="16%" align="center">2. Overview</td>
-    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3. Software Tools and System Requirements</a></td>
-    <td width="17%" align="center"><a href="design-file-hierarchy.md">4. Design File Hierarchy</a></td>
+    <td width="17%" align="center"><a href="README.md">1.  はじめに</a></td>
+    <td width="16%" align="center">2.  概要</td>
+    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3.  ソフトウェア ツールおよびシステム要件</a></td>
+    <td width="17%" align="center"><a href="design-file-hierarchy.md">4.  デザイン ファイルの階層</a></td>
 </tr>
 <tr>
-    <td width="17%" align="center"><a href="operating-instructions.md">5. Installation and Operating Instructions</a></td>
-    <td width="16%" align="center"><a href="tool-flow-tutorials.md">6. Tool Flow Tutorials</a></td>
-    <td width="17%" align="center"><a href="run-application.md">7. Run the Application</a></td>
-    <td width="17%" align="center"><a href="platform-details.md">8. Platform Details</a></td>    
+    <td width="17%" align="center"><a href="operating-instructions.md">5.  インストールおよび操作手順</a></td>
+    <td width="16%" align="center"><a href="tool-flow-tutorials.md">6.  ツール フロー チュートリアル</a></td>
+    <td width="17%" align="center"><a href="run-application.md">7.  アプリケーションの実行</a></td>
+    <td width="17%" align="center"><a href="platform-details.md">8.  プラットフォームの詳細</a></td>    
   </tr>
 <tr>
-    <td width="17%" align="center" colspan="2"><a href="known-issues-limitations.md">9. Known Issues and Limitations</a></td>
-    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10. Additional References</a></td>
+    <td width="17%" align="center" colspan="2"><a href="known-issues-limitations.md">9.  既知の問題および制限</a></td>
+    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10.  その他のリソース</a></td>
 </tr>
 </table>
 
-# 2. Overview
+# 2.  概要
 
-The below figure shows a block diagram of the reVISION single sensor design:
-* video sources (or capture pipelines) are highlighted in blue color
-* computer vision accelerators implemented as memory-to-memory (m2m) pipelines in red color and
-* video sinks (or output/display pipelines) in green color
+次の図に、reVISION シングル センサー デザインのブロック図を示します。
+* ビデオ ソース (キャプチャ パイプライン) は青で示します。
+* M2M (Memory-to-Memory) パイプラインとしてインプリメントされているコンピューター ビジョン アクセラレータは赤で示します。
+* ビデオ シンク (出力/ディスプレイ パイプライン) は緑で示します。
 
 ![](./images/rv-ss-bd.jpg)
 
-## 2.1 Platform
+## 2.1 プラットフォーム
 
-The ZCU102/ZCU104 single-sensor reVISION platform supports the following video interfaces:
+ZCU102/ZCU104 シングル センサー reVISION プラットフォームでは、次のビデオ インターフェイスがサポートされています。
 
-### 2.1.1 Sources
-* USB2/3 camera up to 1080p60 or stereo 1080p30
-   * The USB controller is part of the processing system (PS). It uses the standard Linux Universal Video Class (UVC) driver.
-* HDMI Rx up to 4k60
-   * The HDMI capture pipeline is implemented in the programmable logic (PL) and consists of HDMI Rx Subsystem, Video Processing Subsystem (Scaler only configuration), and Frame Buffer Write. The HDMI Rx subsystem receives and decodes the HDMI data stream from an HDMI source and converts it to AXI4-Stream. The Video Processing Subsystem converts the incoming color format (one of RGB, YUV444, YUV422) to YUV422 and optionally scales the image to the target resolution. The Frame Buffer Write IP writes the YUV422 stream to memory as packed YUYV format. The HDMI capture pipeline uses the V4L Linux framework.
-* MIPI CSI via optional FMC card up to 4k60
-   * The MIPI capture pipeline is implemented in the PL and consists of Sony IMX274 image sensor, MIPI CSI2 Subsystem, Demosaic, Gamma, Video Processing Subsystem (CSC configuration), Video Processing Subsystem (Scaler only configuration), and Frame Buffer Write. The IMX274 image sensor provides raw image data over the camera sensor interface (CSI) link. The MIPI CSI2 Subsystem receives and decodes the incoming data stream to AXI4-Stream. The Demosaic IP converts the raw image format to RGB. The Gamma IP provides per-channel gamma correction functionality. The VPSS-CSC provides color correction functionality. The VPSS-Scaler converts the RGB image to YUV422. The Frame Buffer Write IP writes the YUV422 stream to memory as packed YUYV format. The MIPI capture pipeline uses the V4L Linux framework.
+### 2.1.1 ソース
+* 1080p60 までの USB2/3 カメラまたはステレオ 1080p30
+   * USB コントローラーは、プロセッシング システム (PS) の一部です。標準の Linux ユニバーサル ビデオ クラス (UVC) ドライバーを使用します。
+* 4k60 までの HDMI Rx
+   * HDMI キャプチャ パイプラインはプログラマブル ロジック (PL) にインプリメントされ、HDMI Rx Subsystem、Video Processing Subsystem (Scaler のみのコンフィギュレーション)、および Frame Buffer Write で構成されます。HDMI Rx Subsystem は、HDMI ソースから HDMI データ ストリームを受信してデコードし、AXI4-Stream に変換します。Video Processing Subsystem は、入力の色フォーマット (RGB、YUV444、YUV422 のいずれか) から YUV422 に変換し、オプションで画像をターゲットの解像度にスケーリングします。Frame Buffer Write IP は、YUV422 ストリームをパック形式の YUYV フォーマットとしてメモリに書き込みます。HDMI キャプチャ パイプラインは、V4L Linux フレームワークを使用します。
+* 4k60 までのオプションの FMC カードを介した MIPI CSI
+   * MIPI キャプチャ パイプラインは PL にインプリメントされ、ソニー IMX274 イメージ センサー、MIPI CSI2 Subsystem、Demosaic、Gamma、Video Processing Subsystem (CSC コンフィギュレーション)、Video Processing Subsystem (Scaler のみのコンフィギュレーション)、および Frame Buffer Write で構成されます。IMX274 イメージ センサーは、カメラ センサー インターフェイス (CSI) リンク を介して Raw 画像データを供給します。MIPI CSI2 Subsystem は、入力データ ストリームを受信してデコードし、AXI4-Stream に変換します。Demosaic IP は、Raw 画像フォーマットを RGB に変換します。Gamma IP は、チャネルごとのガンマ補正を実行します。VPSS-CSC は、色補正を実行します。VPSS Scaler は、RGB 画像を YUV422 に変換します。Frame Buffer Write IP は、YUV422 ストリームをパック形式の YUYV フォーマットとしてメモリに書き込みます。MIPI キャプチャ パイプラインは、V4L Linux フレームワークを使用します。
 
-### 2.1.2 Sinks
-* HDMI Tx up to 4k60
-  * The HDMI display pipeline is implemented in the PL and consists of a Video Mixer and HDMI Tx Subsystem. The Video Mixer is configured to read one ARGB and two YUYV layers from memory. In the provided design examples, only a single YUYV layer is used. The video layers are then composed and alpha-blended into a single output frame which is sent to the HDMI Tx Subsystem via AXI4-Stream. The HDMI Tx Subsystem encodes the incoming video into an HDMI data stream and sends it to the HDMI display. The HDMI display pipeline uses the DRM/KMS Linux framework.
-* DP Tx up to 4k30
-   * The DP display pipeline is configured for dual-lane mode and is part of the PS. It includes a simple two-layer blender with run-time programmable color format converters per layer. The two layers are always full screen matching the target display resolution. The DP display pipeline uses the DRM/KMS Linux framework.
+### 2.1.2 シンク
+* 4k60 までの HDMI Tx
+  * HDMI ディスプレイ パイプラインは PL にインプリメントされ、Video Mixer および HDMI Tx Subsystem で構成されます。Video Mixer は、メモリから 1 つの ARGB と 2 つの YUYV レイヤーを読み出します。提供されているデザイン例では、1 つの YUYV レイヤーのみが使用されます。この後ビデオ レイヤーが構成され、1 つの出力フレームにアルファブレンドされ、AXI4-Stream を介して HDMI Tx Subsystem に送信されます。HDMI Tx Subsystem は入力ビデオを HDMI データ ストリームにエンコードし、HDMI ディスプレイに送信します。HDMI ディスプレイ パイプラインは、DRM/KMS Linux フレームワークを使用します。
+* 4k30 までの DP Tx
+   * DP ディスプレイはデュアル レーン モード用に設定されており、PS の一部です。レイヤーごとにランタイム プログラマブルの色フォーマット コンバーターを含む単純な 2 レイヤー ブレンダーを含みます。2 つのレイヤーは、ターゲット ディスプレイの解像度に一致するフル スクリーンです。DP ディスプレイ パイプラインは、DRM/KMS Linux フレームワークを使用します。
 
-## 2.2 Design Examples
+## 2.2 デザイン例
 
-### 2.2.1 File I/O
-These are the simplest design examples. Typically they will read a frame of video from a standard image file using a standard OpenCV call (such as cv::imread()), process that frame with a call to an xfopencv function, and output the result to a file, (e.g., using cv::imwrite()). They illustrate use of five different xfopencv HW accelerated versions of popular OpenCV functions.
-* Bilateral Filter
-* Harris Filter
-* Dense Optical Flow
-* Stereo Vision (Depth Detection)
-* Warp Transformation
+### 2.2.1 ファイル I/O
+これらは単純なデザイン例です。標準 OpenCV 読み出し (cv::imread() など) を使用して標準画像ファイルからビデオのフレームを読み出し、xfOpenCV 関数への呼び出しを使用してフレームを処理し、結果をファイルに出力します (cv::imwrite() を使用)。よく使用される OpenCV 関数のハードウェア アクセラレーションされたバージョンである xfOpenCV を 5 つ使用します。
+* バイラテラル フィルター
+* Harris フィルター
+* 高密度オプティカル フロー
+* ステレオ ビジョン (深度検出)
+* ワープ変換
 
-### 2.2.2 Live I/O
-These examples input and output live video.
-* Dense Optical Flow - requires LI-IMX274MIPI-FMC **or** HDMI source **or** See3CAM_CU30 USB camera
-   * This algorithm uses two successive images in time, and calculates the direction and magnitude of motion at every pixel position in the image. The calculation is a simple implementation of the Lucas–Kanade method for optical flow estimation. The optical flow algorithm returns two signed numbers at each pixel position, representing up or down motion in the vertical direction, and left or right motion in the horizontal direction. The brightness of the false-color output, from black up to bright color, indicates the magnitude of the motion, and the color indicates the direction.
+### 2.2.2 ライブ I/O
+これらは、入力および出力ライブ ビデオの例です。
+* 高密度オプティカル フロー - LI-IMX274MIPI-FMC **または** HDMI ソース **または** See3CAM_CU30 USB カメラが必要
+   * このアルゴリズムは、時間的に連続する 2 つの画像を使用し、画像の各ピクセル位置における動きの方向と大きさを計算します。この計算は、オプティカル フロー見積もり用の Lucas–Kanade 法の単純なインプリメンテーションです。このオプティカル フロー アルゴリズムは、各ピクセル位置に対して、垂直方向の動きと水平方向の動きを表す 2 つの符号付きの値を返します。擬色出力の明るさは黒から鮮明な色までで、動きの大きさを表し、色は方向を示します。
 
-* Stereo Vision (Depth Detection) - requires ZED USB stereo camera
-   * This algorithm uses two side-by-side images from the stereo camera taken at the same moment in time, and calculates the depth, or distance from the camera, at every pixel position in the image. The stereo block-matching algorithm calculates depth based on binocular parallax, similar to the way human eyes perceive depth. The depth map is coded in false colors. Objects far away appear deep blue. Closer and closer objects appear in rainbow succession green, yellow, orange, red, purple and finally white, closest to the camera.
+* ステレオ ビジョン (深度検出) - ZED USB ステレオ カメラが必要
+   * このアルゴリズムは、同じ時間に撮られたステレオ カメラからの 2 つの並んだ画像を使用し、画像の各ピクセル位置に対して深度 (カメラからの距離) を計算します。ステレオ ブロック マッチング アルゴリズムでは、人間が深度を認識するのと同様の方法である両眼視差に基づいて深度を計算します。深度マップは、擬色でコード記述されます。遠い物体は濃い青で示されます。物体が近くなるほど徐々に緑、黄、オレンジ、赤、紫と変化していき、カメラに最も近い物体は白で示されます。
 
-* Filter2D - requires LI-IMX274MIPI-FMC **or** HDMI source **or** See3CAM_CU30 USB camera
-   * Convolution is a common image processing technique that changes the intensity of a pixel to reflect the intensities of the surrounding pixels. This is widely used in image filters to achieve popular image effects like blur, sharpen, and edge detection. The implemented algorithm uses a 3x3 kernel with programmable filter coefficients.
+* Filter2D - LI-IMX274MIPI-FMC **または** HDMI ソース **または** See3CAM_CU30 USB カメラが必要
+   * たたみ込みは、ピクセルの強度を周辺ピクセルの強度を反映して変更する一般的な画像処理手法です。この手法は、ぼかし、鮮鋭化、エッジ検出などの画像効果を達成するため、画像フィルターに広く使用されます。インプリメントされたアルゴリズムでは、プログラム可能なフィルター係数を持つ 3x3 カーネルが使用されます。
 
-* Triple - combine the above three designs in a single project (**ZCU102 only**)
-   * All three designs are available at once in HW. The test application provided sets up three pipelines, from three independent video sources, via the three HW accelerated plugins, to three planes of the video mixer for output on the HDMI display.
+* トリプル - 上記 3 つのデザインを 1 つのプロジェクトにまとめたものです (**ZCU102 のみ**)。
+   * 3 つのデザインすべてをハードウェアで同時に使用できます。提供されるテスト アプリケーションでは、3 つの個別のビデオ ソースから、3 つのハードウェアでアクセラレーションされたプラグインを介して、HDMI ディスプレイに出力するためビデオ ミキサーの 3 つのプレーンに転送する 3 つのパイプラインが設定されます。
 
-Below table shows the performance matrix of the live I/O samples on the supported platforms:
+次の表に、サポートされるプラットフォームでのライブ I/O サンプルのパフォーマンス マトリックスを示します。
 
 |   | **ZCU102** | **ZCU104** |
 |----|----|----|
@@ -82,13 +82,13 @@ Below table shows the performance matrix of the live I/O samples on the supporte
 | **optical_flow** | 2160p52 | 2160p30 |
 | **stereo** | 1080p16 | 720p18 |
 
-**:pushpin: NOTE**
-Work to bring the performance on the ZCU104 up to par with the ZCU102 is ongoing.
+**:pushpin: 注記:**
+ZCU104 のパフォーマンスを ZCU102 のレベルに引き上げるため取り組んでおります。
 
 <hr/>
 
-:arrow_forward:**Next Topic:**  [3. Software Tools and System Requirements](software-tools-system-requirements.md)
+:arrow_forward:**次のトピック:**  [3.  ソフトウェア ツールおよびシステム要件](software-tools-system-requirements.md)
 
-:arrow_backward:**Previous Topic:**  [1. Introduction](README.md)
+:arrow_backward:**前のトピック:**  [1.はじめに](README.md)
 <hr/>
 <p align="center"><sup>Copyright&copy; 2018 Xilinx</sup></p>

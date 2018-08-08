@@ -1,59 +1,59 @@
 <table style="width:100%">
   <tr>
 
-<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.2</h1>
+<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION 入門ガイド 2018.2</h1>
 </th>
 
   </tr>
   <tr>
-    <td width="17%" align="center"><a href="README.md">1. Introduction</a></td>
-    <td width="16%" align="center"><a href="overview.md">2. Overview</a></td>
-    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3. Software Tools and System Requirements</a></td>
-    <td width="17%" align="center"><a href="design-file-hierarchy.md">4. Design File Hierarchy</a></td>
+    <td width="17%" align="center"><a href="README.md">1.  はじめに</a></td>
+    <td width="16%" align="center"><a href="overview.md">2.  概要</a></td>
+    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3.  ソフトウェア ツールおよびシステム要件</a></td>
+    <td width="17%" align="center"><a href="design-file-hierarchy.md">4.  デザイン ファイルの階層</a></td>
 </tr>
 <tr>
-    <td width="17%" align="center"><a href="operating-instructions.md">5. Installation and Operating Instructions</a></td>
-    <td width="16%" align="center"><a href="tool-flow-tutorials.md">6. Tool Flow Tutorials</a></td>
-    <td width="17%" align="center"><a href="run-application.md">7. Run the Application</a></td>
-    <td width="17%" align="center"><a href="platform-details.md">8. Platform Details</a></td>    
+    <td width="17%" align="center"><a href="operating-instructions.md">5.  インストールおよび操作手順</a></td>
+    <td width="16%" align="center"><a href="tool-flow-tutorials.md">6.  ツール フロー チュートリアル</a></td>
+    <td width="17%" align="center"><a href="run-application.md">7.  アプリケーションの実行</a></td>
+    <td width="17%" align="center"><a href="platform-details.md">8.  プラットフォームの詳細</a></td>    
   </tr>
 <tr>
-    <td width="17%" align="center" colspan="2">9. Known Issues and Limitations</td>
-    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10. Additional References</a></td>
+    <td width="17%" align="center" colspan="2">9.  既知の問題および制限</td>
+    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10.  その他のリソース</a></td>
 </tr>
 </table>
 
-# 9. Known Issues and Limitations 
+# 9.  既知の問題および制限 
 
-## 9.1 Known Issues
+## 9.1 既知の問題
 
-* SDSoC accelerator code runs very slowly in pure software implementation when Debug configuration is used.
+* デバッグ コンフィギュレーションを使用した場合、SDSoC アクセラレータ コードはソフトウェアのみのインプリメンテーションでは非常に低速に実行されます。
 
-  **Solution:** Set project build configurations to Release which sets sdsoc compiler to optimize most (-O3).
+  **ソリューション:** プロジェクトのビルド コンフィギュレーションを [Release] に設定し、sdsoc コンパイラで最適化が最大に実行されるように -O3 オプションを使用します。
 
-* The following error message is shown when compiling the SDx project:
+* SDx プロジェクトを実行すると、次のような警告メッセージが表示されます。
 
   `WARNING: [DMAnalysis 83-4492] Unable to determine the memory attributes passed to _mapx_mat.data of function w1_xf_remap at /home/workspaces/ws_sv/stereo/src/stereo_sds.cpp:257, please use mem_attribute pragma to specify`
 
-  **Solution:** The message is benign and can be ignored
+  **ソリューション:** このメッセージは無視しても問題ありません。
 
-## 9.2 Limitations 
+## 9.2 制限 
 
-* Do not connect a DisplayPort cable and HDMI Tx at the same time.
-* Make sure the DisplayPort or HDMI Tx cable is plugged in when you power on the board.
-* DP-to-HDMI adapters are not supported, see [AR 67462](https://www.xilinx.com/support/answers/67462.html)
+* DisplayPort ケーブルと HDMI Tx を同時に接続しないでください。
+* ボードに電源を投入するときに、DisplayPort または HDMI Tx ケーブルが差し込まれていることを確認してください。
+* DP-to-HDMI アダプターはサポートされていません。[アンサー 67462](https://japan.xilinx.com/support/answers/67462.html) を参照してください。
 * HDMI Rx:
-  * Does not support YUV 4:2:0 input.
-  * Does not support HDCP encrypted input.
-  * Does not support hotplug or dynamic resolution changes while the application is running.
-* The provided image signal processor (ISP) pipeline does not include any auto algorithms. The IMX274, gamma, and color correction controls have to be adjusted manually based on the surrounding environment.
-* The `optical_flow` live IO sample does not have a software implementation of the algorithm, only the hardware optimized implementation is available.
-* SDSoC does not support “Estimate Performance” for the xfopenCV library and in general for all the C++ templates (the part of Performance Estimation flow not yet supported is the estimate of software performance for function templates). Once the HLS estimate of HW resources pops up, the Ethernet P2P communication process between the SDSoC GUI and the board stalls forever and no error message is displayed.
+  * YUV 4:2:0 入力はサポートされません。
+  * HDCP 暗号化入力はサポートされません。
+  * アプリケーション実行中のホットプラグまたは動的な解像度の変更はサポートされません。
+* 提供されている画像信号プロセッサ (ISP) パイプラインには自動アルゴリズムは含まれていません。IMX274、ガンマ、および色補正制御は、周囲の環境に基づいて手動で調整する必要があります。
+* `optical_flow` ライブ I/O サンプルには、アルゴリズムのソフトウェア インプリメンテーションは含まれておらず、ハードウェアに最適化されたインプリメンテーションのみを使用可能です。
+* SDSoC では、xfOpenCV ライブラリおよび通常すべての C++ テンプレートのパフォーマンス見積もりはサポートされていません。パフォーマンス見積もりフローでまだサポートされていない部分は、関数テンプレートのソフトウェア パフォーマンスの見積もりです。ハードウェア リソースの HLS 見積もりが表示されると、SDSoC GUI とボード間のイーサネット P2P 通信が恒久的に停止し、エラー メッセージも表示されません。
 
 <hr/>
 
-:arrow_forward:**Next Topic:**  [10. Additional References](additional-references.md)
+:arrow_forward:**次のトピック:**  [10.  その他のリソース](additional-references.md)
 
-:arrow_backward:**Previous Topic:**  [8. Platform Details](platform-details.md)
+:arrow_backward:**前のトピック:**  [8.  プラットフォームの詳細](platform-details.md)
 <hr/>
 <p align="center"><sup>Copyright&copy; 2018 Xilinx</sup></p>

@@ -1,33 +1,33 @@
-<table style="width:100%">
+﻿<table style="width:100%">
   <tr>
 
-<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.2</h1>
+<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION 入門ガイド 2018.2</h1>
 </th>
 
   </tr>
   <tr>
-    <td width="17%" align="center"><a href="README.md">1. Introduction</a></td>
-    <td width="16%" align="center"><a href="overview.md">2. Overview</a></td>
-    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3. Software Tools and System Requirements</a></td>
-    <td width="17%" align="center"><a href="design-file-hierarchy.md">4. Design File Hierarchy</a></td>
+    <td width="17%" align="center"><a href="README.md">1.  はじめに</a></td>
+    <td width="16%" align="center"><a href="overview.md">2.  概要</a></td>
+    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3.  ソフトウェア ツールおよびシステム要件</a></td>
+    <td width="17%" align="center"><a href="design-file-hierarchy.md">4.  デザイン ファイルの階層</a></td>
 </tr>
 <tr>
-    <td width="17%" align="center"><a href="operating-instructions.md">5. Installation and Operating Instructions</a></td>
-    <td width="16%" align="center"><a href="tool-flow-tutorials.md">6. Tool Flow Tutorials</a></td>
-    <td width="17%" align="center"><a href="run-application.md">7. Run the Application</a></td>
-    <td width="17%" align="center">8. Platform Details</td>    
+    <td width="17%" align="center"><a href="operating-instructions.md">5.  インストールおよび操作手順</a></td>
+    <td width="16%" align="center"><a href="tool-flow-tutorials.md">6.  ツール フロー チュートリアル</a></td>
+    <td width="17%" align="center"><a href="run-application.md">7.  アプリケーションの実行</a></td>
+    <td width="17%" align="center">8.  プラットフォームの詳細</td>    
   </tr>
 <tr>
-    <td width="17%" align="center" colspan="2"><a href="known-issues-limitations.md">9. Known Issues and Limitations</a></td>
-    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10. Additional References</a></td>
+    <td width="17%" align="center" colspan="2"><a href="known-issues-limitations.md">9.  既知の問題および制限</a></td>
+    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10.  その他のリソース</a></td>
 </tr>
 </table>
 
-# 8 Platform Details 
+# 8 プラットフォームの詳細 
 
-## 8.1 Vivado Hardware Design
+## 8.1 Vivado ハードウェア デザイン
 
-The Vivado hardware design is packaged inside the DSA located at `zcu10[2|4]_[es2_]rv_ss/hw/zcu102_[es2_]rv_ss.dsa`. The DSA also includes the hpfm file that describes the available AXI interfaces, clocks, resets, and interrupts. To open the hardware design in Vivado, run the following command from the tcl console:
+Vivado ハードウェア デザインは、`zcu10[2|4]_[es2_]rv_ss/hw/zcu102_[es2_]rv_ss.dsa` にある DSA 内にパッケージされています。DSA には、使用可能な AXI インターフェイス、クロック、リセット、および割り込みを記述する hpfm ファイルも含まれます。Vivado でハードウェア デザインを開くには、[Tcl Console] で次のコマンドを実行します。
 
 ```
 % open_dsa zcu10[2|4]_[es2_]rv_ss/hw/zcu10[2|4]_[es2_]rv_ss.dsa
@@ -36,9 +36,9 @@ The Vivado hardware design is packaged inside the DSA located at `zcu10[2|4]_[es
 
 ## 8.2 PetaLinux BSP 
 
-The PetaLinux BSP is located at `zcu10[2|4]_[es2_]rv_ss/sw/petalinux_bsp`. The hdf file exported from the corresponding Vivado project (see 9.1) is available in the `project-spec/hw-description/` subfolder inside to the PetaLinux BSP.
+PetaLinux BSP は、`zcu10[2|4]_[es2_]rv_ss/sw/petalinux_bsp` にあります。対応する Vivado プロジェクトからエクスポートした HDF ファイルは、PetaLinux BSP 内の `project-spec/hw-description/` サブフォルダーにあります。
 
-To configure and build the PetaLinux BSP, run the following commands:
+PetaLinux BSP をコンフィギュレーションしてビルドするには、次のコマンドを実行します。
 
 ```
 % cd petalinux
@@ -47,38 +47,38 @@ To configure and build the PetaLinux BSP, run the following commands:
 % petalinux-build
 ```
 
-**:pushpin: NOTE** The tmp directory might relocated to a different folder especially if your petalinux project is located on a NFS mount. Please check your petalinux configuration.
+**:pushpin: 注記:** 特に PetaLinux プロジェクトが NFS マウントにある場合、tmp ディレクトリは別のフォルダーに移動されている可能性があります。PetaLinux の構成を確認してください。
 
-The generated output products are located inside the `images/linux/` subfolder. The relevant files that are packaged as part of the platform are
+生成された出力ファイルは、`images/linux/` サブフォルダーにあります。プラットフォームの一部としてパッケージされている関連ファイルは、次のとおりです。
 * bl31.elf
 * pmufw.elf
 * u-boot.elf
 * zynqmp_fsbl.elf
 * image.ub
 
-To generate the SDK/sysroot run the following command:
+SDK/sysroot を生成するには、次のコマンドを実行します。
 
 ```
 % petalinux-build -s
 ```
 
-The generated SDK installer will be located at `images/linux/sdk.sh`.
+生成された SDK インストーラーは、`images/linux/sdk.sh` にあります。
 
-## 8.3 Video Command Line Utility 
+## 8.3 ビデオ コマンド ライン ユーティリティ 
 
-The Xilinx `video_cmd` utility is used to initialize the media pipeline of an associated V4L2 capture device. A prebuilt version of this utility is available at `zcu10[2|4]_[es2_]rv_ss/sw/a53_linux/a53_linux/image/video_cmd` and will be automatically placed in the `sd_card` folder of the generated SDx project.
+ザイリンクス `video_cmd` ユーティリティは、関連の V4L2 キャプチャ デバイスのメディア パイプラインを初期化するために使用します。このユーティリティのビルド済みバージョンは `zcu10[2|4]_[es2_]rv_ss/sw/a53_linux/a53_linux/image/video_cmd` にあり、生成された SDx プロジェクトの `sd_card` フォルダーに自動的に配置されます。
 
-The `video_cmd`, `video_lib`, and `gst_lib` sources are provided as XSDK projects and are located at `zcu10[2|4]_[es2_]rv_ss/workspaces/ws_video`. Perform the following steps to build the application using the SDx GUI:
-* Make sure the `SYSROOT` environment variable is set correctly before starting SDx (see design example tutorials for details).
-* Start SDx and select the `zcu10[2|4]_[es2_]rv_ss/workspaces/ws_video` directory as your workspace.
-* From the SDx menu bar, select 'File -> Import -> General -> Existing Projects into Workspace'. Click 'Next'.
-* In the 'Import Project' dialog, browse to the workspace root directory at `zcu102_[es2_]rv_ss/workspaces/ws_video`. Make sure the `gst_lib`, `video_lib`, and `video_cmd` projects are checked and click 'Finish'.
-* Right-click the newly added `video_cmd` project in the 'Project Explorer' and select 'Build Project'. The `video_cmd` output product will be placed inside the `Debug` or `Release` subfolder depending on the chosen build configuration.
+`video_cmd`、`video_lib`、および `gst_lib` のソースは XSDK プロジェクトとして提供されており、`zcu10[2|4]_[es2_]rv_ss/workspaces/ws_video` に含まれます。次の手順に従って、SDx GUI を使用してアプリケーションをビルドします。
+* SDx を起動する前に、`SYSROOT` 環境変数が正しく設定されていることを確認してください。詳細は、デザイン例チュートリアルを参照してください。
+* SDx を起動し、ワークスペースとして `zcu10[2|4]_[es2_]rv_ss/workspaces/ws_video` ディレクトリを選択します。
+* SDx のメニューから [File] → [Import] → [General] → [Existing Projects into Workspace] をクリックします。[Next] をクリックします。
+* [Import Project] ダイアログ ボックスで、ワークスペースのルート ディレクトリ `zcu102_[es2_]rv_ss/workspaces/ws_video` に移動します。`gst_lib`、`video_lib`、および `video_cmd` プロジェクトのチェック ボックスがオンになっていることを確認し、[Finish] をクリックします。
+* [Project Explorer] ビューで追加した `video_cmd` プロジェクトを右クリックし、[Build Project] をクリックします。選択されているビルド コンフィギュレーションによって、`video_cmd` 出力ファイルは `Debug` または `Release` サブフォルダーに配置されます。
 
 <hr/>
 
-:arrow_forward:**Next Topic:**  [9. Known Issues and Limitations](known-issues-limitations.md)
+:arrow_forward:**次のトピック:**  [9.  既知の問題および制限](known-issues-limitations.md)
 
-:arrow_backward:**Previous Topic:**  [7. Run the Application](run-application.md)
+:arrow_backward:**前のトピック:**  [7.  アプリケーションの実行](run-application.md)
 <hr/>
 <p align="center"><sup>Copyright&copy; 2018 Xilinx</sup></p>

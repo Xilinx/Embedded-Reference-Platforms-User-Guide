@@ -1,42 +1,42 @@
 <table style="width:100%">
   <tr>
 
-<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.2</h1>
+<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION 入門ガイド 2018.2</h1>
 </th>
 
   </tr>
   <tr>
-    <td width="17%" align="center"><a href="README.md">1. Introduction</a></td>
-    <td width="16%" align="center"><a href="overview.md">2. Overview</a></td>
-    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3. Software Tools and System Requirements</a></td>
-    <td width="17%" align="center">4. Design File Hierarchy</td>
+    <td width="17%" align="center"><a href="README.md">1.  はじめに</a></td>
+    <td width="16%" align="center"><a href="overview.md">2.  概要</a></td>
+    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3.  ソフトウェア ツールおよびシステム要件</a></td>
+    <td width="17%" align="center">4.  デザイン ファイルの階層</td>
 </tr>
 <tr>
-    <td width="17%" align="center"><a href="operating-instructions.md">5. Installation and Operating Instructions</a></td>
-    <td width="16%" align="center"><a href="tool-flow-tutorials.md">6. Tool Flow Tutorials</a></td>
-    <td width="17%" align="center"><a href="run-application.md">7. Run the Application</a></td>
-    <td width="17%" align="center"><a href="platform-details.md">8. Platform Details</a></td>    
+    <td width="17%" align="center"><a href="operating-instructions.md">5.  インストールおよび操作手順</a></td>
+    <td width="16%" align="center"><a href="tool-flow-tutorials.md">6.  ツール フロー チュートリアル</a></td>
+    <td width="17%" align="center"><a href="run-application.md">7.  アプリケーションの実行</a></td>
+    <td width="17%" align="center"><a href="platform-details.md">8.  プラットフォームの詳細</a></td>    
   </tr>
 <tr>
-    <td width="17%" align="center" colspan="2"><a href="known-issues-limitations.md">9. Known Issues and Limitations</a></td>
-    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10. Additional References</a></td>
+    <td width="17%" align="center" colspan="2"><a href="known-issues-limitations.md">9.  既知の問題および制限</a></td>
+    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10.  その他のリソース</a></td>
 </tr>
 </table>
 
-# 4 Design File Hierarchy 
+# 4 デザイン ファイルの階層 
 
-The Zynq UltraScale+ MPSoC reVISION Platform zip file is released with the binary and source files required to create Xilinx SDx projects and build the sample applications. The sample applications are built as GStreamer plugins and test designs to exercise them. The provided samples include five file I/O examples and four live I/O examples. The file I/O examples read an input image file and produce an output image file whereas the live I/O examples take live video input from a video source and output live video on a display.
+Zynq UltraScale+ MPSoC reVISION プラットフォームの ZIP ファイルには、ザイリンクス SDx プロジェクトを作成してサンプル アプリケーションをビルドするために必要なバイナリおよびソース ファイルが含まれています。サンプル アプリケーションは、それを実行する GStreamer プラグインおよびテスト デザインとしてビルドされます。5 つのファイル I/O 例と 4 つのライブ I/O 例が提供されています。ファイル I/O 例は入力画像ファイルを読み込んで出力画像ファイルを生成し、ライブ I/O 例はビデオ ソースからビデオ入力を読み込んでディスプレイにライブ ビデオを出力します。
 
-The single-sensor reVISION platform contain the following components:
-* **zcu102_rv_ss** SDSoC Platform
-  * **hw** contains the .dsa file describing the hardware platform.
-  * **samples** contains sample app code. Each sample directory has a .json file describing the build process. These are the SDx sample apps that appear in the "Template" dialog when creating a new project using the reVISION platform.
-    * **file_IO** projects are self-contained.
-    * **live_IO** projects are more complex, and are built in several steps. See section 7.
-  * **sw** contains software - bootloaders and other code and support files for the processors on the ZCU10x target board.
-* **petalinux** contains a petalinux bsp with device tree info, hardware description files, and other system setup files. An advanced user has the option of creating their own platform. A sysroot is included as zip file.
-* **sd_card** contains pre-built SD card images that enable the user to run the live I/O example applications on the ZCU10x board.
-* **workspaces** contains a workspace directory structure you may use to build the live_IO samples. See section 7.
+シングル センサー reVISION プラットフォームには、次のコンポーネントが含まれます。
+* **zcu102_rv_ss** SDSoC プラットフォーム
+  * **hw**: ハードウェア プラットフォームを記述する .dsa ファイルが含まれます。
+  * **samples**: サンプル アプリケーション コードが含まれます。各サンプル ディレクトリには、ビルド プロセスを記述する .json ファイルが含まれます。これらは、reVISION プラットフォームを使用して新しいプロジェクトを作成するときに [Template] ダイアログ ボックスに表示される SDx サンプル アプリケーションです。
+    * **file_IO** プロジェクトは自己完結型です。
+    * **live_IO** プロジェクトはより複雑で、複数の手順でビルドされます。セクション 7 を参照してください。
+  * **sw**: ZCU10x ターゲット ボード上のプロセッサ用のソフトウェア、ブートローダー、およびその他のコードとサポート ファイルが含まれます。
+* **petalinux**: デバイス ツリー情報、ハードウェア記述ファイル、その他のシステム セットアップ ファイルを含む PetaLinux BSP が含まれます。上級ユーザーは、独自のプラットフォームを作成するオプションもあります。sysroot が ZIP ファイルとして含まれます。
+* **sd_card**: ZCU10x ボードでライブ I/O 例アプリケーションを実行できるようにするビルド済み SD カード イメージが含まれます。
+* **workspaces**: live_IO サンプルをビルドするのに使用可能なワークスペース ディレクトリ構造が含まれます。セクション 7 を参照してください。
 
 ```
 zcu102-rv-ss-2018-2
@@ -103,8 +103,8 @@ zcu102-rv-ss-2018-2
 
 <hr/>
 
-:arrow_forward:**Next Topic:**  [5. Installation and Operating Instructions](operating-instructions.md)
+:arrow_forward:**次のトピック:**  [5.  インストールおよび操作手順](operating-instructions.md)
 
-:arrow_backward:**Previous Topic:**  [3. Software Tools and System Requirements](software-tools-system-requirements.md)
+:arrow_backward:**前のトピック:**  [3.ソフトウェア ツールおよびシステム要件](software-tools-system-requirements.md)
 <hr/>
 <p align="center"><sup>Copyright&copy; 2018 Xilinx</sup></p>

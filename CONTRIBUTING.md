@@ -1,39 +1,39 @@
-# Contributing
+# 投稿
 
-You **always** want to look at this file *before* contributing. In here you should find
-steps that you need to take to set up your development environment as well as instructions
-for coding standards and contributing guidelines.
+投稿する前に**必ず**このファイルを参照してください。このページでは、開発環境のセットアップ方法と、コード記述の基準および投稿のガイドラインを示します。
 
-You'll notice that when this file is present, GitHub will give you an alert when creating
-a new issue, indicating that you should check out the guidelines first:
 
-## Acceptable Contributions
 
-We only accept pull requests that:
+このファイルが存在する場合、新しい問題を作成するときに、ガイドラインを確認するように指示する警告メッセージが表示されます。
 
-- fix bugs for existing documentation
-- enhance the existing documentation
 
-In the case of adding a new topic, that topic must:
+## 受領可能な投稿
+
+次のプル リクエストのみを受け付けています。
+
+- 既存の資料のバグ修正
+- 既存の資料を向上する変更
+
+新しいトピックを追加する場合、トピックが次の条件を満たしている必要があります。
 
 - provide instructions here
 
-Also, **please discuss any changes in the documentation** before working on a PR to make sure
-that we'll accept it before you spend time working on it.
+また、プル リクエストの作業を開始して時間を費やす前に、受領されるかどうかを確認するため、**資料の変更点についてディスカッションしてください**。
 
-## Set up instructions
 
-This is a documentation project that's distributed on [github.com](https://github.com)
-You're going to need to have certain tools and scripts installed to contribute to this project.
+## セットアップ手順
 
-1. Fork the repo
-2. Clone your fork
-3. Create a branch
-4. Push your changes to your fork with `git push`
-5. Create a pull request.
-6. Iterate on the solution.
-7. Get merged! 🎉 🎊
+これは、[github.com](https://github.com) で配布される資料プロジェクトです。
+このプロジェクトに投稿するには、特定のツールおよびスクリプトをインストールする必要があります。
 
-## Commit messages
+1.  repo をフォークします。
+2.  フォークをクローンします。
+3.  ブランチを作成します。
+4.  フォークの変更を `git push` を使用してプッシュします。
+5.  プル リクエストを作成します。
+6.  ソリューションでイテレーションします。
+7.  マージします。  
 
-We follow a convention for our commit messages, to learn about why and how, see
+## コミット メッセージ
+
+コミット メッセージは規則に従っています。

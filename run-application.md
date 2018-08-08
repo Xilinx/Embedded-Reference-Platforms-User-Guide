@@ -1,106 +1,110 @@
-<table style="width:100%">
+﻿<table style="width:100%">
   <tr>
 
-<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.2</h1>
+<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION 入門ガイド 2018.2</h1>
 </th>
 
   </tr>
   <tr>
-    <td width="17%" align="center"><a href="README.md">1. Introduction</a></td>
-    <td width="16%" align="center"><a href="overview.md">2. Overview</a></td>
-    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3. Software Tools and System Requirements</a></td>
-    <td width="17%" align="center"><a href="design-file-hierarchy.md">4. Design File Hierarchy</a></td>
+    <td width="17%" align="center"><a href="README.md">1.  はじめに</a></td>
+    <td width="16%" align="center"><a href="overview.md">2.  概要</a></td>
+    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3.  ソフトウェア ツールおよびシステム要件</a></td>
+    <td width="17%" align="center"><a href="design-file-hierarchy.md">4.  デザイン ファイルの階層</a></td>
 </tr>
 <tr>
-    <td width="17%" align="center"><a href="operating-instructions.md">5. Installation and Operating Instructions</a></td>
-    <td width="16%" align="center"><a href="tool-flow-tutorials.md">6. Tool Flow Tutorials</a></td>
-    <td width="17%" align="center">7. Run the Application</td>
-    <td width="17%" align="center"><a href="platform-details.md">8. Platform Details</a></td>    
+    <td width="17%" align="center"><a href="operating-instructions.md">5.  インストールおよび操作手順</a></td>
+    <td width="16%" align="center"><a href="tool-flow-tutorials.md">6.  ツール フロー チュートリアル</a></td>
+    <td width="17%" align="center">7.  アプリケーションの実行</td>
+    <td width="17%" align="center"><a href="platform-details.md">8.  プラットフォームの詳細</a></td>    
   </tr>
 <tr>
-    <td width="17%" align="center" colspan="2"><a href="known-issues-limitations.md">9. Known Issues and Limitations</a></td>
-    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10. Additional References</a></td>
+    <td width="17%" align="center" colspan="2"><a href="known-issues-limitations.md">9.  既知の問題および制限</a></td>
+    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10.  その他のリソース</a></td>
 </tr>
 </table>
 
-# 7 Run the Application 
+# 7 アプリケーションの実行 
 
-To use the GStreamer plugins, a video pipeline that includes them must be set up and launched. The command line utility `gst-launch-1.0` may be used to do this. Use your laptop connected to the target board over a serial terminal emulator, interacting with the system via a standard Linux console session. See section 6.1. You may construct video pipeline graphs consisting of one or more sources, zero, one or more accelerators, and one sink. GStreamer is responsible for initializing the capture, memory-to-memory, and display pipelines as well as managing the video buffer flow through the pipeline stages.
+GStreamer プラグインを使用するには、それを含むビデオ パイプラインをセットアップして起動する必要があります。これには、コマンド ライン ユーティリティ `gst-launch-1.0` を使用できます。シリアル ターミナル エミュレーターを介してターゲット ボードに接続しているラップトップを使用して、標準 Linux コンソール セッションによってシステムと通信します。[セクション 6.1](tool-flow-tutorials.md#61-live_io-オプティカル-フロー-サンプル-アプリケーションのビルド) を参照してください。1 つまたは複数のソース、0 個以上のアクセラレータ、および 1 つのシンクを含むビデオ パイプライン グラフを構築できます。GStreamer は、キャプチャ、M2M (Memory-to-Memory)、およびディスプレイ パイプラインを初期化し、パイプライン段を通過するビデオ バッファー フローを制御します。
 
-The gst-launch utility is really a debugging tool. The other way to set up and launch your plugins is with a compiled application that sets up and runs the pipeline using API calls to the GStreamer libraries. The sample code is provided for test apps that do this. See the `./gst/apps/<name> `folder for each of the live_IO samples.
+gst-launch ユーティリティは、デバッグ ツールです。プラグインをセットアップして起動するには、GStreamer ライブラリへの API 呼び出しを使用してパイプラインをセットアップして実行するコンパイル済みのアプリケーションを使用する方法もあります。これを実行するためのテスト アプリケーション用のサンプルのコードが提供されています。各 live_IO サンプルの `./gst/apps/<name>` フォルダーを確認してください。
 
-The HDMI and MIPI input channels are themselves hardware pipelines that must be configured. This task is done by the `video_cmd` utility, run once before starting up a pipeline that uses that video input. The `video_cmd` utility is present on the sd_card directory. It is needed only when the MIPI or HDMI input channels are used.
+HDMI および MIPI 入力チャネルは、それ自体が設定する必要のあるハードウェア パイプラインです。このタスクは `video_cmd` ユーティリティにより実行され、ビデオ入力を使用するパイプラインを開始する前に一度実行します。`video_cmd` ユーティリティは、sd_card ディレクトリにあります。これは、MIPI または HDMI 入力チャネルを使用する場合にのみ必要です。
 
-## 7.1 Run the live_IO sample applications 
+## 7.1 live_IO I/O サンプル アプリケーションの実行 
 
-* The "bottom" project containing the HW accelerated code is an SDx project, e.g. `./ws_f2d/filter2d`. When it completes, it creates an sd_card image with files you need to copy to your SD card you'll use on the target board.
-* While copying the sd_card directory to the SD card please create two directories in SD card namely 'lib' and 'gstreamer-1.0'
-* All the libraries should be copied to lib directory, sample plugin should be copied to gstreamer-1.0 and remaining images must be copied to the sd_card root directory.
-* The following sections list the exact files for each case.
-* For the stereo and triple case (because it includes stereo) you will also need the camera configuration file on the sd_card. (see below: "Particularities about the Stereo demo").
+* ハードウェア アクセラレーションされたコードを含む bottom プロジェクトは SDx プロジェクト (`./ws_f2d/filter2d` など) です。完了すると sd_card イメージが作成されるので、そこに含まれるファイルをターゲット ボードで使用する SD カードにコピーします。
+* sd_card ディレクトリを SD カードにコピーする際、SD カード内に lib と gstreamer-1.0 という名前の 2 つのディレクトリを作成してください。
+* ライブラリはすべて lib ディレクトリに、サンプル プラグインは gstreamer-1.0 にコピーして、残りのイメージは sd_card ルート ディレクトリにコピーします。
+* 次のセクションに、各サンプル アプリケーションのファイルを示します。
+* stereo および triple には、stereo が含まれるので、sd_card にカメラ コンフィギュレーション ファイルも必要です。下の[ステレオ デモの詳細](#73-ステレオ-デモの詳細)を参照してください。
 
-**filter2d case**
+**filter2d の場合**
 
-After building the "bottom" library, your sd_card directory will contain these files:
+bottom ライブラリをビルドすると、sd_card ディレクトリに次のファイルが含まれます。
 * `./ws_f2d/filter2d/Release/sd_card/image.ub`
 * `./ws_f2d/filter2d/Release/sd_card/BOOT.BIN`
 * `./ws_f2d/filter2d/Release/sd_card/libfilter2d.so`
 * `./ws_f2d/filter2d/Release/sd_card/video_cmd`
-The "top" projects generate shared libraries and the demo app.
+
+top プロジェクトは、共有ライブラリとデモ アプリケーションを生成します。
 * `./ws_f2d/gst/plugins/filter2d/Debug/libgstsdxfilter2d.so`
 * `./ws_f2d/gst/base/Debug/libgstsdxbase.so`
 * `./ws_f2d/gst/allocators/Debug/libgstsdxallocator.so`
 * `./ws_f2d/gst/apps/filter2d/Debug/gstdemo.`
 
->**:information_source: TIP**
-> * copy libfilter2d.so, libgstsdxbase.so and libgstsdxallocator.so in /lib directory.
-> * copy libgstsdxfilter2d.so in /gstreamer-1.0.
-> * Rest all images copy directly in sdcard's root folder /.
+>**:information_source: ヒント:**
+> * libfilter2d.so、libgstsdxbase.so、および libgstsdxallocator.so を /lib ディレクトリにコピーします。
+> * libgstsdxfilter2d.so を /gstreamer-1.0 にコピーします。
+> * 残りすべてのイメージを SD カードのルート フォルダー / にコピーします。
 
-**opticalflow case**
+**opticalflow の場合**
 
-After building the "bottom" library, your sd_card directory will contain these files:
+bottom ライブラリをビルドすると、sd_card ディレクトリに次のファイルが含まれます。
 * `./ws_of/opticalflow/Release/sd_card/image.ub`
 * `./ws_of/opticalflow/Release/sd_card/BOOT.BIN`
 * `./ws_of/opticalflow/Release/sd_card/libopticalflow.so`
 * `./ws_of/opticalflow/Release/sd_card/video_cmd`
-The "top" projects generate shared libraries and the demo app.
+
+top プロジェクトは、共有ライブラリとデモ アプリケーションを生成します。
 * `./ws_of/gst/plugins/optical_flow/Debug/libgstsdxopticalflow.so`
 * `./ws_of/gst/base/Debug/libgstsdxbase.so`
 * `./ws_of/gst/allocators/Debug/libgstsdxallocator.so`
 * `./ws_of/gst/apps/optical_flow/Debug/gstdemo.`
 
->**:information_source: TIP**
-> * copy libopticalflow.so, libgstsdxbase.so and libgstsdxallocator.so in /lib directory.
-> * copy libgstsdxopticalflow.so in /gstreamer-1.0 directory.
-> * Rest all images copy directly in sdcard's root folder /.
+>**:information_source: ヒント:**
+> * libopticalflow.so、libgstsdxbase.so、および libgstsdxallocator.so を /lib ディレクトリにコピーします。
+> * libgstsdxopticalflow.so を /gstreamer-1.0 ディレクトリにコピーします。
+> * 残りすべてのイメージを SD カードのルート フォルダー / にコピーします。
 
-**stereo case**
+**stereo の場合**
 
-After building the "bottom" library, your sd_card directory will contain these files:
+bottom ライブラリをビルドすると、sd_card ディレクトリに次のファイルが含まれます。
 * `./ws_sv/stereo/Release/sd_card/image.ub`
 * `./ws_sv/stereo/Release/sd_card/BOOT.BIN`
 * `./ws_sv/stereo/Release/sd_card/libstereo.so`
 * `./ws_sv/stereo/Release/sd_card/video_cmd`
-The "top" projects generate shared libraries and the demo app.
+
+top プロジェクトは、共有ライブラリとデモ アプリケーションを生成します。
 * `./ws_sv/gst/plugins/stereo/Debug/libgstsdxstereo.so`
 * `./ws_sv/gst/base/Debug/libgstsdxbase.so`
 * `./ws_sv/gst/allocators/Debug/libgstsdxallocator.so`
 * `./ws_sv/gst/apps/stereo/Debug/gstdemo.`
 
->**:information_source: TIP**
-> * copy libstereo.so, libgstsdxbase.so and libgstsdxallocator.so in /lib directory.
-> * copy libgstsdxstereo.so in /gstreamer-1.0 directory.
-> * Rest all images copy directly in sdcard's root folder /.
+>**:information_source: ヒント:**
+> * libstereo.so、libgstsdxbase.so、および libgstsdxallocator.so を /lib ディレクトリにコピーします。
+> * libgstsdxstereo.so を /gstreamer-1.0 ディレクトリにコピーします。
+> * 残りすべてのイメージを SD カードのルート フォルダー / にコピーします。
 
-**triple case**
+**triple の場合**
 
-After building the "bottom" library, your sd_card directory will contain these files:
+bottom ライブラリをビルドすると、sd_card ディレクトリに次のファイルが含まれます。
 * `./ws_triple/triple/Release/sd_card/image.ub`
 * `./ws_triple/triple/Release/sd_card/BOOT.BIN`
 * `./ws_triple/triple/Release/sd_card/libtriple.so`
 * `./ws_triple/triple/Release/sd_card/video_cmd`
-The "top" projects generate shared libraries and the demo app.
+
+top プロジェクトは、共有ライブラリとデモ アプリケーションを生成します。
 * `./ws_triple/gst/plugins/filter2d/Debug/libgstsdxfilter2d.so`
 * `./ws_triple/gst/plugins/optical_flow/Debug/libgstsdxopticalflow.so`
 * `./ws_triple/gst/plugins/stereo/Debug/libgstsdxstereo.so`
@@ -108,22 +112,22 @@ The "top" projects generate shared libraries and the demo app.
 * `./ws_triple/gst/allocators/Debug/libgstsdxallocator.so`
 * `./ws_triple/gst/apps/triple/Debug/gstdemo.`
 
->**:information_source: TIP**
-> * create a lib directory in sdcard's root folder and copy libtriple.so, libgstsdxbase.so and libgstsdxallocator.so in lib directory.
-> * copy libgstsdxfilter2d.so, libgstsdxstereo.so and libgstsdxopticalflow.so in gstreamer-1.0 directory.
-> * Rest all images copy directly in sdcard's root folder.
+>**:information_source: ヒント:**
+> * SD カードのルート フォルダーに lib ディレクトリを作成し、その中に libtriple.so、libgstsdxbase.so、および libgstsdxallocator.so をコピーします。
+> * libgstsdxfilter2d.so、libgstsdxstereo.so、および libgstsdxopticalflow.so を gstreamer-1.0 ディレクトリにコピーします。
+> * 残りすべてのイメージを SD カードのルート フォルダーにコピーします。
 
 
-* insert SD card in the SD card slot on your target board.
-* Power on the board; make sure the large "INIT_B" LED and the "DONE" LED next to it go green after a few seconds.
-* Control the system from your computer: start a terminal session using TeraTerm, PuTTY or the like. See section 6.1. With the USB-UART cable connected and the board powered up, you can locate the COM port that is responsive. You'll see several pages of Linux bootstrap and debug messages scroll by, finishing at the linux command line prompt.
-* cd over to directory `/media/card . ` This directory contains all the files you copied to your SD card.
+* ターゲット ボードの SD カード スロットに SD カードを挿入します。
+* ボードの電源をオンにします。数秒後に INIT_B LED とその横にある DONE LED が緑色になることを確認してください。
+* コンピューターからシステムを制御します。TeraTerm、PuTTY などを使用してターミナル セッションを開始します。[セクション 6.1](tool-flow-tutorials.md#61-live_io-オプティカル-フロー-サンプル-アプリケーションのビルド) を参照してください。USB-UART ケーブルが接続され、ボードの電源がオンの状態なので、応答している COM ポートを見つけることができます。Linux ブートストラップおよびデバッグ メッセージが数ページ分表示され、最後に Linux コマンド ライン プロンプトが表示されます。
+* cd コマンドを使用して `/media/card` ディレクトリに移動します。このディレクトリには、SD カードにコピーしたすべてのファイルが含まれます。
 ```
 # cd /media/card
 
 ```
-* Copy the shared libraries where they need to go.
-  * filter2d case:
+* 共有ライブラリを適切な場所にコピーします。
+  * filter2d の場合:
 
 	```
 	# cp lib/libfilter2d.so /usr/lib
@@ -132,7 +136,7 @@ The "top" projects generate shared libraries and the demo app.
 	# cp lib/libgstsdxallocator.so /usr/lib/gstreamer-1.0
 
 	```
-  * opticalflow case:
+  * opticalflow の場合:
 
 	```
 	# cp lib/libopticalflow.so /usr/lib
@@ -142,7 +146,7 @@ The "top" projects generate shared libraries and the demo app.
 
 	```
 
-  * stereo case:
+  * stereo の場合:
 	```
 
 	# cp lib/libstereo.so /usr/lib
@@ -152,7 +156,7 @@ The "top" projects generate shared libraries and the demo app.
 
 	```
 
-  * triple case:
+  * triple の場合:
 	``` 
 
 	# cp lib/libtriple.so /usr/lib
@@ -165,10 +169,10 @@ The "top" projects generate shared libraries and the demo app.
 	```
 
 
-**Media pipeline initialization**
+**メディア パイプラインの初期化**
 
-Use the `video_cmd` utility to list the available video sources and to configure the media pipeline. This needs to be done before running the gstreamer demo app or the `gst-launch` utility.
-* To list all available video sources, their source IDs and corresponding video nodes:
+`video_cmd` ユーティリティを使用して使用可能なビデオ ソースをリストし、メディア パイプラインを設定します。これは、gstreamer デモ アプリケーションまたは `gst-launch` ユーティリティの前に実行する必要があります。
+* 使用可能なビデオ ソース、そのソース ID および対応するビデオ ノードをリストするには、次のコマンドを使用します。
 ```
 
 # video_cmd -S
@@ -180,75 +184,75 @@ Virtual Video De        3       /dev/video0
 
 ```
 
->**:pushpin: NOTE** 
-> The output depends on the peripherals connected to the board and can be different in your case. The middle column shows the source ID which is needed for the next step to initialize the media pipeline (-s switch).
+>**:pushpin: 注記:** 
+> 出力はボードに接続されているペリフェラルによるので、上記とは異なる場合があります。中央の列はソース ID を示しており、メディア パイプラインを初期化 (-s オプション) する次の手順で必要です。
 
-The MIPI, HDMI and vivid video sources support the YUY2 and UYVY pixel formats. For USB, the supported pixel format depends on the camera firmware e.g. the e-con USB camera only supports UYVY whereas the ZED stereo camera supports only YUYV (which is identical with YUY2). Make sure you set the input parameters correctly when configuring the media pipeline.
+MIPI、HDMI、および vivid ビデオ ソースでは、YUY2 および UYVY ピクセル フォーマットがサポートされています。USB では、サポートされるピクセル フォーマットはカメラのファームウェアによって異なります。たとえば、e-con USB カメラでは UYVY のみがサポートされますが、ZED ステレオ カメラでは YUYV (YUY2 と同一) がサポートされます。メディア パイプラインを設定する際は、入力パラメーターを正しく設定してください。
 
-* Configure MIPI media pipeline for 1920x1080 resolution and YUY2 pixel format:
+* MIPI メディア パイプラインを解像度 1920x1080、YUY2 ピクセル フォーマットに設定するには、次のコマンドを使用します。
 ```
 
 # video_cmd -s 0 -i 1920x1080@YUY2 -X
 
 ```
 
-  * `-s 0` is the input source ID, in this case MIPI CSI
-  * `-i 1920x1080@YUY2` means the MIPI source will be set up for 1080p resolution and YUY2 format
-  * `-X` causes `video_cmd` to exit immediately after setting up MIPI.
-  * returns video node that corresponds to the input ID selected by -s. The video node needs to be passed to the v4lsrc plugin via the device property
+  * `-s 0` は入力ソース ID で、この場合は MIPI CSI です。
+  * `-i 1920x1080@YUY2` は、MIPI ソースを解像度 1080p、YUY2 フォーマットに設定します。
+  * `-X` は、MIPI を設定した直後に `video_cmd` を終了します。
+  * -s で選択した入力 ID に対応するビデオ ノードが返されます。ビデオ ノードは、デバイス プロパティを使用して v4lsrc プラグインに渡す必要があります。
 
-* Configure HDMI media pipeline for 1920x1080 resolution and UYVY pixel format:
+* HDMI メディア パイプラインを解像度 1920x1080、UYVY ピクセル フォーマットに設定するには、次のコマンドを使用します。
 ```
 
 # video_cmd -s 1 -i 1920x1080@UYVY -X
 
 ```
 
-  * `-s 1` is the input source ID, in this case is HDMI
-  * `-i 1920x1080@UYVY` means the MIPI source will be set up for 1080p resolution and UVYV fomat
-  * `-X` causes `video_cmd` to exit immediately after setting up HDMI.
-  * returns video node that corresponds to the input ID selected by -s. The video node needs to be passed to the v4lsrc plugin via the device property
+  * `-s 1` は入力ソース ID で、この場合は HDMI です。
+  * `-i 1920x1080@UYVY` は、MIPI ソースを解像度 1080p、UVYV フォーマットに設定します。
+  * `-X` は、HDMI を設定した直後に `video_cmd` を終了します。
+  * -s で選択した入力 ID に対応するビデオ ノードが返されます。ビデオ ノードは、デバイス プロパティを使用して v4lsrc プラグインに渡す必要があります。
 
-**Display controller initialization**
+**ディスプレイ コントローラーの初期化**
 
-Use the `video_cmd` utility to initialize the display controller. The command should be run in the background as the display mode will otherwise be reset to its original value after `video_cmd` exits. This needs to be done before running the gstreamer demo app or the `gst-launch` utility.
+`video_cmd` ユーティリティを使用してディスプレイ コントローラーを初期化します。コマンドは、バックグランドで実行する必要があります。そうしないと、`video_cmd` が終了した後にディスプレイ モードが元の値にリセットされます。これは、gstreamer デモ アプリケーションまたは `gst-launch` ユーティリティの前に実行する必要があります。
 
-* Configure DP display controller
+* DP ディスプレイ コントローラーの設定
 ```
 
 # video_cmd -d 0 &
 
 ```
 
-  * `-d 0` is the display ID for DP
+  * `-d 0` は、DP のディスプレイ ID です。
 
-* Configure HDMI display controller
+* HDMI ディスプレイ コントローラーを設定します。
 ```
 
 # video_cmd -d 1 &
 
 ```
 
-  * `-d 1` is the display ID for HDMI
+  * `-d 1` は、HDMI のディスプレイ ID です。
 
-**Gstreamer application**
+**Gstreamer アプリケーション**
 
-To create and run the gstreamer pipeline, you can either use the gst demo applications that are compiled from source or you can use the prebuilt `gst-launch` utility.
+gstreamer パイプラインを作成して実行するには、ソースからコンパイルされた gst デモ アプリケーションを使用するか、ビルド済みの `gst-launch` ユーティリティを使用します。
 
-* Use your compiled demo program:
+* コンパイル済みのデモ プログラムを使用するには、次のコマンドを実行します。
 ```
 
 # ./gstdemo
 
 ```
 
-  * All the demo programs use HDMI output, via the mixer.
-  * The filter2d demo uses HDMI input.
-  * The opticalflow demo uses the MIPI input
-  * The stereo demo used the USB "ZED" stereo camera input
-  * The triple demo uses all of the above
+  * デモ プログラムはすべて、ミキサーを介して HDMI 出力を使用します。
+  * filter2d デモは HDMI 入力を使用します。
+  * opticalflow デモは MIPI 入力を使用します。
+  * stereo デモは USB ZED ステレオ カメラ入力を使用します。
+  * triple の デモは上記すべての入力を使用します。
 
-* Here is a gst-launch command to run the filter2d pipeline, from MIPI, 1920x1080, YUY2, to HDMI output via mixer plane 29.
+* 次の gst-launch コマンドは filter2d パイプラインを実行し、解像度 1920x1080、YUY2 フォーマットの MIPI からミキサー プレーン 29 を介して HDMI 出力を生成します。
 ```
 
 gst-launch-1.0 \
@@ -260,7 +264,7 @@ gst-launch-1.0 \
 ```
 
 
-* Here is a gst-launch command to run the opticalflow pipeline, from HDMI, 1920x1080, YUY2, to HDMI output via mixer plane 29.
+* 次の gst-launch コマンドは opticalflow パイプラインを実行し、解像度 1920x1080、YUY2 フォーマットの HDMI からミキサー プレーン 29 を介して HDMI 出力を生成します。
 ```
 
 gst-launch-1.0 \
@@ -272,7 +276,7 @@ gst-launch-1.0 \
 ```
 
 
-* Here is a gst-launch command to run the stereo pipeline, from USB, 3840x1080 side-by-side input, YUY2, 1920x1080 output to HDMI via mixer plane 29. You must substitute your camera serial number for the config-filename property. See section below on "**Particuliarities about the Stereo Demo**".
+* 次の gst-launch コマンドは opticalflow パイプラインを実行し、解像度 3840x1080 の並んだ入力、YUY2 フォーマットの HDMI からミキサー プレーン 29 を介して HDMI 出力を生成します。config-filename プロパティを誤使用のカメラのシリアル番号に置き換える必要があります。下の[ステレオ デモの詳細](#73-ステレオ-デモの詳細)を参照してください。
 ```
 
 gst-launch-1.0 \
@@ -284,7 +288,7 @@ gst-launch-1.0 \
 ```
 
 
-* Here is an alternate way of running filter2d, with frames-per-second display enabled. Notice the output pipe stage is 'fpsdisplaysink' and that the 'kmssink...." string we used before is a property of fpsdisplaysink called 'video-sink'.
+* 次は、秒ごとのフレーム数ディスプレイをイネーブルにして filter2d を実行しています。出力パイプ段は fpsdisplaysink で、先ほど使用した「kmssink....」文字列は video-sink という fpsdisplaysink プロパティの 1 つです。
 ```
 
 gst-launch-1.0 \
@@ -296,9 +300,9 @@ gst-launch-1.0 \
 ```
 
 
-## 7.2 Gstreamer elements 
+## 7.2 Gstreamer エレメント 
 
-These pipelines are using the elements **v4l2src**, **sdxfilter2d** (or **sdxopticalflow**, or **sdxstereo**), **queue**, and **kmssink**. You may display properties and other info about any of these elements using the gstreamer utility gst-inspect-1.0.
+これらのパイプラインは、エレメント **v4l2src**、**sdxfilter2d** (または **sdxopticalflow**、または **sdxstereo**)、**queue**、および **kmssink** を使用します。gstreamer ユーティリティ gst-inspect-1.0 を使用すると、これらのエレメントのプロパティおよびその他の情報を表示できます。
 
 **v4l2src**
 
@@ -308,100 +312,100 @@ These pipelines are using the elements **v4l2src**, **sdxfilter2d** (or **sdxopt
 
 ```
 
-* You will see a lot of information. Of interest to us here is the v4l2src "device" property that is set in each of the above commands to select the video source
+* 多くの情報が表示されます。v4l2src の device プロパティは、上記の各コマンドでビデオ ソースを選択するために設定されています。
   * /dev/video2 is HDMI
   * /dev/video3 is MIPI
   * /dev/video4 is US
-* The io-mode property
-  * 4 is "dmabuf" - it means that we will not have to copy images in between pipe stages - the frames are passed by reference.
+* io-mode プロパティ
+  * 4 は dmabuf で、パイプ段の間でイメージをコピーする必要はなく、フレームは参照で渡されることを示します。
 
-* Following the first '!' character is an expression "video/x-raw, ....". This is a "capabilities filter" that informs the v4l2src element which of the many formats it supports are suitable for the downstream pipe element. Specifically:
-  * "raw" video (uncompressed)
-  * width and height
-  * pixel format - YUY2 is 16 bit per pixel 4:2:2 with 'Y' on the LOW byte of each word. UYVY is also 16 bit 4:2:2, with 'Y' on the HIGH byte of each word.
+* 最初の感嘆符 (!) は「video/x-raw, ....」です。これは、サポートされる多くのフォーマットのうちダウンストリームのパイプ エレメントに適したものがどれを v4l2src エレメントに通知します。具体的には、次を考慮します。
+  * Raw ビデオ (非圧縮)
+  * 幅と高さ
+  * ピクセル フォーマット - YUY2 はピクセルごと 16 ビットの 4:2:2 で、Y が各ワードの下位バイトにあります。UYVY も 16 ビットの 4:2:2 ですが、Y が各ワードの上位バイトにあります。
 
-**queue**
+**キュー**
 
-This is not strictly necessary, but using it will give better performance - i.e. the highest possible frame rate.
+これは必須ではありませんが、使用するとフレーム レートが高くなるので、パフォーマンスが向上します。
 
 **kmssink**
 
-To inspect the kmssink plugin:
+kmssink プラグインを調べるには、次のコマンドを使用します。
 ```
 
 # gst-inspect-1.0 kmssink
 
 ```
 
-* property 'bus-id'
-  * 'b00c0000.v_mix' means HDMI output (via the video mixer)
-  * 'fd4a0000.zynqmp-display' means DP output
-* property 'plane-id'
-  * if you are using b00c0000.v_mix (HDMI output)
-       *** '29' is a YUY2 plane
-       *** '30' is a YUY2 plane
-       *** '31' is a UYUV plane
-  * if you are using fd4a0000.zynqmp-display (DP output)
-       *** '35' supports a number of RGB
-       *** '34' supports YUY2 and UYVY
+* bus-id プロパティ
+  * b00c0000.v_mix は HDMI 出力 (ビデオ ミキサーを介する) を意味します。
+  * fd4a0000.zynqmp-display は DP 出力を意味します。
+* plane-id プロパティ
+  * b00c0000.v_mix (HDMI 出力) を使用する場合:
+       * 29 は YUY2 プレーンです。
+       * 30 は YUY2 プレーンです。
+       * 31 は UYUV プレーンです。
+  * fd4a0000.zynqmp-display (DP 出力) を使用する場合:
+       * 35 は RGB をサポートします。
+       * 34 は YUY2 および UYVY をサポートします。
 
-**sdx<accelerator>**
+**sdx&lt;accelerator&gt;**
 
-To inspect the sdxfilter2d plugin:
+sdxfilter2d プラグインを調べるには、次のコマンドを使用します。
 ```
 
 # gst-inspect-1.0 sdxfilter2d
 
 ```
 
-* property 'filter_mode'
-  * 1: use HW acceleration
-  * 0: use SW (the filter2d code executes entirely on the ARM processor)
-* property 'filter_preset'
-  * 1 - 10 select a number of preset filters. The example uses '4' which is the 'emboss' or edge enhancement filter.
-* property 'coefficients'
-  * Array with a 3x3 coefficients matrix e.g. `coefficients="<<0,0,0>,<0,-1,0>,<0,0,0>>"`
+* filter_mode プロパティ
+  * 1: ハードウェア アクセラレーションを使用します。
+  * 0: ソフトウェアを使用します (filter2d コードは完全に Arm プロセッサ上で実行)。
+* filter_preset プロパティ
+  * プリセット フィルターを選択します。1 ～ 10 の値を指定します。例では 4 に指定しており、エッジ強調フィルター (emboss) を使用しています。
+* coefficients プロパティ
+  * 3x3 係数マトリックスの配列です (例: `coefficients="<<0,0,0>,<0,-1,0>,<0,0,0>>"`)。
 
-To inspect the sdxopticalflow plugin:
+sdxopticalflow プラグインを調べるには、次のコマンドを使用します。
 ```
 
 # gst-inspect-1.0 sdxopticalflow
 
 ```
 
-* property 'filter_mode'
-  * 1: use HW acceleration
-  * 0: use SW (the optical flow code executes entirely on the ARM processor)
+* filter_mode プロパティ
+  * 1: ハードウェア アクセラレーションを使用します。
+  * 0: ソフトウェアを使用します (オプティカル フロー コードは完全に Arm プロセッサ上で実行)。
 
-To inspect the sdxstereo plugin:
+sdxstereo プラグインを調べるには、次のコマンドを使用します。
 ```
 
 # gst-inspect-1.0 sdxstereo
 
 ```
 
-* property 'filter_mode'
-  * 1: use HW acceleration
-  * 0: use SW (the optical flow code executes entirely on the ARM processor)
-* property 'config-filename'
-  * This is how you specify the ZED camera configuration file, which must be present on the SD card. See the notes below.
+* filter_mode プロパティ
+  * 1: ハードウェア アクセラレーションを使用します。
+  * 0: ソフトウェアを使用します (オプティカル フロー コードは完全に Arm プロセッサ上で実行)。
+* config-filename プロパティ
+  * ZED カメラ コンフィギュレーション ファイルを指定します。このファイルは、SD カードに存在する必要があります。下の注記を参照してください。
 
-## 7.3 Particularities about the Stereo demo 
+## 7.3 ステレオ デモの詳細 
 
-The stereo vision demo is special in several ways. First, you MUST use the ZED stereo camera connected to the USB video input. Second, and particular to this app, the width of the input image resolution is twice the width of the output resolution. The input consists of two images side-by-side, the synchronized left and right stereo input supplied by the camera. Two cases are possible: 2560x720 in to 1280x720 out, and 3840x1080 in to 1920x1080 out. The default 3840x2160 output resolution is not supported by the Stereo Vision app.
+ステレオ ビジョン デモは、複数の点から特別です。まず、USB ビデオ入力に接続されている ZED ステレオ カメラを使用する必要があります。次に、このアプリケーションに限り、入力画像解像度の幅が出力解像度の幅の 2 倍になっています。入力は 2 つの並んだ画像で構成されており、同期化された左および右ステレオ入力がカメラから供給されます。2560x720 を入力して 1280x720 を出力、3840x1080 を入力して 1920x1080 を出力する 2 つのモードが可能です。デフォルトの 3840x2160 出力解像度はステレオ ビジョン アプリケーションではサポートされていません。
 
-The other special thing about this app is that a configuration file must be used that corresponds to the camera you have connected to your system . Each StereoLabs ZED camera has a unique parameters file associated with it. This text file comes from StereoLabs, and must be present on the SD Card for the Stereo Vision demo to work properly. You need the file unique to your camera, identified by its Serial Number (found on the ZED camera box and also on a black tag near the USB plug of the ZED camera itself). This number will be, e.g., S/N 000012345. The parameter file for that camera would be named SN12345.conf. To download your parameter file, enter this URL into your browser:
-http://calib.stereolabs.com/?SN=12345 (using your serial number in place of 12345)
-This will download your configuration file to your computer.
+このアプリケーションのもう 1 つ特別な点は、システムに接続されているカメラに対応する設定ファイルを使用する必要があるということです。各 StereoLabs ZED カメラには、特有のパラメーター ファイルが関連付けられています。このテキスト ファイルは StereoLabs から提供されているもので、ステレオ ビジョン デモを正しく機能させるためには、SD カードに存在する必要があります。特定のカメラ用のファイルは、シリアル番号 (ZED カメラの箱および ZED カメラの USB プラグの近くにある黒いタグに記載) から特定できます。シリアル番号は S/N 000012345 という形式であり、このカメラに対応するパラメーター ファイルは SN12345.conf という名前です。パラメーター ファイルをダウンロードするには、http://calib.stereolabs.com/?SN=12345 (12345 を実際のシリアル番号に置換) にアクセスします。
 
-The stereo block-matching algorithm calculates depth based on binocular parallax, similar to the way human eyes perceive depth. The depth map is coded in false colors. Objects far away appear deep blue. Closer and closer objects appear in rainbow succession green, yellow, orange, red, purple and finally white at about two feet from the camera in the 720p case, and about five feet away in the 1080p case. Any object closer than that cannot be tracked, and smooth areas with no texture in the image cannot be tracked, and show up as black. Areas with a lot of detail (especially with lots of vertical edges) are tracked best. It is normal that a large area on the left is black - this is 128 pixels wide, representing the range of the horizontal search for best match between the right and left binocular images.
+これにより、設定ファイルをコンピューターにダウンロードできます。
+
+ステレオ ブロック マッチング アルゴリズムでは、人間が深度を認識するのと同様の方法である両眼視差に基づいて深度を計算します。深度マップは、擬色でコード記述されます。遠い物体は濃い青で示されます。物体が近くなるほど徐々に緑、黄、オレンジ、赤、紫と変化していき、最終的に 720p の場合はカメラから 2 フィート、1080p の場合はカメラから 5 フィートの距離にある物体が白で示されます。これより近い物体、および画像でテクスチャのない滑らかな領域は追跡できず、黒で表示されます。細部情報の多い (特に垂直エッジが多い) 部分が最も良く追跡できます。左側の大きな領域 (128 ピクセル幅) が黒であるのは普通で、これは双眼鏡の右と左の画像間でベスト マッチを水平検索するための領域を表します。
 
 
 
 <hr/>
 
-:arrow_forward:**Next Topic:**  [8. Platform Details](platform-details.md)
+:arrow_forward:**次のトピック:**  [8.  プラットフォームの詳細](platform-details.md)
 
-:arrow_backward:**Previous Topic:**  [6. Tool Flow Tutorials](tool-flow-tutorials.md)
+:arrow_backward:**前のトピック:**  [6.  ツール フロー チュートリアル](tool-flow-tutorials.md)
 <hr/>
 <p align="center"><sup>Copyright&copy; 2018 Xilinx</sup></p>

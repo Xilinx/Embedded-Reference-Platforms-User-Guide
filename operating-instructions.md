@@ -1,66 +1,66 @@
 <table style="width:100%">
   <tr>
 
-<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.2</h1>
+<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION 入門ガイド 2018.2</h1>
 </th>
 
   </tr>
   <tr>
-    <td width="17%" align="center"><a href="README.md">1. Introduction</a></td>
-    <td width="16%" align="center"><a href="overview.md">2. Overview</a></td>
-    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3. Software Tools and System Requirements</a></td>
-    <td width="17%" align="center"><a href="design-file-hierarchy.md">4. Design File Hierarchy</a></td>
+    <td width="17%" align="center"><a href="README.md">1.  はじめに</a></td>
+    <td width="16%" align="center"><a href="overview.md">2.  概要</a></td>
+    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3.  ソフトウェア ツールおよびシステム要件</a></td>
+    <td width="17%" align="center"><a href="design-file-hierarchy.md">4.  デザイン ファイルの階層</a></td>
 </tr>
 <tr>
-    <td width="17%" align="center">5. Installation and Operating Instructions</td>
-    <td width="16%" align="center"><a href="tool-flow-tutorials.md">6. Tool Flow Tutorials</a></td>
-    <td width="17%" align="center"><a href="run-application.md">7. Run the Application</a></td>
-    <td width="17%" align="center"><a href="platform-details.md">8. Platform Details</a></td>    
+    <td width="17%" align="center">5.  インストールおよび操作手順</td>
+    <td width="16%" align="center"><a href="tool-flow-tutorials.md">6.  ツール フロー チュートリアル</a></td>
+    <td width="17%" align="center"><a href="run-application.md">7.  アプリケーションの実行</a></td>
+    <td width="17%" align="center"><a href="platform-details.md">8.  プラットフォームの詳細</a></td>    
   </tr>
 <tr>
-    <td width="17%" align="center" colspan="2"><a href="known-issues-limitations.md">9. Known Issues and Limitations</a></td>
-    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10. Additional References</a></td>
+    <td width="17%" align="center" colspan="2"><a href="known-issues-limitations.md">9.  既知の問題および制限</a></td>
+    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10.  その他のリソース</a></td>
 </tr>
 </table>
 
-# 5 Installation and Operating Instructions 
+# 5 インストールおよび操作手順 
 
-## 5.1 Board Setup
+## 5.1 ボードのセットアップ
 
-**Required:**
-* Connect power supply to the 12V power connector.
-* Display
-  * Connect a DisplayPort cable to DisplayPort connector on the board; connect the other end to a monitor **OR**
-  * Connect an HDMI cable to HDMI Output (*top* HDMI connector) on the board; connect the other end to a monitor.
+**必須:**
+* 電源を 12V 電源コネクタに接続します。
+* ディスプレイ
+  * DisplayPort ケーブルの一端をボードの DisplayPort コネクタに、もう一端をモニターに接続します。 **または**
+  * HDMI ケーブルの一端をボードの HDMI 出力に、もう一端をモニターに接続します。
 
-  **:pushpin: NOTE** Certain monitors have multiple HDMI ports supporting different HDMI standards. Make sure you choose an HDMI 2.0 capable port (if available) for 4k60 performance.
+  **:pushpin: 注記:** モニターによっては、異なる HDMI 規格をサポートするため複数の HDMI ポートがあるものもあります。4k60 パフォーマンスには、HDMI 2.0 対応ポート (使用可能な場合) を選択してください。
   
-  **:pushpin: NOTE** Make sure you only connect either DisplayPort or HDMI Output on the board, not both, otherwise the design might malfunction.
+  **:pushpin: 注記:** ボードの DisplayPort または HDMI 出力のいずれかのみを接続してください。両方接続すると、デザインが誤動作する可能性があります。
 
-* Connect micro-USB cable to the USB-UART connector; use the following settings for your terminal emulator:
-  * Baud Rate: 115200
-  * Data: 8 bit
-  * Parity: None
-  * Stop: 1 bit
-  * Flow Control: None
+* マイクロ USB ケーブルを USB-UART コネクタに接続します。ターミナル エミュレーターに次の設定を使用します。
+  * ボー レート: 115200
+  * データ: 8 ビット
+  * パリティ: なし
+  * ストップ: 1 ビット
+  * フロー制御: なし
 
-* Insert SD card (FAT formatted) with pre-built image copied from one of the following directories:
+* 次のいずれかのディレクトリからコピーしたビルド済みイメージを含む SD カード (FAT フォーマット) を挿入します。
   * optical_flow: `sd_card/optical_flow`
   * stereo: `sd_card/stereo`
   * filter2d: `sd_card/filter2d`
   * triple: `sd_card/triple`
 
-**Optional:**
-* Connect an HDMI cable to HDMI Input (*bottom* HDMI connector) on the board; connect the other end to an HDMI source
-* Connect the See3CAM_CU30 or ZED USB camera to the USB3 micro-AB connector via the Xilinx USB3 micro-B adapter
-* Connect the LI-IMX274MIPI-FMC module to the FMC connector on the board (use the HPC0 connector on the ZCU102)
+**オプション:**
+* HDMI ケーブルの一端をボードの HDMI 入力 (下の HDMI コネクタ) に、もう一端を HDMI ソースに接続します。
+* See3CAM_CU30 または ZED USB カメラをザイリンクス USB3 micro-B アダプターを介して USB3 micro-AB コネクタに接続します。
+* LI-IMX274MIPI-FMC モジュールをボードの FMC コネクタに接続します (ZCU102 の HPC0 コネクタを使用)。
   
-  **:pushpin: NOTE** Vadj needs to be set to **1.2V** for correct operation of the daughter card. If the FMC card does not function, please follow the instructions explained in Answer Record [AR67308](https://www.xilinx.com/support/answers/67308.html) for rev 1.0 and beyond to check and/or set Vadj.
+  **:pushpin: 注記:** ドーター カードの接続には、Vadj を **1.2V** に設定する必要があります。FMC カードが機能しない場合は、rev 1.0 以降では[アンサー 67308](https://japan.xilinx.com/support/answers/67308.html) の手順に従って Vadj を確認および設定してください。
 
-**ZCU102 Jumpers & Switches:**
-* Set boot mode to SD card
-  * SW6[4:1]: **off,off,off, on**
-* Configure USB jumpers for host mode. The drawing shows the area on the board near the USB connector.
+**ZCU102 ジャンパーおよびスイッチ:**
+* ブート モードを SD カードに設定します。
+  * SW6[4:1]: **オフ、オフ、オフ、オン**
+* USB ジャンパーをホスト モードに設定します。USB ジャンパーは、下のボード図で USB コネクタの近くに赤い矩形で示されているエリアにあります。
   * J110: **2-3**
   * J109: **1-2**
   * J112: **2-3**
@@ -69,28 +69,28 @@
   
   ![](./images/zcu102_rv_board_setup_2017.4.jpg)
 
-**ZCU104 Jumpers & Switches:**
-* Set boot mode to SD card
-  * SW6[4:1]: **off,off,off, on**
+**ZCU104 ジャンパーおよびスイッチ:**
+* ブート モードを SD カードに設定します。
+  * SW6[4:1]: **オフ、オフ、オフ、オン**
   
   ![](./images/zcu104_board_setup_2017.4.jpg)
 
-## 5.2 Extract the design zip files 
+## 5.2 デザインの ZIP ファイルの解凍 
 
-Download and unzip the reference design zip file matching your silicon version (see Section 3.2).
-* For Linux, use the **unzip** utlity.
-* For Windows, make sure that the reference design zip file is unzipped in a directory path which contains no spaces. Use the **7zip** utility and follow the steps below. If you need 7zip, get it here [7zip](http://www.7-zip.org/).
+ご使用のシリコン バージョンに対応するリファレンス デザインの ZIP ファイルをダウンロードして解凍します (セクション 4.2 を参照)。
+* Linux では、**unzip** ユーティリティを使用します。
+* Windows では、リファレンス デザインの ZIP ファイルをスペースを含まないディレクトリ パスに解凍してください。**7zip** ユーティリティを使用して、下の手順に従います。7zip は、[7zip サイト](http://www.7-zip.org/)からダウンロードできます。
 
-Once the reference design zip file is unzipped, navigate to the `petalinux` directory and unzip the file `sdk.zip` which contains the sysroot.
+リファレンス デザインの ZIP ファイルを解凍したら、petalinux ディレクトリに移動して sdk.zip ファイルを解凍します。このファイルに sysroot が含まれています。
 
-**:pushpin: NOTE** When prompted to confirm file replace, select ‘Auto Rename’ (Windows only)
+**:pushpin: 注記:** ファイルの置換を確認するダイアログ ボックスが表示されたら、[Auto Rename] をクリックします (Windows のみ)。
 
   ![](./images/7zip-1.jpg)
 
 <hr/>
 
-:arrow_forward:**Next Topic:**  [6. Tool Flow Tutorials](tool-flow-tutorials.md)
+:arrow_forward:**次のトピック:**  [6.  ツール フロー チュートリアル](tool-flow-tutorials.md)
 
-:arrow_backward:**Previous Topic:**  [4. Design File Hierarchy](design-file-hierarchy.md)
+:arrow_backward:**前のトピック:**  [4.  デザイン ファイルの階層](design-file-hierarchy.md)
 <hr/>
 <p align="center"><sup>Copyright&copy; 2018 Xilinx</sup></p>

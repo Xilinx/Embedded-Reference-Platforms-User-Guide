@@ -1,59 +1,59 @@
 <table style="width:100%">
   <tr>
 
-<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.2</h1>
+<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION 入門ガイド 2018.2</h1>
 </th>
 
   </tr>
   <tr>
-    <td width="17%" align="center"><a href="README.md">1. Introduction</a></td>
-    <td width="16%" align="center"><a href="overview.md">2. Overview</a></td>
-    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3. Software Tools and System Requirements</a></td>
-    <td width="17%" align="center"><a href="design-file-hierarchy.md">4. Design File Hierarchy</a></td>
+    <td width="17%" align="center"><a href="README.md">1.  はじめに</a></td>
+    <td width="16%" align="center"><a href="overview.md">2.  概要</a></td>
+    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3.  ソフトウェア ツールおよびシステム要件</a></td>
+    <td width="17%" align="center"><a href="design-file-hierarchy.md">4.  デザイン ファイルの階層</a></td>
 </tr>
 <tr>
-    <td width="17%" align="center"><a href="operating-instructions.md">5. Installation and Operating Instructions</a></td>
-    <td width="16%" align="center">6. Tool Flow Tutorials</td>
-    <td width="17%" align="center"><a href="run-application.md">7. Run the Application</a></td>
-    <td width="17%" align="center"><a href="platform-details.md">8. Platform Details</a></td>    
+    <td width="17%" align="center"><a href="operating-instructions.md">5.  インストールおよび操作手順</a></td>
+    <td width="16%" align="center">6.  ツール フロー チュートリアル</td>
+    <td width="17%" align="center"><a href="run-application.md">7.  アプリケーションの実行</a></td>
+    <td width="17%" align="center"><a href="platform-details.md">8.  プラットフォームの詳細</a></td>    
   </tr>
 <tr>
-    <td width="17%" align="center" colspan="2"><a href="known-issues-limitations.md">9. Known Issues and Limitations</a></td>
-    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10. Additional References</a></td>
+    <td width="17%" align="center" colspan="2"><a href="known-issues-limitations.md">9.  既知の問題および制限</a></td>
+    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10.  その他のリソース</a></td>
 </tr>
 </table>
 
-# 6 Tool Flow Tutorials 
+# 6 ツール フロー チュートリアル 
 
-The SDx Development Environment, version 2018.2, must be installed and working on your host computer, either the Linux or the Windows version.
+SDx 開発環境バージョン 2018.2 がインストールされており、Linux または Windows ホスト コンピューターで動作している必要があります。
 
-This guide will walk you through the process of building the sample designs. In step [3.2 Software](https://github.com/Xilinx/TechDocs/blob/reVISION-getting-started/software-tools-system-requirements.md#32-software ), you unzipped your platform files, and noted the exact directory paths.
+このガイドでは、サンプル デザインをビルドする手順を示します。[3.2 ソフトウェア](software-tools-system-requirements.md#32-ソフトウェア)でプラットフォーム ファイルを解凍したディレクトリ パスを記録しておいてください。
 
-The path to the extracted platform will be needed to tell SDx where your custom platform resides. You need to set the SYSROOT environment variable to point to a directory inside the platform. The platform root directory is abbreviated to <platform> below and needs to be replaced with your local path.
+このパスは、SDx でカスタム プラットフォームの場所を指定する際に必要です。SYSROOT 環境変数でプラットフォーム内のディレクトリを指定します。下に示す構文ではプラットフォーム ルート ディレクトリを `<platform>` で示しており、これを実際のローカル パスに置き換える必要があります。
 
-**:information_source: IMPORTANT:** Before starting SDx, set the **SYSROOT environment variable** to point to the Linux root file system, i.e the sysroot top directory you just unzipped in step [5.2 Extract the design zip files](https://github.com/saurabhsengar/TechDocs/blob/reVISION-getting-started/operating-instructions.md#52-extract-the-design-zip-files).`
+**:information_source: 重要:** SDx を起動する前に、**SYSROOT 環境変数**で Linux ルート ファイル システム ([5.2 デザインの ZIP ファイルの解凍](operating-instructions.md#52-デザインの-zip-ファイルの解凍)で ZIP ファイルを解凍したシステム ルート最上位ディレクトリ) を指定してください。
 
 ```
 Linux: export SYSROOT=<platform>/petalinux/sdk/sysroots/aarch64-xilinx-linux
-Windows: Start->Control Panel->System->Advanced->Environment Variables Create environment variable SYSROOT with value <platform>/petalinux/sdk/sysroots/aarch64-xilinx-linux
+Windows: [スタート] → [コントロール パネル] → [システム] → [詳細設定] → [環境変数] をクリックし、SYSROOT という環境変数を作成して値を <platform>/petalinux/sdk/sysroots/aarch64-xilinx-linux に設定
 ```
 
-You can also set SYSROOT for all projects in your SDx Environment by opening the Menu 'Window' → 'Preferences' and adding 'sysroot' variable to 'C/C++' → 'Build' → 'Environment'.
+SDx IDE で [Window] → [Preferences] をクリックし、[C/C++] → [Build] → [Environment] で SYSROOT を設定することもできます。
 
 ![](./images/sysroot.PNG)
 
-The platform ships with five file IO and three live IO design examples demonstrating popular OpenCV functions accelerated on the programmable logic. A fourth live I/O example shows how to combine the other three live I/O designs into one design, allowing the three accelerated functions to reside and run in parallel in the FPGA.
+プラットフォームには、プログラマブル ロジックでアクセラレーションされたよく使用される OpenCV 関数のデモを示す 5 つのファイル I/O と 3 つのライブ I/O デザイン例が含まれています。4 つ目のライブ I/O 例は、3 つのライブ I/O デザインを 1 つのデザインにまとめて、3 つのアクセラレーション関数を FPGA に配置して並列実行する方法を示します。
 
-With this release of reVISION the live IO sample design examples are based on GStreamer. See [GStreamer](https://gstreamer.freedesktop.org/) The open source GStreamer framework code is included with the reVISION platform, and design examples are built as GStreamer plugins. Code for test applications is provided as well, allowing you to compile apps that will set up and run video pipelines using the plugins. Pipelines may be run using the `gst-launch-1.0` utility, or by your own app compiled against the gstreamer libraries. An example test app called gstdemo is provided for each of the platform samples. The four sample `<names>` are `filter2d`, `optical_flow`, `stereo`, and `triple`. See the `./workspaces/<name>/gst/apps/<name>`. directory for each sample.
+このリリースの reVISION では、ライブ I/O サンプル デザインは GStreamer に基づいています。[GStreamer](https://gstreamer.freedesktop.org/) を参照してください。オープン ソース GStreamer フレームワークのコードが reVISION プラットフォームに含まれており、デザイン例は GStreamer プラグインとしてビルドされます。テスト アプリケーションのコードも提供されており、プラグインを使用してビデオ パイプラインをセットアップして実行するアプリケーションをコンパイルできます。パイプラインは、`gst-launch-1.0` ユーティリティを使用して実行するか、gstreamer ライブラリに対してコンパイルされた独自のアプリケーションにより実行できます。各プラットフォーム サンプル用に gstdemo という名前のテスト アプリケーションの例が提供されています。4 つのサンプル名 (`<names>`) は、`filter2d`、`optical_flow`、`stereo`、および `triple` です。各サンプルの `./workspaces/<name>/gst/apps/<name>` ディレクトリを確認してください。
 
-A GStreamer plugin is a shared library. In the case of the reVISION sample designs, the GStreamer plugin consists of two linked parts. These "top" and "bottom" parts are separate shared libraries produced by separate project builds. The top part is the GStreamer plugin itself, containing the code for interfacing with the GStreamer framework. See the `./workspaces/<name>/gst/plugins/<name>` directory.
-The top part links with the bottom part which contains the code for the HW accelerated function(s). This bottom project generates the BOOT.BIN file containing the programmable logic used for the HW function(s). These are SDx projects: See the `./samples/live_IO/<name>` directory.
+GStreamer プラグインは共有ライブラリです。reVISION サンプル デザインの場合、GStreamer プラグインはリンクされた 2 つの部分で構成されています。これら 2 つの部分 top および bottom は、個別のプロジェクト ビルドで生成された個別の共有ライブラリです。top 部分は GStreamer プラグイン自体で、GStreamer フレームワークとインターフェイスするためのコードが含まれます。`./workspaces/<name>/gst/plugins/<name>` ディレクトリを確認してください。
+top 部分は、ハードウェアでアクセラレーションされる関数のコードを含む bottom 部分にリンクされています。bottom プロジェクトは、ハードウェア関数に使用されるプログラマブル ロジックを含む BOOT.BIN ファイルを生成します。これらは SDx プロジェクトです。`./samples/live_IO/<name>` ディレクトリを参照してください。
 
-## 6.1 Build the Live_IO Optical Flow sample application 
+## 6.1 live_IO オプティカル フロー サンプル アプリケーションのビルド 
 
-The following steps are virtually identical whether you are running the Linux or Windows version of SDx.
+次の手順は、Linux または Windows バージョンのどちらの SDx を使用しても基本的に同じです。
 
-There is a` ./workspaces/...` folder structure already set up for the four live_IO samples as part of the platform :
+プラットフォームの一部として、4 つの live_IO サンプルに対して ` ./workspaces/...` フォルダー構造が既に設定されています。
 ```
 ├── workspaces
 │   ├── ws_f2d
@@ -63,7 +63,7 @@ There is a` ./workspaces/...` folder structure already set up for the four live_
 
 ```
 
-You should copy these workspaces to the directory where you want to work. Look at the optical_flow workspace area supplied with the platform. All files under `./gst/` are supplied exactly as shown. The `./opticalflow` directory is the SDx project you will create to build the low level accelerator code - note that you'll create this 'opticalflow' SDx project directly under the` ws_of` workspace. Note that `./gst/` is also directly under `./ws_of` :
+これらのワークスペースを、作業用のディレクトリにコピーします。プラットフォームで提供されている optical_flow ワークスペース エリアを見てください。`./gst/` にあるファイルは次のとおりです。`./opticalflow` ディレクトリは SDx プロジェクトで、下位アクセラレータ コードをビルドするためにユーザーが作成します。この opticalflow SDx プロジェクトは、`ws_of` ワークスペースのすぐ下に作成します。`./gst/` も `./ws_of` のすぐ下にあります。
 ```
 ├── ws_of
 │   ├── gst
@@ -87,151 +87,151 @@ You should copy these workspaces to the directory where you want to work. Look a
 
 ```
 
-For a given workspace, such as `./ws_of/`, the arrangement of these subdirectories must be preserved. This is because the various projects depend on each other in that they need to know the paths to each other's include files and library files. As long as you keep this structure, you're OK - i.e. you may copy the `./ws_of/` tree with everything just as shown, and put it anywhere you want to work.
+`./ws_of/` などワークスペース内では、このディレクトリ構造を保持する必要があります。これは、さまざまなプロジェクトが互いに依存関係にあり、インクルード ファイルおよびライブラリ ファイルへのパスが既知である必要があるからです。この構造を保持していれば、`./ws_of/` ツリーをすべてのサブディレクトリをそのまま別の場所にコピーしても問題ありません。
 
-**:pushpin: NOTE**
->If you are working on Linux, there is no restriction on where you put these workspaces. Some people may want to work directly in the` ./workspaces/` directory under the platform itself, and others may want to copy it elsewhere so that the original area remains untouched.
+**:pushpin: 注記:**
+>Linux を使用している場合は、ワークスペースを配置する場所に制限はありません。プラットフォームの下にある `./workspaces/` ディレクトリで直接作業することもできますし、元のエリアが変更されないように別の場所にコピーして作業することもできます。
 
->**If you are working on Windows there is a restriction**, i.e. file path lengths are restricted to 256 characters. The Xilinx build process creates some very deep directory structures with long names as it goes through the build process. You are advised, therefore, to keep the path to the workspace as short as possible. E.g. `C:\ws_of\...`
+>**Windows を使用している場合は、ファイル パス名は 256 文字までに制限**されます。ザイリンクス ビルド プロセスでは、ビルド プロセスを進めていくと、ディレクトリ構造が深くなり、パス名が長くなります。そのため、ワークスペースのパス名ができるだけ短くなるようにしてください (`C:\ws_of\...` など)。
 
-### 6.1.1 Import existing gstreamer workspaces
-* Start SDx and select workspace `./ws_of`. Make sure you use the same shell to run SDx as the one where you have set $SYSROOT.
-* Close the Welcome screen and select 'File'→'Import'→'General'→'Existing Projects into Workspacel'→'Next'.
+### 6.1.1 既存の gstreamer ワークスペースのインポート
+* SDx を起動してワークスペース `./ws_of` を選択します。$SYSROOT を設定したのと同じシェルで SDx を実行してください。
+* Welcome 画面を閉じ、[File] → [Import] → [General] → [Existing Projects into Workspacel] → [Next] をクリックします。
 
 ![](./images/p22.png)
 
 ![](./images/p33.png)
 
-* In the Import dialog, to the right of 'Select root directory', click 'Browse'.
+* [Import] ダイアログ ボックスで、[Select root directory] の右側の [Browse] ボタンをクリックします。
 
 ![](./images/p44.png)
 
-* By default you're already in the directory you want `./workspaces/ws_of`, just click 'OK'.
+* デフォルトでは既にディレクトリ内にいるので、`./workspaces/ws_of` を指定して [OK] をクリックします。
 
 ![](./images/p55.png)
 
-* You should see a list of projects, with gstdemo, gstsdxallocator, gstsdxbase, and gstopticalflow selected, click 'Finish'.
+* プロジェクトのリストが表示され、gstdemo、gstsdxallocator、gstsdxbase、および gstopticalflow が選択されています。[Finish] をクリックします。
 
 ![](./images/p66.png)
 
-* Back at the main window, the four imported projects appear in the Project Explorer pane. Now select 'File'→'New'→'SDx Project'... from the menu bar.
+* メイン ウィンドウに戻ると、[Project Explorer] ビューにインポートされたプロジェクトが表示されます。メニュー バーから [File] → [New] → [SDx Project] をクリックします。
 
-### 6.1.2 Create application project
+### 6.1.2 アプリケーション プロジェクトの作成
 ![](./images/p77.png)
 
-* This brings up the Project Type dialog box, with Application Project selected, click 'Next'.
+* New SDx Project ウィザードの [Project Type] ページが [Application Project] がオンの状態で表示されます。[Next] をクリックします。
 
 ![](./images/p88.png)
 
-* In the 'Create a New SDx Project' dialog, enter Project name 'opticalflow', click 'Next'.
+* [Create a New SDx Project] ページで [Project name] に「opticalflow」と入力し、[Next] をクリックします。
 
 ![](./images/p99.png)
 
-### 6.1.3 Add custom platform
-* In the Platform dialog, click 'Add Custom Platform', find your way to the top directory where you unzipped the reVISION platform, called, for example, zcu102_rv_ss. Click 'OK'.
+### 6.1.3 カスタム プラットフォームの追加
+* [Platform] ページで [Add Custom Platform] をクリックし、reVISION プラットフォームを解凍した最上位ディレクトリ (zcu102_rv_ss など) を選択して、[OK] をクリックします。
 
 ![](./images/pAA.png)
 
 ![](./images/pBB.png)
 
-* Back in the Platform dialog, the new platform appears in the list, but is not selected. Select it, then click 'Next'.
+* [Platform] ページに新しいプラットフォームが表示されますが、選択されていません。選択して [Next] をクリックします。
 
 ![](./images/pCC.png)
 
-### 6.1.4 Opt shared library
-* In the System configuration dialog, under Output type, select 'Shared Library', click 'Next'.
+### 6.1.4 Opt 共有ライブラリ
+* [System configuration] ページの [Output type] で [Shared Library] をオンにし、[Next] をクリックします。
 
 ![](./images/pDD.png)
 
-### 6.1.5 Select live I/O sample
-* In the Templates dialog, under live_IO select Dense Optical Flow and click 'Finish'.
+### 6.1.5 ライブ I/O サンプルの選択
+* [Templates] ページで [live_IO] の下の [Dense Optical Flow] を選択し、[Finish] をクリックします。
 
 ![](./images/pEE.png)
 
-* Back again at the main window, the new project 'opticalflow' appears under the four imported projects appear in the Project Explorer pane.
+* メイン ウィンドウに戻ると、[Project Explorer] ビューのインポートされた 4 つのプロジェクトの下に新しいプロジェクト opticalflow が表示されます。
 
-### 6.1.6 Select release build configuration
-* Switch the 'Active Build Configuration' for the opticalflow project to Release. Note that three routines are marked as Hardware Functions.
+### 6.1.6 リリース ビルド コンフィギュレーションの選択
+* opticalflow プロジェクトの [Active Build Configuration] を [Release] に変更します。3 つのルーチンがハードウェア関数とマークされていることに注目してください。
 
 ![](./images/pFF.png)
 
-### 6.1.7 Building project
+### 6.1.7 プロジェクトのビルド
 
-* Build the opticalflow project - do this by clicking right and choosing Build Project, or by clicking the 'hammer' icon.
-* In the small Build Project dialog that opens, you may hit the "Run in Background" button. That causes the small dialog box to disappear, though you can still see a progress icon in the lower right part of the GUI, showing that work is in progress. Select the Console tab in the lower central pane of the GUI to observe the steps of the build process as it progresses. The build process may take tens of minutes, up to several hours, depending on the power of your host machine, whether you are running on Linux or Windows, and of course the complexity of your design. By far the most time is spent processing the routines that have been tagged for realization in hardware - note the "HW functions" window in the lower part of the SDx Project Settings pane. In our example above, the routines read_optflow_input, DenseNonPyrLKOpticalFlow, and write_optflow_output are tagged to be built in hardware. The synthesis of the C code found in these routines into RTL, and the Placement and Routing of that RTL into the programmable logic in the Zynq MPSoC, are the steps that take most of the time.
+* opticalflow プロジェクトをビルドします。これには、右クリックして [Build Project] を選択するか、ハンマー アイコンをクリックします。
+* 開いた [Build Project] ダイアログ ボックスで [Run in Background] をクリックします。これにより [Build Project] ダイアログ ボックスは閉じますが、GUI の右下に進捗状況バーが表示され、処理が実行中であることがわかります。GUI の下部中央にある [Console] ビューを選択し、ビルド プロセスの進捗状況を確認します。ビルド プロセスには、ホスト マシンの処理能力、Linux または Windows のどちらで実行しているか、およびデザインの複雑性によって、数十分から数時間かかります。ほとんどの時間は、ハードウェアに配置するよう指定されたルーチンの処理に費やされます。[SDx Project Settings] の左下の [Hardware Functions] ペインにリストされているものです。上記の例では、read_optflow_input、DenseNonPyrLKOpticalFlow、および write_optflow_output ルーチンがハードウェアにビルドされます。これらのルーチンの C コードを RTL に合成し、その RTL を Zynq MPSoC のプログラマブル ロジックに配置配線するプロセスに最も時間がかかります。
 
 ![](./images/pGG.png)
 
-* Once the Build completes, you will find an sd_card directory has been created containing these files you'll need to transfer to your SD card.
-* Please note few of the images need to be copied crating lib and gstreamer-1.0 directory in your sdcard.
+* ビルドが完了すると sd_card ディレクトリが作成されるので、これに含まれるファイルを SD カードにコピーします。
+* 次のファイルを SD カードにコピーします。
   * `cp ./workspaces/ws_of/opticalflow/Release/sd_card/BOOT.BIN <sdcard>`
   * `cp ./workspaces/ws_of/opticalflow/Release/sd_card/libopticalflow.so <sdcard>/lib/`
   * `cp ./workspaces/ws_of/opticalflow/Release/sd_card/image.ub <sdcard>`
   * `cp ./workspaces/ws_of/opticalflow/Release/sd_card/video_cmd <sdcard>`
-* Now that the "bottom" shared library is built, you may build the "top" part, that will be linked with the bottom library. Now select the gstdemo project, and build it. Doing this will build all four of the gst--- projects.
+* bottom 共有ライブラリがビルドされたので、top 部分をビルドし、bottom ライブラリにリンクします。gstdemo プロジェクトを選択し、ハンマー アイコンをクリックしてビルドします。これにより、4 つの gst--- プロジェクトがすべてビルドされます。
 
 ![](./images/pHH.png)
 
-* This entire process should take only a few minutes, and creates these libraries and executable
+* このライブラリと実行ファイルを作成するプロセスは、数分で終了するはずです。
   * `cp ./workspaces/ws_of/gst/allocators/Debug/libgstsdxallocator.so <sdcard>/lib/`
   * `cp ./workspaces/ws_of/gst/base/Debug/libgstsdxbase.so <sdcard>/lib/`
   * `cp ./workspaces/ws_of/gst/plugins/optical_flow/Debug/libgstsdxopticalflow.so <sdcard>/gstreamer-1.0/`
   * `cp ./workspaces/ws_of/gst/apps/optical_flow/Debug/gstdemo <sdcard>`
 
-## 6.2 Build the Stereo, the Filter2D, and the Triple sample applications 
+## 6.2 Stereo、Filter2D、および Triple サンプル アプリケーションのビルド 
 
-* The Stereo, Filter2D and the Triple project may be created and built in the same way just explained for the Optical Flow project. The steps are very similar.
-* Launch SDx, starting in the appropriate workspace directory`./workspaces/`ws_sv,`
-> ./workspaces/`ws_f2d `or
-> ./workspaces/`ws_triple`, respectively.`
-* In the Templates dialog, select 'Stereo Vision', 'Filter2D', or 'Filter2D, Optical Flow and Stereo', respectively.
-* All the other steps are analogous.
+* Stereo、Filter2D、および Triple プロジェクトも、Optical Flow プロジェクトの手順と同じように作成してビルドできます。手順はよく似ています。
+* SDx を起動し、適切なワークスペース ディレクトリ `./workspaces/ws_sv`、`./workspaces/ws_f2d`、または `./workspaces/ws_triple` を開きます。
 
-## 6.3 Build the File IO sample applications 
 
-* Start SDx and create a new workspace. Make sure you use the same shell to run SDx as the one where you have set $SYSROOT.
-* Close the Welcome screen and select 'File' → 'New' → 'SDx Project'... from the menu bar. Select Application Project and click 'Next'. This brings up the Create a New SDx Project dialog box. Enter a name for project (e.g. “bil_fil” which stands for bilateral filter), click 'Next'.
+* [Templates] ページで [Stereo Vision]、[Filter2D]、または [Optical Flow and Stereo] を選択します。
+* その他すべての手順は同じです。
+
+## 6.3 ファイル I/O サンプル アプリケーションのビルド 
+
+* SDx を起動して新しいワークスペース作成します。$SYSROOT を設定したのと同じシェルで SDx を実行してください。
+* Welcome 画面を閉じ、メニュー バーから [File] → [New] → [SDx Project] をクリックします。[Application Project] を選択し、[Next] をクリックします。New SDx Project ウィザードが開きます。プロジェクトの名前 (バイラテラル フィルターを表す bil_fil など) を入力します。
 
 ![](./images/fio1_crp.jpg)
 
-* Leave the "Use default location" box checked, hit Next>, this opens the "Platform" page.
-* Select the platform. The very first time you do this for a new workspace, you must hit Add Custom Platform (as explained in [6.1.3 Add custom platform](https://github.com/saurabhsengar/TechDocs/blob/reVISION-getting-started/tool-flow-tutorials.md#613-add-custom-platform) and select the custom platform.
+* [Use default location] をオンのままにして [Next] をクリックします。[Platform] ページが開きます。
+* プラットフォームを選択します。新しいワークスペースでこれを初めて実行する場合は、[Add Custom Platform] ([6.1.3 カスタム プラットフォームの追加](#613-カスタム-プラットフォームの追加)を参照) をクリックしてカスタム プラットフォームを選択する必要があります。
 
 ![](./images/scr2_crp.jpg)
 
-* Select your custom platform e.g. "zcu102_es2_rv_ss (custom)", hit 'Next', this opens the "System configuration" page.
+* カスタム プラットフォーム ([zcu102_es2_rv_ss (custom)] など) を選択して [Next] をクリックします。[System configuration] ページが開きます。
 
 ![](./images/scr3_crp.png)
 
-* Leave everything as is, hit Next>, this opens the "Templates" page.
-* Select “bilateral – File I/O” from the set of templates and click on “Finish”.
+* すべてをデフォルト設定のままにして [Next] をクリックします。[Templates] ページが開きます。
+* テンプレートのリストから [bilateral – File I/O] を選択し、[Finish] をクリックします。
 
 ![](./images/pII.png)
 
-* The dialog box closes, and you now see the SDx Project Settings pane in the center of the SDx GUI. Notice the progress bar in the lower right border of the pane, saying "C/C++ Indexer" - wait a few moments for this to finish. Locate the "Active build configuration:" in the upper right corner of the pane, which says "Debug" - click it and select Release. Your window should now look something like this:
+* ウィザードが閉じ、SDx GUI の中央に [SDx Project Settings] が表示されます。このパネルの右下の進捗状況バーに C/C++ Indexer と表示されます。これが終了するのを待ちます。[Application Project Settings] の右上にある [Active build configuration] を [Debug] から [Release] に変更します。ウィンドウの表示は次のようになります。
 
 ![](./images/fio3_crp.jpg)
 
-* In the left hand "Project Explorer" pane, select the bil_fil project, click right on it, then select Build Project. The "Hammer" icon in the menu bar also performs "Build Project". In the small Build Project dialog that opens, you may hit the "Run in Background" button. That causes the small dialog box to disappear, though you can still see a progress icon in the lower right part of the GUI, showing that work is in progress. Select the Console tab in the lower central pane of the GUI to observe the steps of the build process as it progresses. The build process may take tens of minutes, up to several hours, depending on the power of your host machine, whether you are running on Linux or Windows, and of course the complexity of your design. By far the most time is spent processing the routines that have been tagged for realization in hardware - note the "HW functions" window in the lower part of the SDx Project Settings pane. “bilateralFilter” is listed as a function tagged to be moved to hardware.
-* Once the Build completes, you will find an sd_card directory has been created at
+* 左側の [Project Explorer] ビューで bil_fil プロジェクトを右クリックし、[Build Project] をクリックします。または、ツールバーのハンマー アイコンをクリックしても [Build Project] コマンドを実行できます。開いた [Build Project] ダイアログ ボックスで [Run in Background] をクリックします。これにより [Build Project] ダイアログ ボックスは閉じますが、GUI の右下に進捗状況バーが表示され、処理が実行中であることがわかります。GUI の下部中央にある [Console] ビューを選択し、ビルド プロセスの進捗状況を確認します。ビルド プロセスには、ホスト マシンの処理能力、Linux または Windows のどちらで実行しているか、およびデザインの複雑性によって、数十分から数時間かかります。ほとんどの時間は、ハードウェアに配置するよう指定されたルーチンの処理に費やされます。[SDx Project Settings] の左下の [Hardware Functions] ペインにリストされているものです。bilateralFilter がハードウェアに移動する関数としてリストされています。
+* ビルドが完了すると sd_card ディレクトリが次の場所に作成されます。
   * `.\<workspace>\bil_fil\Release\sd_card`
-* In order to run the function on the board, mount the SD card on the board and power it on.
-* At the prompt, go to the directory “/media/card”. Use the following command: cd /media/card
-* Run the executable using the following command: ./bil_fil.elf im0.jpg
-* If the run is successful, the following text appears at the terminal:
+* ボード上で関数を実行するには、ボードに SD カードを挿入して電源を投入します。
+* プロンプトで /media/card ディレクトリに移動します。「cd /media/card」と入力します。
+* 「./bil_fil.elf im0.jpg」と入力して実行ファイルを実行します。
+* 正しく実行されると、ターミナルに次のように表示されます。
 ```
 
 sigma_color: 7.72211 sigma_space: 0.901059 elapsed time 9133271 Minimum error in intensity = 0 Maximum error in intensity = 1 Percentage of pixels above error threshold = 0.00168789 Count: 35
 
 ```
 
-* Follow the same procedure for other file I/O samples – Harris corner detection, optical flow, stereo block matching and warpTransform.
+* ほかのファイル I/O サンプル (Harris コーナー検出、オプティカル フロー、ステレオ ブロック マッチング、および warpTransform) にも同じ操作を実行します。
 
 
 <hr/>
 
-:arrow_forward:**Next Topic:**  [7. Run the Application](run-application.md)
+:arrow_forward:**次のトピック:**  [7.  アプリケーションの実行](run-application.md)
 
-:arrow_backward:**Previous Topic:**  [5. Installation and Operating Instructions](operating-instructions.md)
+:arrow_backward:**前のトピック:**  [5.  インストールおよび操作手順](operating-instructions.md)
 <hr/>
 <p align="center"><sup>Copyright&copy; 2018 Xilinx</sup></p>
