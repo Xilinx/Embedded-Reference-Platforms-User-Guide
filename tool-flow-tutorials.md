@@ -1,4 +1,5 @@
-<table style="width:100%">
+<p align="right">
+            Read this page in other languages:<a href="../Japanese-master/tool-flow-tutorials.md">日本語</a>    <table style="width:100%"><table style="width:100%">
   <tr>
 
 <th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.2</h1>
@@ -23,15 +24,15 @@
 </tr>
 </table>
 
-# 6 Tool Flow Tutorials 
+# 6 Tool Flow Tutorials
 
 The SDx Development Environment, version 2018.2, must be installed and working on your host computer, either the Linux or the Windows version.
 
-This guide will walk you through the process of building the sample designs. In step [3.2 Software](https://github.com/Xilinx/TechDocs/blob/reVISION-getting-started/software-tools-system-requirements.md#32-software ), you unzipped your platform files, and noted the exact directory paths.
+This guide will walk you through the process of building the sample designs. In step [3.2 Software](software-tools-system-requirements.md#32-software ), you unzipped your platform files, and noted the exact directory paths.
 
-The path to the extracted platform will be needed to tell SDx where your custom platform resides. You need to set the SYSROOT environment variable to point to a directory inside the platform. The platform root directory is abbreviated to <platform> below and needs to be replaced with your local path.
+The path to the extracted platform will be needed to tell SDx where your custom platform resides. You need to set the SYSROOT environment variable to point to a directory inside the platform. The platform root directory is abbreviated to `<platform>` below and needs to be replaced with your local path.
 
-**:information_source: IMPORTANT:** Before starting SDx, set the **SYSROOT environment variable** to point to the Linux root file system, i.e the sysroot top directory you just unzipped in step [5.2 Extract the design zip files](https://github.com/saurabhsengar/TechDocs/blob/reVISION-getting-started/operating-instructions.md#52-extract-the-design-zip-files).`
+**:information_source: IMPORTANT:** Before starting SDx, set the **SYSROOT environment variable** to point to the Linux root file system, i.e the sysroot top directory you just unzipped in step [5.2 Extract the design zip files](operating-instructions.md#52-extract-the-design-zip-files).
 
 ```
 Linux: export SYSROOT=<platform>/petalinux/sdk/sysroots/aarch64-xilinx-linux
@@ -49,7 +50,7 @@ With this release of reVISION the live IO sample design examples are based on GS
 A GStreamer plugin is a shared library. In the case of the reVISION sample designs, the GStreamer plugin consists of two linked parts. These "top" and "bottom" parts are separate shared libraries produced by separate project builds. The top part is the GStreamer plugin itself, containing the code for interfacing with the GStreamer framework. See the `./workspaces/<name>/gst/plugins/<name>` directory.
 The top part links with the bottom part which contains the code for the HW accelerated function(s). This bottom project generates the BOOT.BIN file containing the programmable logic used for the HW function(s). These are SDx projects: See the `./samples/live_IO/<name>` directory.
 
-## 6.1 Build the Live_IO Optical Flow sample application 
+## 6.1 Build the Live_IO Optical Flow sample application
 
 The following steps are virtually identical whether you are running the Linux or Windows version of SDx.
 
@@ -155,7 +156,7 @@ For a given workspace, such as `./ws_of/`, the arrangement of these subdirectori
 
 ![](./images/pFF.png)
 
-### 6.1.7 Building project
+### 6.1.7 Building Project
 
 * Build the opticalflow project - do this by clicking right and choosing Build Project, or by clicking the 'hammer' icon.
 * In the small Build Project dialog that opens, you may hit the "Run in Background" button. That causes the small dialog box to disappear, though you can still see a progress icon in the lower right part of the GUI, showing that work is in progress. Select the Console tab in the lower central pane of the GUI to observe the steps of the build process as it progresses. The build process may take tens of minutes, up to several hours, depending on the power of your host machine, whether you are running on Linux or Windows, and of course the complexity of your design. By far the most time is spent processing the routines that have been tagged for realization in hardware - note the "HW functions" window in the lower part of the SDx Project Settings pane. In our example above, the routines read_optflow_input, DenseNonPyrLKOpticalFlow, and write_optflow_output are tagged to be built in hardware. The synthesis of the C code found in these routines into RTL, and the Placement and Routing of that RTL into the programmable logic in the Zynq MPSoC, are the steps that take most of the time.
@@ -163,39 +164,35 @@ For a given workspace, such as `./ws_of/`, the arrangement of these subdirectori
 ![](./images/pGG.png)
 
 * Once the Build completes, you will find an sd_card directory has been created containing these files you'll need to transfer to your SD card.
-* Please note few of the images need to be copied crating lib and gstreamer-1.0 directory in your sdcard.
+* Note that a few of the images must be copied, creating lib and gstreamer-1.0 directory in your sdcard.
   * `cp ./workspaces/ws_of/opticalflow/Release/sd_card/BOOT.BIN <sdcard>`
   * `cp ./workspaces/ws_of/opticalflow/Release/sd_card/libopticalflow.so <sdcard>/lib/`
   * `cp ./workspaces/ws_of/opticalflow/Release/sd_card/image.ub <sdcard>`
   * `cp ./workspaces/ws_of/opticalflow/Release/sd_card/video_cmd <sdcard>`
-* Now that the "bottom" shared library is built, you may build the "top" part, that will be linked with the bottom library. Now select the gstdemo project, and build it. Doing this will build all four of the gst--- projects.
-
-![](./images/pHH.png)
-
-* This entire process should take only a few minutes, and creates these libraries and executable
   * `cp ./workspaces/ws_of/gst/allocators/Debug/libgstsdxallocator.so <sdcard>/lib/`
   * `cp ./workspaces/ws_of/gst/base/Debug/libgstsdxbase.so <sdcard>/lib/`
   * `cp ./workspaces/ws_of/gst/plugins/optical_flow/Debug/libgstsdxopticalflow.so <sdcard>/gstreamer-1.0/`
   * `cp ./workspaces/ws_of/gst/apps/optical_flow/Debug/gstdemo <sdcard>`
+* Now that the "bottom" shared library is built, you may build the "top" part, that will be linked with the bottom library. Now select the gstdemo project, and build it. Doing this will build all four of the gst--- projects.
 
-## 6.2 Build the Stereo, the Filter2D, and the Triple sample applications 
+![](./images/pHH.png)
 
-* The Stereo, Filter2D and the Triple project may be created and built in the same way just explained for the Optical Flow project. The steps are very similar.
-* Launch SDx, starting in the appropriate workspace directory`./workspaces/`ws_sv,`
-> ./workspaces/`ws_f2d `or
-> ./workspaces/`ws_triple`, respectively.`
-* In the Templates dialog, select 'Stereo Vision', 'Filter2D', or 'Filter2D, Optical Flow and Stereo', respectively.
+## 6.2 Build the Stereo, the Filter2D, and the Triple sample applications
+
+* The Stereo, Filter2D, and the Triple project may be created and built in the same way just explained for the Optical Flow project. The steps are very similar.
+* Launch SDx, starting in the appropriate workspace directory: `./workspaces/ws_sv`, `./workspaces/ws_f2d`, or `./workspaces/ws_triple`, respectively.
+* In the Templates dialog, select 'Stereo Vision', 'Filter2D', or 'Optical Flow and Stereo', respectively.
 * All the other steps are analogous.
 
-## 6.3 Build the File IO sample applications 
+## 6.3 Build the File IO sample applications
 
 * Start SDx and create a new workspace. Make sure you use the same shell to run SDx as the one where you have set $SYSROOT.
-* Close the Welcome screen and select 'File' → 'New' → 'SDx Project'... from the menu bar. Select Application Project and click 'Next'. This brings up the Create a New SDx Project dialog box. Enter a name for project (e.g. “bil_fil” which stands for bilateral filter), click 'Next'.
+* Close the Welcome screen and select 'File' → 'New' → 'SDx Project'... from the menu bar. Select Application Project and click 'Next'. This brings up the Create a New SDx Project dialog box. Enter a name for project (e.g. “bil_fil” which stands for bilateral filter).
 
 ![](./images/fio1_crp.jpg)
 
 * Leave the "Use default location" box checked, hit Next>, this opens the "Platform" page.
-* Select the platform. The very first time you do this for a new workspace, you must hit Add Custom Platform (as explained in [6.1.3 Add custom platform](https://github.com/saurabhsengar/TechDocs/blob/reVISION-getting-started/tool-flow-tutorials.md#613-add-custom-platform) and select the custom platform.
+* Select the platform. The very first time you do this for a new workspace, you must hit Add Custom Platform (as explained in [6.1.3 Add custom platform](#613-add-custom-platform) and select the custom platform.
 
 ![](./images/scr2_crp.jpg)
 

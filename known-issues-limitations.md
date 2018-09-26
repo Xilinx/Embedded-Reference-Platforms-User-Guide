@@ -1,4 +1,5 @@
-<table style="width:100%">
+<p align="right">
+            Read this page in other languages:<a href="../Japanese-master/known-issues-limitations.md">日本語</a>    <table style="width:100%"><table style="width:100%">
   <tr>
 
 <th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.2</h1>
@@ -23,7 +24,7 @@
 </tr>
 </table>
 
-# 9. Known Issues and Limitations 
+# 9. Known Issues and Limitations
 
 ## 9.1 Known Issues
 
@@ -35,9 +36,9 @@
 
   `WARNING: [DMAnalysis 83-4492] Unable to determine the memory attributes passed to _mapx_mat.data of function w1_xf_remap at /home/workspaces/ws_sv/stereo/src/stereo_sds.cpp:257, please use mem_attribute pragma to specify`
 
-  **Solution:** The message is benign and can be ignored
+  **Solution:** The message is benign and can be ignored.
 
-## 9.2 Limitations 
+## 9.2 Limitations
 
 * Do not connect a DisplayPort cable and HDMI Tx at the same time.
 * Make sure the DisplayPort or HDMI Tx cable is plugged in when you power on the board.

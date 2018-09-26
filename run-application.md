@@ -1,4 +1,5 @@
-<table style="width:100%">
+<p align="right">
+            Read this page in other languages:<a href="../Japanese-master/run-application.md">日本語</a>    <table style="width:100%"><table style="width:100%">
   <tr>
 
 <th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.2</h1>
@@ -23,21 +24,21 @@
 </tr>
 </table>
 
-# 7 Run the Application 
+# 7 Run the Application
 
-To use the GStreamer plugins, a video pipeline that includes them must be set up and launched. The command line utility `gst-launch-1.0` may be used to do this. Use your laptop connected to the target board over a serial terminal emulator, interacting with the system via a standard Linux console session. See section 6.1. You may construct video pipeline graphs consisting of one or more sources, zero, one or more accelerators, and one sink. GStreamer is responsible for initializing the capture, memory-to-memory, and display pipelines as well as managing the video buffer flow through the pipeline stages.
+To use the GStreamer plugins, a video pipeline that includes them must be set up and launched. The command line utility `gst-launch-1.0` may be used to do this. Use your laptop connected to the target board over a serial terminal emulator, interacting with the system via a standard Linux console session. See [section 6.1](tool-flow-tutorials.md#61-build-the-live_io-optical-flow-sample-application). You may construct video pipeline graphs consisting of one or more sources, zero, one or more accelerators, and one sink. GStreamer is responsible for initializing the capture, memory-to-memory, and display pipelines as well as managing the video buffer flow through the pipeline stages.
 
 The gst-launch utility is really a debugging tool. The other way to set up and launch your plugins is with a compiled application that sets up and runs the pipeline using API calls to the GStreamer libraries. The sample code is provided for test apps that do this. See the `./gst/apps/<name> `folder for each of the live_IO samples.
 
 The HDMI and MIPI input channels are themselves hardware pipelines that must be configured. This task is done by the `video_cmd` utility, run once before starting up a pipeline that uses that video input. The `video_cmd` utility is present on the sd_card directory. It is needed only when the MIPI or HDMI input channels are used.
 
-## 7.1 Run the live_IO sample applications 
+## 7.1 Run the live_IO sample applications
 
 * The "bottom" project containing the HW accelerated code is an SDx project, e.g. `./ws_f2d/filter2d`. When it completes, it creates an sd_card image with files you need to copy to your SD card you'll use on the target board.
 * While copying the sd_card directory to the SD card please create two directories in SD card namely 'lib' and 'gstreamer-1.0'
 * All the libraries should be copied to lib directory, sample plugin should be copied to gstreamer-1.0 and remaining images must be copied to the sd_card root directory.
 * The following sections list the exact files for each case.
-* For the stereo and triple case (because it includes stereo) you will also need the camera configuration file on the sd_card. (see below: "Particularities about the Stereo demo").
+* For the stereo and triple case (because it includes stereo) you will also need the camera configuration file on the sd_card. (see below: [Particularities about the Stereo demo](#73-particularities-about-the-stereo-demo)).
 
 **filter2d case**
 
@@ -46,6 +47,7 @@ After building the "bottom" library, your sd_card directory will contain these f
 * `./ws_f2d/filter2d/Release/sd_card/BOOT.BIN`
 * `./ws_f2d/filter2d/Release/sd_card/libfilter2d.so`
 * `./ws_f2d/filter2d/Release/sd_card/video_cmd`
+
 The "top" projects generate shared libraries and the demo app.
 * `./ws_f2d/gst/plugins/filter2d/Debug/libgstsdxfilter2d.so`
 * `./ws_f2d/gst/base/Debug/libgstsdxbase.so`
@@ -53,9 +55,9 @@ The "top" projects generate shared libraries and the demo app.
 * `./ws_f2d/gst/apps/filter2d/Debug/gstdemo.`
 
 >**:information_source: TIP**
-> * copy libfilter2d.so, libgstsdxbase.so and libgstsdxallocator.so in /lib directory.
-> * copy libgstsdxfilter2d.so in /gstreamer-1.0.
-> * Rest all images copy directly in sdcard's root folder /.
+> * Copy libfilter2d.so, libgstsdxbase.so and libgstsdxallocator.so in lib directory.
+> * Copy libgstsdxfilter2d.so in gstreamer-1.0.
+> * Rest all images copy directly in sdcard's root folder.
 
 **opticalflow case**
 
@@ -64,6 +66,7 @@ After building the "bottom" library, your sd_card directory will contain these f
 * `./ws_of/opticalflow/Release/sd_card/BOOT.BIN`
 * `./ws_of/opticalflow/Release/sd_card/libopticalflow.so`
 * `./ws_of/opticalflow/Release/sd_card/video_cmd`
+
 The "top" projects generate shared libraries and the demo app.
 * `./ws_of/gst/plugins/optical_flow/Debug/libgstsdxopticalflow.so`
 * `./ws_of/gst/base/Debug/libgstsdxbase.so`
@@ -71,9 +74,9 @@ The "top" projects generate shared libraries and the demo app.
 * `./ws_of/gst/apps/optical_flow/Debug/gstdemo.`
 
 >**:information_source: TIP**
-> * copy libopticalflow.so, libgstsdxbase.so and libgstsdxallocator.so in /lib directory.
-> * copy libgstsdxopticalflow.so in /gstreamer-1.0 directory.
-> * Rest all images copy directly in sdcard's root folder /.
+> * Copy libopticalflow.so, libgstsdxbase.so and libgstsdxallocator.so in lib directory.
+> * Copy libgstsdxopticalflow.so in gstreamer-1.0 directory.
+> * Rest all images copy directly in sdcard's root folder.
 
 **stereo case**
 
@@ -82,6 +85,7 @@ After building the "bottom" library, your sd_card directory will contain these f
 * `./ws_sv/stereo/Release/sd_card/BOOT.BIN`
 * `./ws_sv/stereo/Release/sd_card/libstereo.so`
 * `./ws_sv/stereo/Release/sd_card/video_cmd`
+
 The "top" projects generate shared libraries and the demo app.
 * `./ws_sv/gst/plugins/stereo/Debug/libgstsdxstereo.so`
 * `./ws_sv/gst/base/Debug/libgstsdxbase.so`
@@ -89,9 +93,9 @@ The "top" projects generate shared libraries and the demo app.
 * `./ws_sv/gst/apps/stereo/Debug/gstdemo.`
 
 >**:information_source: TIP**
-> * copy libstereo.so, libgstsdxbase.so and libgstsdxallocator.so in /lib directory.
-> * copy libgstsdxstereo.so in /gstreamer-1.0 directory.
-> * Rest all images copy directly in sdcard's root folder /.
+> * Copy libstereo.so, libgstsdxbase.so and libgstsdxallocator.so in lib directory.
+> * Copy libgstsdxstereo.so in gstreamer-1.0 directory.
+> * Rest all images copy directly in sdcard's root folder.
 
 **triple case**
 
@@ -100,6 +104,7 @@ After building the "bottom" library, your sd_card directory will contain these f
 * `./ws_triple/triple/Release/sd_card/BOOT.BIN`
 * `./ws_triple/triple/Release/sd_card/libtriple.so`
 * `./ws_triple/triple/Release/sd_card/video_cmd`
+
 The "top" projects generate shared libraries and the demo app.
 * `./ws_triple/gst/plugins/filter2d/Debug/libgstsdxfilter2d.so`
 * `./ws_triple/gst/plugins/optical_flow/Debug/libgstsdxopticalflow.so`
@@ -109,14 +114,14 @@ The "top" projects generate shared libraries and the demo app.
 * `./ws_triple/gst/apps/triple/Debug/gstdemo.`
 
 >**:information_source: TIP**
-> * create a lib directory in sdcard's root folder and copy libtriple.so, libgstsdxbase.so and libgstsdxallocator.so in lib directory.
-> * copy libgstsdxfilter2d.so, libgstsdxstereo.so and libgstsdxopticalflow.so in gstreamer-1.0 directory.
+> * Create a lib directory in sdcard's root folder and copy libtriple.so, libgstsdxbase.so and libgstsdxallocator.so in lib directory.
+> * Copy libgstsdxfilter2d.so, libgstsdxstereo.so and libgstsdxopticalflow.so in gstreamer-1.0 directory.
 > * Rest all images copy directly in sdcard's root folder.
 
 
-* insert SD card in the SD card slot on your target board.
+* Insert SD card in the SD card slot on your target board.
 * Power on the board; make sure the large "INIT_B" LED and the "DONE" LED next to it go green after a few seconds.
-* Control the system from your computer: start a terminal session using TeraTerm, PuTTY or the like. See section 6.1. With the USB-UART cable connected and the board powered up, you can locate the COM port that is responsive. You'll see several pages of Linux bootstrap and debug messages scroll by, finishing at the linux command line prompt.
+* Control the system from your computer: start a terminal session using TeraTerm, PuTTY or the like. See [section 6.1](tool-flow-tutorials.md#61-build-the-live_io-optical-flow-sample-application). With the USB-UART cable connected and the board powered up, you can locate the COM port that is responsive. You'll see several pages of Linux bootstrap and debug messages scroll by, finishing at the linux command line prompt.
 * cd over to directory `/media/card . ` This directory contains all the files you copied to your SD card.
 ```
 # cd /media/card
@@ -153,7 +158,7 @@ The "top" projects generate shared libraries and the demo app.
 	```
 
   * triple case:
-	``` 
+	```
 
 	# cp lib/libtriple.so /usr/lib
 	# cp gstreamer-1.0/libgstsdxfilter2d.so /usr/lib/gstreamer-1.0
@@ -180,7 +185,7 @@ Virtual Video De        3       /dev/video0
 
 ```
 
->**:pushpin: NOTE** 
+>**:pushpin: NOTE**
 > The output depends on the peripherals connected to the board and can be different in your case. The middle column shows the source ID which is needed for the next step to initialize the media pipeline (-s switch).
 
 The MIPI, HDMI and vivid video sources support the YUY2 and UYVY pixel formats. For USB, the supported pixel format depends on the camera firmware e.g. the e-con USB camera only supports UYVY whereas the ZED stereo camera supports only YUYV (which is identical with YUY2). Make sure you set the input parameters correctly when configuring the media pipeline.
@@ -272,7 +277,7 @@ gst-launch-1.0 \
 ```
 
 
-* Here is a gst-launch command to run the stereo pipeline, from USB, 3840x1080 side-by-side input, YUY2, 1920x1080 output to HDMI via mixer plane 29. You must substitute your camera serial number for the config-filename property. See section below on "**Particuliarities about the Stereo Demo**".
+* Here is a gst-launch command to run the stereo pipeline, from USB, 3840x1080 side-by-side input, YUY2, 1920x1080 output to HDMI via mixer plane 29. You must substitute your camera serial number for the config-filename property. See section below on "**[Particuliarities about the Stereo Demo](#73-particularities-about-the-stereo-demo)**".
 ```
 
 gst-launch-1.0 \
@@ -296,7 +301,7 @@ gst-launch-1.0 \
 ```
 
 
-## 7.2 Gstreamer elements 
+## 7.2 Gstreamer elements
 
 These pipelines are using the elements **v4l2src**, **sdxfilter2d** (or **sdxopticalflow**, or **sdxstereo**), **queue**, and **kmssink**. You may display properties and other info about any of these elements using the gstreamer utility gst-inspect-1.0.
 
@@ -338,14 +343,14 @@ To inspect the kmssink plugin:
   * 'fd4a0000.zynqmp-display' means DP output
 * property 'plane-id'
   * if you are using b00c0000.v_mix (HDMI output)
-       *** '29' is a YUY2 plane
-       *** '30' is a YUY2 plane
-       *** '31' is a UYUV plane
+       * '29' is a YUY2 plane
+       * '30' is a YUY2 plane
+       * '31' is a UYUV plane
   * if you are using fd4a0000.zynqmp-display (DP output)
-       *** '35' supports a number of RGB
-       *** '34' supports YUY2 and UYVY
+       * '35' supports a number of RGB
+       * '34' supports YUY2 and UYVY
 
-**sdx<accelerator>**
+**sdx&lt;accelerator&gt;**
 
 To inspect the sdxfilter2d plugin:
 ```
@@ -384,9 +389,9 @@ To inspect the sdxstereo plugin:
   * 1: use HW acceleration
   * 0: use SW (the optical flow code executes entirely on the ARM processor)
 * property 'config-filename'
-  * This is how you specify the ZED camera configuration file, which must be present on the SD card. See the notes below.
+  * This is how you specify the ZED camera configuration file, which must be present on the SD card. See section 7.3 below.
 
-## 7.3 Particularities about the Stereo demo 
+## 7.3 Particularities about the Stereo demo
 
 The stereo vision demo is special in several ways. First, you MUST use the ZED stereo camera connected to the USB video input. Second, and particular to this app, the width of the input image resolution is twice the width of the output resolution. The input consists of two images side-by-side, the synchronized left and right stereo input supplied by the camera. Two cases are possible: 2560x720 in to 1280x720 out, and 3840x1080 in to 1920x1080 out. The default 3840x2160 output resolution is not supported by the Stereo Vision app.
 

@@ -1,4 +1,5 @@
-<table style="width:100%">
+<p align="right">
+            Read this page in other languages:<a href="../Japanese-master/additional-references.md">日本語</a>    <table style="width:100%"><table style="width:100%">
   <tr>
 
 <th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.2</h1>
@@ -25,9 +26,9 @@
 
 # 10. Additional References
 
-* [Base TRD User Guide](https://www.xilinx.com/support/documentation/boards_and_kits/zcu102/2018_1/ug1221-zcu102-base-trd.pdf): Contains information about system, software and hardware architecture which is similar to the reVISION platform.
+* [Base TRD User Guide](https://www.xilinx.com/support/documentation/boards_and_kits/zcu102/2018_2/ug1221-zcu102-base-trd.pdf): Contains information about system, software and hardware architecture which is similar to the reVISION platform.
 * [Xilinx OpenCV User Guide](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2018_2/ug1233-xilinx-opencv-user-guide.pdf): Contains detailed description of Xilinx OpenCV functions and file I/O design examples.
-* [Xilinx Fast OpenCV on Github](https://github.com/Xilinx/xfopencv/tree/2017.4_release)
+* [Xilinx Fast OpenCV on Github](https://github.com/Xilinx/xfopencv/tree/2018.2_release)
 * Xilinx Linux Drivers:
   * [Frame Buffer Write](http://www.wiki.xilinx.com/Video%20Framebuffer%20Write)
   * [Video PHY](http://www.wiki.xilinx.com/Xilinx%20Phy%20VideoPhy%20Driver)

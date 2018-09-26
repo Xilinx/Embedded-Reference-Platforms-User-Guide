@@ -1,3 +1,6 @@
+<p align="right">
+            Read this page in other languages:<a href="../Japanese-master/README.md">日本語</a>          
+</p>
 <table style="width:100%">
   <tr>
 

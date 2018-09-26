@@ -1,4 +1,5 @@
-<table style="width:100%">
+<p align="right">
+            Read this page in other languages:<a href="../Japanese-master/design-file-hierarchy.md">日本語</a>    <table style="width:100%"><table style="width:100%">
   <tr>
 
 <th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.2</h1>
@@ -23,7 +24,7 @@
 </tr>
 </table>
 
-# 4 Design File Hierarchy 
+# 4 Design File Hierarchy
 
 The Zynq UltraScale+ MPSoC reVISION Platform zip file is released with the binary and source files required to create Xilinx SDx projects and build the sample applications. The sample applications are built as GStreamer plugins and test designs to exercise them. The provided samples include five file I/O examples and four live I/O examples. The file I/O examples read an input image file and produce an output image file whereas the live I/O examples take live video input from a video source and output live video on a display.
 

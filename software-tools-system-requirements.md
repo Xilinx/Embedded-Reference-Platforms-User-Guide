@@ -1,4 +1,5 @@
-<table style="width:100%">
+<p align="right">
+            Read this page in other languages:<a href="../Japanese-master/software-tools-system-requirements.md">日本語</a>    <table style="width:100%"><table style="width:100%">
   <tr>
 
 <th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.2</h1>
@@ -23,7 +24,7 @@
 </tr>
 </table>
 
-# 3 Software Tools and System Requirements 
+# 3 Software Tools and System Requirements
 
 ## 3.1 Hardware
 
@@ -54,12 +55,12 @@
   * 1920x1080 **or**
   * 1280x720
 
-## 3.2 Software 
+## 3.2 Software
 
 **Required:**
 * Linux or Windows host machine with a minimum memory of 32GB for tool flow tutorials (see [UG1238](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2018_2/ug1238-sdx-rnil.pdf) for supported OS version).
 * [SDSoC Development Environment](https://www.xilinx.com/products/design-tools/software-zone/sdsoc.html) version 2018.2 (see [UG1238](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2018_2/ug1238-sdx-rnil.pdf) for installation instructions)
-* Serial terminal emulator e.g. [teraterm](http://logmett.com/tera-term-the-latest-version)
+* Serial terminal emulator (for example, Tera Term)
 * [7zip](http://www.7-zip.org/) utility to extract the design zip file (**Windows only**).
 
   **:pushpin: NOTE** Other zip utilities may produce incorrect results!
@@ -68,7 +69,7 @@
   * ZCU102 Production silicon: [zcu102-rv-ss-2018-2.zip](https://www.xilinx.com/member/forms/download/design-license-xef.html?akdm=1&filename=zcu102-rv-ss-2018-2.zip)
   * ZCU104 Production silicon: [zcu104-rv-ss-2018-2.zip](https://www.xilinx.com/member/forms/download/design-license-xef.html?akdm=1&filename=zcu104-rv-ss-2018-2.zip)
 
-## 3.3 Licensing 
+## 3.3 Licensing
 
 * **Important:** Certain material in this reference design is separately licensed by third parties and may be subject to the GNU General Public License version 2, the GNU Lesser General License version 2.1, or other licenses. The [Third Party Library Sources](https://www.xilinx.com/member/forms/download/xef.html?akdm=1&filename=zcu10x-rv-ss-2018-2-tpl-sources.zip) zip file provides a copy of separately licensed material that is not included in the reference design.
 * You will need only the SDSoC license to build the design. You can evaluate for 60-days or purchase it [here](https://www.xilinx.com/products/design-tools/software-zone/sdsoc.html#buy).
@@ -84,7 +85,7 @@
 1. The License (.lic file) will be sent to the email-id mentioned in the login details.
 1. Copy the license file locally and give the same path in the SDSoC license manager.
 
-## 3.4 Compatibility 
+## 3.4 Compatibility
 
 The reference design has been tested successfully with the following user-supplied components.
 

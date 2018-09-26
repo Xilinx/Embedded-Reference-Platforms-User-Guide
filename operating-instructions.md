@@ -1,4 +1,5 @@
-<table style="width:100%">
+<p align="right">
+            Read this page in other languages:<a href="../Japanese-master/operating-instructions.md">日本語</a>    <table style="width:100%"><table style="width:100%">
   <tr>
 
 <th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.2</h1>
@@ -23,7 +24,7 @@
 </tr>
 </table>
 
-# 5 Installation and Operating Instructions 
+# 5 Installation and Operating Instructions
 
 ## 5.1 Board Setup
 
@@ -34,7 +35,7 @@
   * Connect an HDMI cable to HDMI Output (*top* HDMI connector) on the board; connect the other end to a monitor.
 
   **:pushpin: NOTE** Certain monitors have multiple HDMI ports supporting different HDMI standards. Make sure you choose an HDMI 2.0 capable port (if available) for 4k60 performance.
-  
+
   **:pushpin: NOTE** Make sure you only connect either DisplayPort or HDMI Output on the board, not both, otherwise the design might malfunction.
 
 * Connect micro-USB cable to the USB-UART connector; use the following settings for your terminal emulator:
@@ -54,7 +55,7 @@
 * Connect an HDMI cable to HDMI Input (*bottom* HDMI connector) on the board; connect the other end to an HDMI source
 * Connect the See3CAM_CU30 or ZED USB camera to the USB3 micro-AB connector via the Xilinx USB3 micro-B adapter
 * Connect the LI-IMX274MIPI-FMC module to the FMC connector on the board (use the HPC0 connector on the ZCU102)
-  
+
   **:pushpin: NOTE** Vadj needs to be set to **1.2V** for correct operation of the daughter card. If the FMC card does not function, please follow the instructions explained in Answer Record [AR67308](https://www.xilinx.com/support/answers/67308.html) for rev 1.0 and beyond to check and/or set Vadj.
 
 **ZCU102 Jumpers & Switches:**
@@ -66,16 +67,16 @@
   * J112: **2-3**
   * J7: **1-2**
   * J113: **1-2**
-  
+
   ![](./images/zcu102_rv_board_setup_2017.4.jpg)
 
 **ZCU104 Jumpers & Switches:**
 * Set boot mode to SD card
   * SW6[4:1]: **off,off,off, on**
-  
+
   ![](./images/zcu104_board_setup_2017.4.jpg)
 
-## 5.2 Extract the design zip files 
+## 5.2 Extract the design zip files
 
 Download and unzip the reference design zip file matching your silicon version (see Section 3.2).
 * For Linux, use the **unzip** utlity.
