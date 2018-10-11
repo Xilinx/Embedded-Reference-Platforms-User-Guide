@@ -1,4 +1,5 @@
-<table style="width:100%">
+<p align="right">
+            別の言語で表示: <a href="../master/tool-flow-tutorials.md">英語</a>    <table style="width:100%"><table style="width:100%">
   <tr>
 
 <th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION 入門ガイド 2018.2</h1>
@@ -6,24 +7,24 @@
 
   </tr>
   <tr>
-    <td width="17%" align="center"><a href="README.md">1.  はじめに</a></td>
-    <td width="16%" align="center"><a href="overview.md">2.  概要</a></td>
-    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3.  ソフトウェア ツールおよびシステム要件</a></td>
-    <td width="17%" align="center"><a href="design-file-hierarchy.md">4.  デザイン ファイルの階層</a></td>
+    <td width="17%" align="center"><a href="README.md">1. はじめに</a></td>
+    <td width="16%" align="center"><a href="overview.md">2. 概要</a></td>
+    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3. ソフトウェア ツールおよびシステム要件</a></td>
+    <td width="17%" align="center"><a href="design-file-hierarchy.md">4. デザイン ファイルの階層</a></td>
 </tr>
 <tr>
-    <td width="17%" align="center"><a href="operating-instructions.md">5.  インストールおよび操作手順</a></td>
-    <td width="16%" align="center">6.  ツール フロー チュートリアル</td>
-    <td width="17%" align="center"><a href="run-application.md">7.  アプリケーションの実行</a></td>
-    <td width="17%" align="center"><a href="platform-details.md">8.  プラットフォームの詳細</a></td>    
+    <td width="17%" align="center"><a href="operating-instructions.md">5. インストールおよび操作手順</a></td>
+    <td width="16%" align="center">6. ツール フロー チュートリアル</td>
+    <td width="17%" align="center"><a href="run-application.md">7. アプリケーションの実行</a></td>
+    <td width="17%" align="center"><a href="platform-details.md">8. プラットフォームの詳細</a></td>    
   </tr>
 <tr>
-    <td width="17%" align="center" colspan="2"><a href="known-issues-limitations.md">9.  既知の問題および制限</a></td>
-    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10.  その他のリソース</a></td>
+    <td width="17%" align="center" colspan="2"><a href="known-issues-limitations.md">9. 既知の問題および制限</a></td>
+    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10. その他のリソース</a></td>
 </tr>
 </table>
 
-# 6 ツール フロー チュートリアル 
+# 6 ツール フロー チュートリアル
 
 SDx 開発環境バージョン 2018.2 がインストールされており、Linux または Windows ホスト コンピューターで動作している必要があります。
 
@@ -49,7 +50,7 @@ SDx IDE で [Window] → [Preferences] をクリックし、[C/C++] → [Build] 
 GStreamer プラグインは共有ライブラリです。reVISION サンプル デザインの場合、GStreamer プラグインはリンクされた 2 つの部分で構成されています。これら 2 つの部分 top および bottom は、個別のプロジェクト ビルドで生成された個別の共有ライブラリです。top 部分は GStreamer プラグイン自体で、GStreamer フレームワークとインターフェイスするためのコードが含まれます。`./workspaces/<name>/gst/plugins/<name>` ディレクトリを確認してください。
 top 部分は、ハードウェアでアクセラレーションされる関数のコードを含む bottom 部分にリンクされています。bottom プロジェクトは、ハードウェア関数に使用されるプログラマブル ロジックを含む BOOT.BIN ファイルを生成します。これらは SDx プロジェクトです。`./samples/live_IO/<name>` ディレクトリを参照してください。
 
-## 6.1 live_IO オプティカル フロー サンプル アプリケーションのビルド 
+## 6.1 live_IO オプティカル フロー サンプル アプリケーションのビルド
 
 次の手順は、Linux または Windows バージョンのどちらの SDx を使用しても基本的に同じです。
 
@@ -163,31 +164,27 @@ top 部分は、ハードウェアでアクセラレーションされる関数�
 ![](./images/pGG.png)
 
 * ビルドが完了すると sd_card ディレクトリが作成されるので、これに含まれるファイルを SD カードにコピーします。
-* 次のファイルを SD カードにコピーします。
+* 次のファイルをコピーして、SD カードに lib および gstreamer-1.0 ディレクトリを作成する必要があります。
   * `cp ./workspaces/ws_of/opticalflow/Release/sd_card/BOOT.BIN <sdcard>`
   * `cp ./workspaces/ws_of/opticalflow/Release/sd_card/libopticalflow.so <sdcard>/lib/`
   * `cp ./workspaces/ws_of/opticalflow/Release/sd_card/image.ub <sdcard>`
   * `cp ./workspaces/ws_of/opticalflow/Release/sd_card/video_cmd <sdcard>`
-* bottom 共有ライブラリがビルドされたので、top 部分をビルドし、bottom ライブラリにリンクします。gstdemo プロジェクトを選択し、ハンマー アイコンをクリックしてビルドします。これにより、4 つの gst--- プロジェクトがすべてビルドされます。
-
-![](./images/pHH.png)
-
-* このライブラリと実行ファイルを作成するプロセスは、数分で終了するはずです。
   * `cp ./workspaces/ws_of/gst/allocators/Debug/libgstsdxallocator.so <sdcard>/lib/`
   * `cp ./workspaces/ws_of/gst/base/Debug/libgstsdxbase.so <sdcard>/lib/`
   * `cp ./workspaces/ws_of/gst/plugins/optical_flow/Debug/libgstsdxopticalflow.so <sdcard>/gstreamer-1.0/`
   * `cp ./workspaces/ws_of/gst/apps/optical_flow/Debug/gstdemo <sdcard>`
+* bottom 共有ライブラリがビルドされたので、top 部分をビルドし、bottom ライブラリにリンクします。gstdemo プロジェクトを選択し、ハンマー アイコンをクリックしてビルドします。これにより、4 つの gst--- プロジェクトがすべてビルドされます。
 
-## 6.2 Stereo、Filter2D、および Triple サンプル アプリケーションのビルド 
+![](./images/pHH.png)
+
+## 6.2 Stereo、Filter2D、および Triple サンプル アプリケーションのビルド
 
 * Stereo、Filter2D、および Triple プロジェクトも、Optical Flow プロジェクトの手順と同じように作成してビルドできます。手順はよく似ています。
 * SDx を起動し、適切なワークスペース ディレクトリ `./workspaces/ws_sv`、`./workspaces/ws_f2d`、または `./workspaces/ws_triple` を開きます。
-
-
 * [Templates] ページで [Stereo Vision]、[Filter2D]、または [Optical Flow and Stereo] を選択します。
 * その他すべての手順は同じです。
 
-## 6.3 ファイル I/O サンプル アプリケーションのビルド 
+## 6.3 ファイル I/O サンプル アプリケーションのビルド
 
 * SDx を起動して新しいワークスペース作成します。$SYSROOT を設定したのと同じシェルで SDx を実行してください。
 * Welcome 画面を閉じ、メニュー バーから [File] → [New] → [SDx Project] をクリックします。[Application Project] を選択し、[Next] をクリックします。New SDx Project ウィザードが開きます。プロジェクトの名前 (バイラテラル フィルターを表す bil_fil など) を入力します。

@@ -1,4 +1,7 @@
-﻿<table style="width:100%">
+<p align="right">
+            別の言語で表示: <a href="../master/README.md">英語</a>          
+</p>
+<table style="width:100%">
   <tr>
 
 <th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION 入門ガイド 2018.2</h1>
@@ -6,20 +9,20 @@
 
   </tr>
   <tr>
-    <td width="17%" align="center">1.  はじめに</td>
-    <td width="16%" align="center"><a href="overview.md">2.  概要</a></td>
-    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3.  ソフトウェア ツールおよびシステム要件</a></td>
-    <td width="17%" align="center"><a href="design-file-hierarchy.md">4.  デザイン ファイルの階層</a></td>
+    <td width="17%" align="center">1. はじめに</td>
+    <td width="16%" align="center"><a href="overview.md">2. 概要</a></td>
+    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3. ソフトウェア ツールおよびシステム要件</a></td>
+    <td width="17%" align="center"><a href="design-file-hierarchy.md">4. デザイン ファイルの階層</a></td>
 </tr>
 <tr>
-    <td width="17%" align="center"><a href="operating-instructions.md">5.  インストールおよび操作手順</a></td>
-    <td width="16%" align="center"><a href="tool-flow-tutorials.md">6.  ツール フロー チュートリアル</a></td>
-    <td width="17%" align="center"><a href="run-application.md">7.  アプリケーションの実行</a></td>
-    <td width="17%" align="center"><a href="platform-details.md">8.  プラットフォームの詳細</a></td>    
+    <td width="17%" align="center"><a href="operating-instructions.md">5. インストールおよび操作手順</a></td>
+    <td width="16%" align="center"><a href="tool-flow-tutorials.md">6. ツール フロー チュートリアル</a></td>
+    <td width="17%" align="center"><a href="run-application.md">7. アプリケーションの実行</a></td>
+    <td width="17%" align="center"><a href="platform-details.md">8. プラットフォームの詳細</a></td>    
   </tr>
 <tr>
-    <td width="17%" align="center" colspan="2"><a href="known-issues-limitations.md">9.  既知の問題および制限</a></td>
-    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10.  その他のリソース</a></td>
+    <td width="17%" align="center" colspan="2"><a href="known-issues-limitations.md">9. 既知の問題および制限</a></td>
+    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10. その他のリソース</a></td>
 </tr>
 </table>
 
@@ -50,3 +53,5 @@
 
 <hr/>
 <p align="center"><sup>Copyright&copy; 2018 Xilinx</sup></p>
+
+この資料は表記のバージョンの英語版を翻訳したもので、内容に相違が生じる場合には原文を優先します。資料によっては英語版の更新に対応していないものがあります。日本語版は参考用としてご使用の上、最新情報につきましては、必ず最新英語版をご参照ください。

@@ -1,4 +1,5 @@
-<table style="width:100%">
+<p align="right">
+            別の言語で表示: <a href="../master/known-issues-limitations.md">英語</a>    <table style="width:100%"><table style="width:100%">
   <tr>
 
 <th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION 入門ガイド 2018.2</h1>
@@ -6,24 +7,24 @@
 
   </tr>
   <tr>
-    <td width="17%" align="center"><a href="README.md">1.  はじめに</a></td>
-    <td width="16%" align="center"><a href="overview.md">2.  概要</a></td>
-    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3.  ソフトウェア ツールおよびシステム要件</a></td>
-    <td width="17%" align="center"><a href="design-file-hierarchy.md">4.  デザイン ファイルの階層</a></td>
+    <td width="17%" align="center"><a href="README.md">1. はじめに</a></td>
+    <td width="16%" align="center"><a href="overview.md">2. 概要</a></td>
+    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3. ソフトウェア ツールおよびシステム要件</a></td>
+    <td width="17%" align="center"><a href="design-file-hierarchy.md">4. デザイン ファイルの階層</a></td>
 </tr>
 <tr>
-    <td width="17%" align="center"><a href="operating-instructions.md">5.  インストールおよび操作手順</a></td>
-    <td width="16%" align="center"><a href="tool-flow-tutorials.md">6.  ツール フロー チュートリアル</a></td>
-    <td width="17%" align="center"><a href="run-application.md">7.  アプリケーションの実行</a></td>
-    <td width="17%" align="center"><a href="platform-details.md">8.  プラットフォームの詳細</a></td>    
+    <td width="17%" align="center"><a href="operating-instructions.md">5. インストールおよび操作手順</a></td>
+    <td width="16%" align="center"><a href="tool-flow-tutorials.md">6. ツール フロー チュートリアル</a></td>
+    <td width="17%" align="center"><a href="run-application.md">7. アプリケーションの実行</a></td>
+    <td width="17%" align="center"><a href="platform-details.md">8. プラットフォームの詳細</a></td>    
   </tr>
 <tr>
-    <td width="17%" align="center" colspan="2">9.  既知の問題および制限</td>
-    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10.  その他のリソース</a></td>
+    <td width="17%" align="center" colspan="2">9. 既知の問題および制限</td>
+    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10. その他のリソース</a></td>
 </tr>
 </table>
 
-# 9.  既知の問題および制限 
+# 9.  既知の問題および制限
 
 ## 9.1 既知の問題
 
@@ -37,7 +38,7 @@
 
   **ソリューション:** このメッセージは無視しても問題ありません。
 
-## 9.2 制限 
+## 9.2 制限
 
 * DisplayPort ケーブルと HDMI Tx を同時に接続しないでください。
 * ボードに電源を投入するときに、DisplayPort または HDMI Tx ケーブルが差し込まれていることを確認してください。

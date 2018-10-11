@@ -1,4 +1,5 @@
-﻿<table style="width:100%">
+<p align="right">
+            別の言語で表示: <a href="../master/run-application.md">英語</a>    <table style="width:100%"><table style="width:100%">
   <tr>
 
 <th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION 入門ガイド 2018.2</h1>
@@ -6,24 +7,24 @@
 
   </tr>
   <tr>
-    <td width="17%" align="center"><a href="README.md">1.  はじめに</a></td>
-    <td width="16%" align="center"><a href="overview.md">2.  概要</a></td>
-    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3.  ソフトウェア ツールおよびシステム要件</a></td>
-    <td width="17%" align="center"><a href="design-file-hierarchy.md">4.  デザイン ファイルの階層</a></td>
+    <td width="17%" align="center"><a href="README.md">1. はじめに</a></td>
+    <td width="16%" align="center"><a href="overview.md">2. 概要</a></td>
+    <td width="17%" align="center"><a href="software-tools-system-requirements.md">3. ソフトウェア ツールおよびシステム要件</a></td>
+    <td width="17%" align="center"><a href="design-file-hierarchy.md">4. デザイン ファイルの階層</a></td>
 </tr>
 <tr>
-    <td width="17%" align="center"><a href="operating-instructions.md">5.  インストールおよび操作手順</a></td>
-    <td width="16%" align="center"><a href="tool-flow-tutorials.md">6.  ツール フロー チュートリアル</a></td>
-    <td width="17%" align="center">7.  アプリケーションの実行</td>
-    <td width="17%" align="center"><a href="platform-details.md">8.  プラットフォームの詳細</a></td>    
+    <td width="17%" align="center"><a href="operating-instructions.md">5. インストールおよび操作手順</a></td>
+    <td width="16%" align="center"><a href="tool-flow-tutorials.md">6. ツール フロー チュートリアル</a></td>
+    <td width="17%" align="center">7. アプリケーションの実行</td>
+    <td width="17%" align="center"><a href="platform-details.md">8. プラットフォームの詳細</a></td>    
   </tr>
 <tr>
-    <td width="17%" align="center" colspan="2"><a href="known-issues-limitations.md">9.  既知の問題および制限</a></td>
-    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10.  その他のリソース</a></td>
+    <td width="17%" align="center" colspan="2"><a href="known-issues-limitations.md">9. 既知の問題および制限</a></td>
+    <td width="16%" align="center" colspan="2"><a href="additional-references.md">10. その他のリソース</a></td>
 </tr>
 </table>
 
-# 7 アプリケーションの実行 
+# 7 アプリケーションの実行
 
 GStreamer プラグインを使用するには、それを含むビデオ パイプラインをセットアップして起動する必要があります。これには、コマンド ライン ユーティリティ `gst-launch-1.0` を使用できます。シリアル ターミナル エミュレーターを介してターゲット ボードに接続しているラップトップを使用して、標準 Linux コンソール セッションによってシステムと通信します。[セクション 6.1](tool-flow-tutorials.md#61-live_io-オプティカル-フロー-サンプル-アプリケーションのビルド) を参照してください。1 つまたは複数のソース、0 個以上のアクセラレータ、および 1 つのシンクを含むビデオ パイプライン グラフを構築できます。GStreamer は、キャプチャ、M2M (Memory-to-Memory)、およびディスプレイ パイプラインを初期化し、パイプライン段を通過するビデオ バッファー フローを制御します。
 
@@ -31,7 +32,7 @@ gst-launch ユーティリティは、デバッグ ツールです。プラグ�
 
 HDMI および MIPI 入力チャネルは、それ自体が設定する必要のあるハードウェア パイプラインです。このタスクは `video_cmd` ユーティリティにより実行され、ビデオ入力を使用するパイプラインを開始する前に一度実行します。`video_cmd` ユーティリティは、sd_card ディレクトリにあります。これは、MIPI または HDMI 入力チャネルを使用する場合にのみ必要です。
 
-## 7.1 live_IO I/O サンプル アプリケーションの実行 
+## 7.1 live_IO I/O サンプル アプリケーションの実行
 
 * ハードウェア アクセラレーションされたコードを含む bottom プロジェクトは SDx プロジェクト (`./ws_f2d/filter2d` など) です。完了すると sd_card イメージが作成されるので、そこに含まれるファイルをターゲット ボードで使用する SD カードにコピーします。
 * sd_card ディレクトリを SD カードにコピーする際、SD カード内に lib と gstreamer-1.0 という名前の 2 つのディレクトリを作成してください。
@@ -47,6 +48,7 @@ bottom ライブラリをビルドすると、sd_card ディレクトリに次�
 * `./ws_f2d/filter2d/Release/sd_card/libfilter2d.so`
 * `./ws_f2d/filter2d/Release/sd_card/video_cmd`
 
+
 top プロジェクトは、共有ライブラリとデモ アプリケーションを生成します。
 * `./ws_f2d/gst/plugins/filter2d/Debug/libgstsdxfilter2d.so`
 * `./ws_f2d/gst/base/Debug/libgstsdxbase.so`
@@ -54,9 +56,9 @@ top プロジェクトは、共有ライブラリとデモ アプリケーショ
 * `./ws_f2d/gst/apps/filter2d/Debug/gstdemo.`
 
 >**:information_source: ヒント:**
-> * libfilter2d.so、libgstsdxbase.so、および libgstsdxallocator.so を /lib ディレクトリにコピーします。
-> * libgstsdxfilter2d.so を /gstreamer-1.0 にコピーします。
-> * 残りすべてのイメージを SD カードのルート フォルダー / にコピーします。
+> * libfilter2d.so、libgstsdxbase.so、および libgstsdxallocator.so を lib ディレクトリにコピーします。
+> * libgstsdxfilter2d.so を gstreamer-1.0 にコピーします。
+> * 残りすべてのイメージを SD カードのルート フォルダーにコピーします。
 
 **opticalflow の場合**
 
@@ -66,6 +68,7 @@ bottom ライブラリをビルドすると、sd_card ディレクトリに次�
 * `./ws_of/opticalflow/Release/sd_card/libopticalflow.so`
 * `./ws_of/opticalflow/Release/sd_card/video_cmd`
 
+
 top プロジェクトは、共有ライブラリとデモ アプリケーションを生成します。
 * `./ws_of/gst/plugins/optical_flow/Debug/libgstsdxopticalflow.so`
 * `./ws_of/gst/base/Debug/libgstsdxbase.so`
@@ -73,9 +76,9 @@ top プロジェクトは、共有ライブラリとデモ アプリケーショ
 * `./ws_of/gst/apps/optical_flow/Debug/gstdemo.`
 
 >**:information_source: ヒント:**
-> * libopticalflow.so、libgstsdxbase.so、および libgstsdxallocator.so を /lib ディレクトリにコピーします。
-> * libgstsdxopticalflow.so を /gstreamer-1.0 ディレクトリにコピーします。
-> * 残りすべてのイメージを SD カードのルート フォルダー / にコピーします。
+> * libopticalflow.so、libgstsdxbase.so、および libgstsdxallocator.so を lib ディレクトリにコピーします。
+> * libgstsdxopticalflow.so を gstreamer-1.0 ディレクトリにコピーします。
+> * 残りすべてのイメージを SD カードのルート フォルダーにコピーします。
 
 **stereo の場合**
 
@@ -85,6 +88,7 @@ bottom ライブラリをビルドすると、sd_card ディレクトリに次�
 * `./ws_sv/stereo/Release/sd_card/libstereo.so`
 * `./ws_sv/stereo/Release/sd_card/video_cmd`
 
+
 top プロジェクトは、共有ライブラリとデモ アプリケーションを生成します。
 * `./ws_sv/gst/plugins/stereo/Debug/libgstsdxstereo.so`
 * `./ws_sv/gst/base/Debug/libgstsdxbase.so`
@@ -92,9 +96,9 @@ top プロジェクトは、共有ライブラリとデモ アプリケーショ
 * `./ws_sv/gst/apps/stereo/Debug/gstdemo.`
 
 >**:information_source: ヒント:**
-> * libstereo.so、libgstsdxbase.so、および libgstsdxallocator.so を /lib ディレクトリにコピーします。
-> * libgstsdxstereo.so を /gstreamer-1.0 ディレクトリにコピーします。
-> * 残りすべてのイメージを SD カードのルート フォルダー / にコピーします。
+> * libstereo.so、libgstsdxbase.so、および libgstsdxallocator.so を lib ディレクトリにコピーします。
+> * libgstsdxstereo.so を gstreamer-1.0 ディレクトリにコピーします。
+> * 残りすべてのイメージを SD カードのルート フォルダーにコピーします。
 
 **triple の場合**
 
@@ -103,6 +107,7 @@ bottom ライブラリをビルドすると、sd_card ディレクトリに次�
 * `./ws_triple/triple/Release/sd_card/BOOT.BIN`
 * `./ws_triple/triple/Release/sd_card/libtriple.so`
 * `./ws_triple/triple/Release/sd_card/video_cmd`
+
 
 top プロジェクトは、共有ライブラリとデモ アプリケーションを生成します。
 * `./ws_triple/gst/plugins/filter2d/Debug/libgstsdxfilter2d.so`
@@ -157,7 +162,7 @@ top プロジェクトは、共有ライブラリとデモ アプリケーショ
 	```
 
   * triple の場合:
-	``` 
+	```
 
 	# cp lib/libtriple.so /usr/lib
 	# cp gstreamer-1.0/libgstsdxfilter2d.so /usr/lib/gstreamer-1.0
@@ -184,7 +189,7 @@ Virtual Video De        3       /dev/video0
 
 ```
 
->**:pushpin: 注記:** 
+>**:pushpin: 注記:**
 > 出力はボードに接続されているペリフェラルによるので、上記とは異なる場合があります。中央の列はソース ID を示しており、メディア パイプラインを初期化 (-s オプション) する次の手順で必要です。
 
 MIPI、HDMI、および vivid ビデオ ソースでは、YUY2 および UYVY ピクセル フォーマットがサポートされています。USB では、サポートされるピクセル フォーマットはカメラのファームウェアによって異なります。たとえば、e-con USB カメラでは UYVY のみがサポートされますが、ZED ステレオ カメラでは YUYV (YUY2 と同一) がサポートされます。メディア パイプラインを設定する際は、入力パラメーターを正しく設定してください。
@@ -300,7 +305,7 @@ gst-launch-1.0 \
 ```
 
 
-## 7.2 Gstreamer エレメント 
+## 7.2 Gstreamer エレメント
 
 これらのパイプラインは、エレメント **v4l2src**、**sdxfilter2d** (または **sdxopticalflow**、または **sdxstereo**)、**queue**、および **kmssink** を使用します。gstreamer ユーティリティ gst-inspect-1.0 を使用すると、これらのエレメントのプロパティおよびその他の情報を表示できます。
 
@@ -388,9 +393,9 @@ sdxstereo プラグインを調べるには、次のコマンドを使用しま�
   * 1: ハードウェア アクセラレーションを使用します。
   * 0: ソフトウェアを使用します (オプティカル フロー コードは完全に Arm プロセッサ上で実行)。
 * config-filename プロパティ
-  * ZED カメラ コンフィギュレーション ファイルを指定します。このファイルは、SD カードに存在する必要があります。下の注記を参照してください。
+  * ZED カメラ コンフィギュレーション ファイルを指定します。このファイルは、SD カードに存在する必要があります。[セクション 7.3](#73-ステレオ-デモの詳細) を参照してください。
 
-## 7.3 ステレオ デモの詳細 
+## 7.3 ステレオ デモの詳細
 
 ステレオ ビジョン デモは、複数の点から特別です。まず、USB ビデオ入力に接続されている ZED ステレオ カメラを使用する必要があります。次に、このアプリケーションに限り、入力画像解像度の幅が出力解像度の幅の 2 倍になっています。入力は 2 つの並んだ画像で構成されており、同期化された左および右ステレオ入力がカメラから供給されます。2560x720 を入力して 1280x720 を出力、3840x1080 を入力して 1920x1080 を出力する 2 つのモードが可能です。デフォルトの 3840x2160 出力解像度はステレオ ビジョン アプリケーションではサポートされていません。
 
