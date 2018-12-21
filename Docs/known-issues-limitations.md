@@ -2,12 +2,12 @@
             Read this page in other languages:<a href="../Japanese-master/known-issues-limitations.md">日本語</a>    <table style="width:100%"><table style="width:100%">
   <tr>
 
-<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.2</h1>
+<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.3 (UG1265)</h1>
 </th>
 
   </tr>
   <tr>
-    <td width="17%" align="center"><a href="README.md">1. Introduction</a></td>
+    <td width="17%" align="center"><a href="https://github.com/Xilinx/TechDocs/blob/reVISION-getting-started-develop/README.md">1. Introduction</a></td>
     <td width="16%" align="center"><a href="overview.md">2. Overview</a></td>
     <td width="17%" align="center"><a href="software-tools-system-requirements.md">3. Software Tools and System Requirements</a></td>
     <td width="17%" align="center"><a href="design-file-hierarchy.md">4. Design File Hierarchy</a></td>
@@ -28,9 +28,9 @@
 
 ## 9.1 Known Issues
 
-* SDSoC accelerator code runs very slowly in pure software implementation when Debug configuration is used.
+* The SDSoC™ environment accelerator code runs very slowly in pure software implementation when the Debug configuration is used.
 
-  **Solution:** Set project build configurations to Release which sets sdsoc compiler to optimize most (-O3).
+  **Solution:** Set project build configurations to Release, which sets the SDSoC compiler to optimize most (-O3).
 
 * The following error message is shown when compiling the SDx project:
 
@@ -40,16 +40,18 @@
 
 ## 9.2 Limitations
 
-* Do not connect a DisplayPort cable and HDMI Tx at the same time.
-* Make sure the DisplayPort or HDMI Tx cable is plugged in when you power on the board.
-* DP-to-HDMI adapters are not supported, see [AR 67462](https://www.xilinx.com/support/answers/67462.html)
-* HDMI Rx:
-  * Does not support YUV 4:2:0 input.
-  * Does not support HDCP encrypted input.
-  * Does not support hotplug or dynamic resolution changes while the application is running.
+* Do not connect a DisplayPort cable and an HDMI TX at the same time.
+* Make sure the DisplayPort or HDMI TX cable is plugged in when you power on the board.
+* DP-to-HDMI adapters are not supported. See [AR 67462](https://www.xilinx.com/support/answers/67462.html).
+* An HDMI RX does _not_ support the following:
+  * YUV 4:2:0 input.
+  * HDCP encrypted input.
+  * Hotplug or dynamic resolution changes while the application is running.
 * The provided image signal processor (ISP) pipeline does not include any auto algorithms. The IMX274, gamma, and color correction controls have to be adjusted manually based on the surrounding environment.
-* The `optical_flow` live IO sample does not have a software implementation of the algorithm, only the hardware optimized implementation is available.
-* SDSoC does not support “Estimate Performance” for the xfopenCV library and in general for all the C++ templates (the part of Performance Estimation flow not yet supported is the estimate of software performance for function templates). Once the HLS estimate of HW resources pops up, the Ethernet P2P communication process between the SDSoC GUI and the board stalls forever and no error message is displayed.
+* The `optical_flow` live I/O sample does not have a software implementation of the algorithm; only the hardware optimized implementation is available.
+* The SDSoC environment does not support performance estimation for the `xfopenCV` library and in general for all the C++ templates (the part of performance estimation flow not yet supported is the estimate of software performance for function templates). When the HLS estimate of hardware resources pops up, the Ethernet P2P communication process between the SDSoC IDE and the board stalls indefinitely and no error message is displayed.
+* The 8-stream VCU + CNN platform demo is tested with the provided input files only. With different input files (that is, with different encoding rates, file resolution/quality, and number of streams), the results might be different.
+* A full understanding of the system is required for effective usage.
 
 <hr/>
 
