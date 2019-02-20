@@ -40,7 +40,7 @@
   * [Gamma](http://www.wiki.xilinx.com/Xilinx%20V4L2%20Gamma%20Correction%20LUT%20driver)
   * [HDMI RX](http://www.wiki.xilinx.com/Xilinx%20V4L2%20hdmirx%20driver)
   * [Xilinx DRM](http://www.wiki.xilinx.com/Xilinx%20DRM%20KMS%20driver)
-  * [Video Mixer](http://www.wiki.xilinx.com/Video_Mixer)
+  * [Video Mixer](https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/69140488/Video+Mixer+2018.1+2018.3)
   * [HDMI TX](http://www.wiki.xilinx.com/Xilinx%20DRM%20KMS%20HDMI-Tx%20Driver)
   * [DP159](http://www.wiki.xilinx.com/Misc%20DP159%20Driver)
   * [SI5324](http://www.wiki.xilinx.com/CCF%20SI5324%20Driver)
