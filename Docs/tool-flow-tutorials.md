@@ -1,5 +1,5 @@
 <p align="right">
-            Read this page in other languages:<a href="../Japanese-master/tool-flow-tutorials.md">日本語</a>    <table style="width:100%"><table style="width:100%">
+            Read this page in other languages:<a href="../docs-jp/Docs/tool-flow-tutorials.md">日本語</a>    <table style="width:100%"><table style="width:100%">
   <tr>
 
 <th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.3 (UG1265)</h1>
@@ -7,7 +7,7 @@
 
   </tr>
   <tr>
-    <td width="17%" align="center"><a href="https://github.com/Xilinx/TechDocs/blob/reVISION-getting-started-develop/README.md">1. Introduction</a></td>
+    <td width="17%" align="center"><a href="../README.md">1. Introduction</a></td>
     <td width="16%" align="center"><a href="overview.md">2. Overview</a></td>
     <td width="17%" align="center"><a href="software-tools-system-requirements.md">3. Software Tools and System Requirements</a></td>
     <td width="17%" align="center"><a href="design-file-hierarchy.md">4. Design File Hierarchy</a></td>
@@ -40,7 +40,7 @@ You can also set `SYSROOT` for all projects in the SDx environment by opening th
 ## 6.1. Single Sensor Flow
 The single-sensor platform ships with five file I/O and three live I/O design examples demonstrating popular OpenCV functions accelerated on the programmable logic. A fourth live I/O example shows how to combine the other three live I/O designs into one design, allowing the three accelerated functions to reside and run in parallel in the FPGA.
 
-With this release of reVISION, the live I/O sample design examples are based on GStreamer (see [GStreamer](https://gstreamer.freedesktop.org/)). The open-source GStreamer framework code is included with the reVISION platform, and design examples are built as GStreamer plugins. Code for test applications is provided as well, allowing you to compile apps that set up and run video pipelines using the plugins. Pipelines can be run using the `gst-launch-1.0` utility, or by your own app compiled against the Gstreamer libraries. An example test app called `gstdemo is provided for each of the platform samples. The four sample names are `filter2d`, `optical_flow`, `stereo`, and `triple`. See the `./workspaces/<name>/gst/apps/<name>` directory for each sample.
+With this release of reVISION, the live I/O sample design examples are based on GStreamer (see [GStreamer](https://gstreamer.freedesktop.org/)). The open-source GStreamer framework code is included with the reVISION platform, and design examples are built as GStreamer plugins. Code for test applications is provided as well, allowing you to compile apps that set up and run video pipelines using the plugins. Pipelines can be run using the `gst-launch-1.0` utility, or by your own app compiled against the Gstreamer libraries. An example test app called ```gstdemo`` is provided for each of the platform samples. The four sample names are `filter2d`, `optical_flow`, `stereo`, and `triple`. See the `./workspaces/<name>/gst/apps/<name>` directory for each sample.
 
 A GStreamer plugin is a shared library. In the case of the reVISION sample designs, the GStreamer plugin consists of two linked parts. These top and bottom parts are separate shared libraries produced by separate project builds. The top part is the GStreamer plugin itself, containing the code for interfacing with the GStreamer framework. See the `./workspaces/<name>/gst/plugins/<name>` directory. The top part links with the bottom part, which contains the code for the hardware accelerated function(s). This bottom project generates the `BOOT.BIN` file containing the programmable logic used for the hardware function(s). These are SDx projects; see the `./samples/live_IO/<name>` directory.
 
@@ -56,7 +56,7 @@ The following steps are virtually identical whether you are running the Linux or
 
 ```
 
-Copy these workspaces to the directory where you want to work. Look at the `optical_flow` workspace area supplied with the platform. All files under `./gst/` are supplied exactly as shown. The `./opticalflow` directory is the SDx project you create to build the low-level accelerator code. You create this 'opticalflow' SDx project directly under the` ws_of` workspace. Note that `./gst/` is also directly under `./ws_of`:
+Copy these workspaces to the directory where you want to work. Look at the `optical_flow` workspace area supplied with the platform. All files under `./gst/` are supplied exactly as shown. The `./opticalflow` directory is the SDx project you create to build the low-level accelerator code. You create this ``opticalflow`` SDx project directly under the` ws_of` workspace. Note that `./gst/` is also directly under `./ws_of`:
 ```
 ├── ws_of
 │   ├── gst
@@ -143,9 +143,9 @@ Switch the Active Build Configuration for the `opticalflow` project to **Release
 
 #### 6.1.1.6. Build the Project
 
-Build the ``opticalflow`` project by right-clicking and choosing **Build Project**, or by clicking the hammer (![](images/hammer.png) icon.
+Build the ``opticalflow`` project by right-clicking and choosing **Build Project**, or by clicking the hammer (![](images/hammer.png)) icon.
 
-In the small Build Project dialog that opens, you can hit the **Run in Background** button. This causes the small dialog box to disappear, though you can still see a progress icon in the lower right part of the GUI, showing that work is in progress. Select the **Console** tab in the lower central pane of the GUI to observe the steps of the build process as it progresses. The build process can take up to several hours, depending on the power of your host machine, whether you are running on Linux or Windows, and the complexity of your design. By far, the most time is spent processing the routines that have been tagged for realization in hardware: note the HW functions window in the lower part of the SDx Project Settings pane. In the example above, the routines `read_optflow_input`, `DenseNonPyrLKOpticalFlow`, and `write_optflow_output` are tagged to be built in hardware. The synthesis of the C code found in these routines into the RTL, and the placement and routing of that RTL into the programmable logic in the Zynq® UltraScale+™ MPSoC, are the steps that take the most time.
+In the small Build Project dialog that opens, you can hit the **Run in Background** button. This causes the small dialog box to disappear, though you can still see a progress icon in the lower right part of the GUI, showing that work is in progress. Select the **Console** tab in the lower central pane of the GUI to observe the steps of the build process as it progresses. The build process can take up to several hours, depending on the power of your host machine, whether you are running on Linux or Windows, and the complexity of your design. By far, the most time is spent processing the routines that have been tagged for realization in hardware: note the HW functions window in the lower part of the SDx Application Project Settings pane. In the example above, the routines `read_optflow_input`, `DenseNonPyrLKOpticalFlow`, and `write_optflow_output` are tagged to be built in hardware. The synthesis of the C code found in these routines into the RTL, and the placement and routing of that RTL into the programmable logic in the Zynq® UltraScale+™ MPSoC, are the steps that take the most time.
 
 ![](images/pGG1.PNG)
 
@@ -155,6 +155,8 @@ When the build completes, an `sd_card` directory is created containing the follo
   * `cp ./workspaces/ws_of/opticalflow/Release/sd_card/image.ub <sdcard>`
   * `cp ./workspaces/ws_of/gst/plugins/optical_flow/Debug/libgstsdxopticalflow.so <sdcard>`
   * `cp ./workspaces/ws_of/gst/apps/optical_flow/Debug/gstdemo <sdcard>`
+
+
 Now that the bottom shared library is built, you can build the top part that will be linked with it. Select the `gstdemo` project and build it. Doing this builds both of the `gst---` projects.
 
 ![](images/pHH1.PNG)
@@ -188,11 +190,11 @@ The Stereo, Filter2D, and Triple projects can be created and built using the met
 
 ![](images/pII.png)
 
-7. The dialog box closes, and you now see the SDx Project Settings pane in the center of the SDx integrated development environment (IDE). Notice the C/C++ Indexer progress bar in the lower right border of the pane, and wait a few moments for this to finish. In the upper-right corner of the pane, you can see that the current active build configuration is set to Debug. Click on **Debug** and change it to **Release**. Your window should now look like this:
+7. The dialog box closes, and you now see the Application Project Settings pane in the center of the SDx integrated development environment (IDE). Notice the C/C++ Indexer progress bar in the lower right border of the pane, and wait a few moments for this to finish. In the upper-right corner of the pane, you can see that the current active build configuration is set to Debug. Click on **Debug** and change it to **Release**. Your window should now look like this:
 
 ![](images/fio3_crp.jpg)
 
-8. In the Project Explorer pane on the left hand side, select the ``bil_fil`` project, right-click on it, and select **Build Project**. The hammer (![](images/hammer.png) icon in the menu bar also performs Build Project. In the small Build Project dialog that opens, you can hit the **Run in Background** button. This causes the small dialog box to disappear, though you can still see a progress icon in the lower right part of the GUI, showing that work is in progress. Select the Console tab in the lower central pane of the GUI to observe the steps of the build process as it progresses. The build process can take up to several hours, depending on the power of your host machine, whether you are running on Linux or Windows, and the complexity of your design. By far the most time is spent processing the routines that have been tagged for realization in hardware - note the HW functions window in the lower part of the SDx Project Settings pane. You can see that ``bilateralFilter`` is listed as a function tagged to be moved to hardware.
+8. In the Project Explorer pane on the left hand side, select the ``bil_fil`` project, right-click on it, and select **Build Project**. The hammer (![](images/hammer.png)) icon in the menu bar also performs Build Project. In the small Build Project dialog that opens, you can hit the **Run in Background** button. This causes the small dialog box to disappear, though you can still see a progress icon in the lower right part of the GUI, showing that work is in progress. Select the Console tab in the lower central pane of the GUI to observe the steps of the build process as it progresses. The build process can take up to several hours, depending on the power of your host machine, whether you are running on Linux or Windows, and the complexity of your design. By far the most time is spent processing the routines that have been tagged for realization in hardware - note the Hardware Functions window in the lower part of the SDx Application Project Settings pane. You can see that ``bilateralFilter`` is listed as a function tagged to be moved to hardware.
 
 9. When the Build completes, an ``sd_card`` directory is created in the `.\<workspace>\bil_fil\Release\sd_card` directory. To run the function on the board, mount the SD card on the board and power it on.
   * At the prompt, go to the ``/media/card`` directory. Use the ``cd /media/card`` command.
@@ -259,9 +261,9 @@ Follow the same step as explained in the single-sensor section (see [Add Custom 
 
 #### 6.2.1.3. Build Project
 
-Build the `dpucore130_4096` project by right-clicking and choosing **Build Project**, or by clicking the hammer (![](images/hammer.png) icon.
+Build the `dpucore130_4096` project by right-clicking and choosing **Build Project**, or by clicking the hammer (![](images/hammer.png)) icon.
 
-In the small Build Project dialog that opens, you can hit the **Run in Background** button. This causes the small dialog box to disappear, but you can still see a progress icon in the lower right part of the GUI, showing that work is in progress. Select the **Console tab** in the lower central pane of the GUI to observe the steps of the build process as it progresses. The build process can take up to several hours, depending on the power of your host machine, whether you are running on Linux or Windows, and the complexity of your design. By far, the most time is spent processing the routines that have been tagged for realization in hardware: note the HW function window in the lower part of the SDx Project Settings pane. In the example above, the routines `dpu_cache_sync`, `dpu_memcpy`, and `dpu_memset` are tagged to be built in hardware. The synthesis of the C code found in these routines into the RTL, and the placement and routing of that RTL into the programmable logic in the Zynq UltraScale+ MPSoC, are the steps that take the most time.
+In the small Build Project dialog that opens, you can hit the **Run in Background** button. This causes the small dialog box to disappear, but you can still see a progress icon in the lower right part of the GUI, showing that work is in progress. Select the **Console tab** in the lower central pane of the GUI to observe the steps of the build process as it progresses. The build process can take up to several hours, depending on the power of your host machine, whether you are running on Linux or Windows, and the complexity of your design. By far, the most time is spent processing the routines that have been tagged for realization in hardware: note the Hardware Function window in the lower part of the SDx Application Project Settings pane. In the example above, the routines `dpu_cache_sync`, `dpu_memcpy`, and `dpu_memset` are tagged to be built in hardware. The synthesis of the C code found in these routines into the RTL, and the placement and routing of that RTL into the programmable logic in the Zynq UltraScale+ MPSoC, are the steps that take the most time.
 
 ![](images/pGG2.PNG)
 
@@ -284,4 +286,4 @@ Now that the DPU C-callable workspace is built, you can build the Gstreamer plug
 
 :arrow_backward:**Previous Topic:**  [5. Installation and Operating Instructions](operating-instructions.md)
 <hr/>
-<p align="center"><sup>Copyright&copy; 2018 Xilinx</sup></p>
+<p align="center"><sup>Copyright&copy; 2018–2019 Xilinx</sup></p>

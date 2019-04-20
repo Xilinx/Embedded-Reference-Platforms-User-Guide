@@ -1,5 +1,5 @@
 <p align="right">
-            Read this page in other languages:<a href="../Japanese-master/software-tools-system-requirements.md">日本語</a>    <table style="width:100%"><table style="width:100%">
+            Read this page in other languages:<a href="../docs-jp/Docs/software-tools-system-requirements.md">日本語</a>    <table style="width:100%"><table style="width:100%">
   <tr>
 
 <th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.3 (UG1265)</h1>
@@ -7,7 +7,7 @@
 
   </tr>
   <tr>
-    <td width="17%" align="center"><a href="https://github.com/Xilinx/TechDocs/blob/reVISION-getting-started-develop/README.md">1. Introduction</a></td>
+    <td width="17%" align="center"><a href="../README.md">1. Introduction</a></td>
     <td width="16%" align="center"><a href="overview.md">2. Overview</a></td>
     <td width="17%" align="center">3. Software Tools and System Requirements</td>
     <td width="17%" align="center"><a href="design-file-hierarchy.md">4. Design File Hierarchy</a></td>
@@ -30,12 +30,12 @@
 
 ## 3.1.1. Single-Sensor Platform
 
-#### 3.1.1.1. Required:
+**Required:**
 * [ZCU104 Evaluation Board](https://www.xilinx.com/products/boards-and-kits/zcu104.html) or [ZCU102 Evaluation Board](https://www.xilinx.com/products/boards-and-kits/ek-u1-zcu102-g.html) (rev 1.0 with production silicon for ZCU102)
 * Micro USB cable, connected to laptop or desktop computer for the terminal emulator
 * SD card (for ZCU102) or Micro SD card (for ZCU104)
 
-#### 3.1.1.2. Optional (required for live I/O examples):
+**Optional (required for live I/O examples):**
 * Monitor with DisplayPort or HDMI input supporting one of the following resolutions:
   * 3840x2160
   * 1920x1080
@@ -67,8 +67,8 @@
 ## 3.2. Software
 
 **Required:**
-* Linux or Windows host machine with a minimum memory of 32GB for tool flow tutorials (see [UG1238](https://www.xilinx.com/cgi-bin/docs/rdoc?v=latest;d=ug1238-sdx-rnil.pdf) for supported OS version).
-* [SDSoC™ Development Environment](https://www.xilinx.com/products/design-tools/software-zone/sdsoc.html) version 2018.3 (see [UG1238](https://www.xilinx.com/cgi-bin/docs/rdoc?v=latest;d=ug1238-sdx-rnil.pdf) for installation instructions).
+* Linux or Windows host machine with a minimum memory of 32GB for tool flow tutorials (see [UG1238](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2018_3/ug1238-sdx-rnil.pdf) for supported OS version).
+* [SDSoC™ Development Environment](https://www.xilinx.com/products/design-tools/software-zone/sdsoc.html) version 2018.3 (see [UG1238](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2018_3/ug1238-sdx-rnil.pdf) for installation instructions).
 * Serial terminal emulator (for example, Tera Term)
 * [7zip](http://www.7-zip.org/) utility to extract the design .zip file (Windows only).
 
@@ -91,7 +91,7 @@ You only need the SDSoC license to build the design. You can evaluate it for 60 
 1. Log in [here](http://www.xilinx.com/getproduct) with your work e-mail address (if you do not yet have an account, follow the steps listed under Create Account).
 1. Generate a license from Create New Licenses by checking **SDSoC Environment, 60 Day Evaluation License**.
 
-   ![](images/license.PNG)
+   ![](images/license.png)
 
 1. Under system information, give the host details.
 1. Proceed until you get the license agreement and accept it.
@@ -141,4 +141,4 @@ The reference design has been tested successfully with the following user-suppli
 
 :arrow_backward:**Previous Topic:**  [2. Overview](overview.md)
 <hr/>
-<p align="center"><sup>Copyright&copy; 2018 Xilinx</sup></p>
+<p align="center"><sup>Copyright&copy; 2018–2019 Xilinx</sup></p>

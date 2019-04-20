@@ -1,5 +1,5 @@
 <p align="right">
-            Read this page in other languages:<a href="../Japanese-master/overview.md">日本語</a>    <table style="width:100%">
+            Read this page in other languages:<a href="../docs-jp/Docs/overview.md">日本語</a>    <table style="width:100%">
   <tr>
 
 <th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.3 (UG1265)</h1>
@@ -7,7 +7,7 @@
 
   </tr>
   <tr>
-    <td width="17%" align="center"><a href="https://github.com/Xilinx/TechDocs/blob/reVISION-getting-started-develop/README.md">1. Introduction</a></td>
+    <td width="17%" align="center"><a href="../README.md">1. Introduction</a></td>
     <td width="16%" align="center">2. Overview</td>
     <td width="17%" align="center"><a href="software-tools-system-requirements.md">3. Software Tools and System Requirements</a></td>
     <td width="17%" align="center"><a href="design-file-hierarchy.md">4. Design File Hierarchy</a></td>
@@ -120,4 +120,4 @@ The decoded output of the VCU is NV12, and the input for the DPU IP is BGR. The 
 
 :arrow_backward:**Previous Topic:**  [1. Introduction](https://github.com/Xilinx/TechDocs/tree/reVISION-getting-started-develop/README.md)
 <hr/>
-<p align="center"><sup>Copyright&copy; 2018 Xilinx</sup></p>
+<p align="center"><sup>Copyright&copy; 2018–2019 Xilinx</sup></p>

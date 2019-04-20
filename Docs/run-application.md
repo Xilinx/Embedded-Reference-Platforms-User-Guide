@@ -1,5 +1,5 @@
 2018.3<p align="right">
-            Read this page in other languages:<a href="../Japanese-master/run-application.md">日本語</a>    <table style="width:100%"><table style="width:100%">
+            Read this page in other languages:<a href="../docs-jp/Docs/run-application.md">日本語</a>    <table style="width:100%"><table style="width:100%">
   <tr>
 
 <th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.3 (UG1265)</h1>
@@ -7,7 +7,7 @@
 
   </tr>
   <tr>
-    <td width="17%" align="center"><a href="https://github.com/Xilinx/TechDocs/blob/reVISION-getting-started-develop/README.md">1. Introduction</a></td>
+    <td width="17%" align="center"><a href="../README.md">1. Introduction</a></td>
     <td width="16%" align="center"><a href="overview.md">2. Overview</a></td>
     <td width="17%" align="center"><a href="software-tools-system-requirements.md">3. Software Tools and System Requirements</a></td>
     <td width="17%" align="center"><a href="design-file-hierarchy.md">4. Design File Hierarchy</a></td>
@@ -177,7 +177,7 @@ gst-launch-1.0 \
 ```
 
 
-The following code example is a ``gst-launch`` command to run the stereo pipeline, from USB, 3840x1080 side-by-side input, YUY2, 1920x1080 output to HDMI through mixer plane 29. You must substitute your camera serial number for the ``config-filename property``. See the section below on [Single-Sensor Platform Stereo Demo: Special Considerations](#74-single-sensor-platform-stereo-demo-special-considerations).
+The following code example is a ``gst-launch`` command to run the stereo pipeline, from USB, 3840x1080 side-by-side input, YUY2, 1920x1080 output to HDMI through mixer plane 29. You must substitute your camera serial number for the ``config-filename`` property. See the section below on [Single-Sensor Platform Stereo Demo: Special Considerations](#74-single-sensor-platform-stereo-demo-special-considerations).
 ```
 
 gst-launch-1.0 \
@@ -381,7 +381,7 @@ To inspect the ``sdxopticalflow`` plugin:
 
 * ``filter_mode`` property
   * 1: Use HW acceleration.
-  * 0: Use SW (the optical flow code executes entirely on the ARM processor).
+  * 0: Use SW (the optical flow code executes entirely on the Arm processor).
 
 To inspect the ``sdxstereo`` plugin:
 ```
@@ -412,4 +412,4 @@ The stereo block-matching algorithm calculates depth based on binocular parallax
 
 :arrow_backward:**Previous Topic:**  [6. Tool Flow Tutorials](tool-flow-tutorials.md)
 <hr/>
-<p align="center"><sup>Copyright&copy; 2018 Xilinx</sup></p>
+<p align="center"><sup>Copyright&copy; 2018–2019 Xilinx</sup></p>
