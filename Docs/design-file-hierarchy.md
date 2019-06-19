@@ -24,12 +24,12 @@
 </tr>
 </table>
 
+
 # 4. Design File Hierarchy
 
 The Zynq® UltraScale+™ MPSoC reVISION platform .zip file is released with the binary and source files required to create projects in the SDx™ environments and build the sample applications. The sample applications are built as GStreamer plugins with test designs to exercise them.
 
-
-The samples provided with the single-sensor platform include five file I/O examples and four live I/O examples. The file I/O examples read an input image file and produce an output image file, whereas the live I/O examples take live video input from a video source and output live video on a display. The single-sensor reVISION platform contains the following components:
+The samples provided with the single-sensor platform include five file I/O examples and four live I/O examples. The file I/O examples read an input image file and produce an output image file, whereas the live I/O examples take live video input from a video source and output live video on a display. The single-sensor reVISION platform (download [zcu102-rv-ss-2018-3.zip](https://www.xilinx.com/member/forms/download/design-license-xef.html?filename=zcu102-rv-ss-2018-3.zip) for ZCU102 and [zcu104-rv-ss-2018-3.zip](https://www.xilinx.com/member/forms/download/design-license-xef.html?filename=zcu104-rv-ss-2018-3.zip) for ZCU104) contains the following components:
 
 * `zcu102_rv_ss` SDSoC platform
   * `hw` contains the .dsa file describing the hardware platform.
@@ -96,7 +96,7 @@ zcu102-rv-ss-2018-3
     └── zcu102_rv_ss.xpfm
 ```
 
-The MIN reVISION platform contains the following components:
+The MIN reVISION platform (download [zcu102-rv-min-2018-3.zip](https://www.xilinx.com/member/forms/download/design-license-xef.html?filename=zcu102-rv-min-2018-3.zip) for ZCU102, and [zcu104-rv-min-2018-3.zip](https://www.xilinx.com/member/forms/download/design-license-xef.html?filename=zcu104-rv-min-2018-3.zip) for ZCU104) contains the following components:
 
 * `zcu102_rv_min` SDSoC platform
   * `hw` contains the .dsa file describing the hardware platform.
@@ -124,13 +124,14 @@ zcu102-rv-min-2018-3
     └── zcu102_rv_min.xpfm
 ```
 
-The 8-stream VCU + CNN reVISION platform contains the following components:
+The 8-stream VCU + CNN reVISION platform (design .zip not yet available) contains the following components:
+
 * `zcu104` SDSoC platform
   * `hw` contains the .dsa file describing the hardware platform.
   * `sw` contains software; bootloaders and other code, and support files for the processors on the ZCU104 target board.
 * `petalinux` contains a PetaLinux BSP with device tree information, hardware description files, and other system setup files. An advanced user has the option of creating their own platform.
-* `SDcard` contains pre-built SD card images that enable you to run the "8-stream VCU + CNN" demo.
-* `scripts` contains test scripts for running the "8-stream VCU + CNN" demo with one copy of these scripts are in `SDcard` too.
+* `SDcard` contains pre-built SD card images that enable you to run the 8-stream VCU + CNN demo.
+* `scripts` contains test scripts for running the 8-stream VCU + CNN demo.
 
 ```
 zcu104-rv-vcu-ml-2018-3
