@@ -1,10 +1,7 @@
-<p align="right">
-            別の言語で表示: <a href="../../Docs/design-file-hierarchy.md">英語</a>    <table style="width:100%"><table style="width:100%">
+<p align="right">別の言語で表示:<a href="../../Docs/design-file-hierarchy.md">英語</a><table style="width:100%"><table style="width:100%">
   <tr>
-
 <th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION 入門ガイド 2018.3 (UG1265)</h1>
 </th>
-
   </tr>
   <tr>
     <td width="17%" align="center"><a href="../README.md">1. はじめに</a></td>
@@ -28,12 +25,11 @@
 
 Zynq® UltraScale+™ MPSoC reVISION プラットフォームの ZIP ファイルには、SDx™ 環境でプロジェクトを作成してサンプル アプリケーションをビルドするために必要なバイナリおよびソース ファイルが含まれています。サンプル アプリケーションは、実行するテスト デザインを含む GStreamer プラグインとしてビルドされます。
 
-
-シングル センサー プラットフォームには、5 つのファイル I/O 例と 4 つのライブ I/O 例が含まれています。ファイル I/O 例は入力画像ファイルを読み込んで出力画像ファイルを生成し、ライブ I/O 例はビデオ ソースからビデオ入力を読み込んでディスプレイにライブ ビデオを出力します。シングル センサー reVISION プラットフォームには、次のコンポーネントが含まれます。
+シングル センサー プラットフォームには、5 つのファイル I/O 例と 4 つのライブ I/O 例が含まれています。ファイル I/O 例は入力画像ファイルを読み込んで出力画像ファイルを生成し、ライブ I/O 例はビデオ ソースからビデオ入力を読み込んでディスプレイにライブ ビデオを出力します。シングル センサー reVISION プラットフォーム (ZCU102 用は [zcu102-rv-ss-2018-3.zip](https://japan.xilinx.com/member/forms/download/design-license-xef.html?filename=zcu102-rv-ss-2018-3.zip)、ZCU104 用は [zcu104-rv-ss-2018-3.zip](https://japan.xilinx.com/member/forms/download/design-license-xef.html?filename=zcu104-rv-ss-2018-3.zip) からダウンロード) には、次のコンポーネントが含まれます。
 
 * `zcu102_rv_ss` SDSoC プラットフォーム
   * `hw`: ハードウェア プラットフォームを記述する .dsa ファイルが含まれます。
-  * `samples`: サンプル アプリケーション コードが含まれます。各サンプル ディレクトリには、ビルド プロセスを記述する .json ファイルが含まれます。これらは、reVISION プラットフォームを使用して新しいプロジェクトを作成するときに [Template] ダイアログ ボックスに表示される SDx サンプル アプリケーションです。
+  * `samples`: サンプル アプリケーション コードが含まれます。各サンプル ディレクトリには、ビルド プロセスを記述する .json ファイルが含まれます。これらは、reVISION プラットフォームを使用して新しいプロジェクトを作成するときに \[Template] ダイアログ ボックスに表示される SDx サンプル アプリケーションです。
     * `file_IO` プロジェクトは自己完結型です。
     * `live_IO` プロジェクトはより複雑で、複数の手順でビルドされます。<a href="run-application.md">アプリケーションの実行</a>を参照してください。
   * `sw`: ZCU10x ターゲット ボード上のプロセッサ用のソフトウェア、ブートローダー、およびその他のコードとサポート ファイルが含まれます。
@@ -96,13 +92,12 @@ zcu102-rv-ss-2018-3
     └── zcu102_rv_ss.xpfm
 ```
 
-MIN reVISION プラットフォームには、次のコンポーネントが含まれます。
+MIN reVISION プラットフォーム (ZCU102 用は [zcu102-rv-min-2018-3.zip](https://japan.xilinx.com/member/forms/download/design-license-xef.html?filename=zcu102-rv-min-2018-3.zip)、ZCU104 用は [zcu104-rv-min-2018-3.zip](https://japan.xilinx.com/member/forms/download/design-license-xef.html?filename=zcu104-rv-min-2018-3.zip) からダウンロード) には、次のコンポーネントが含まれます。
 
 * `zcu102_rv_min` SDSoC プラットフォーム
   * `hw`: ハードウェア プラットフォームを記述する .dsa ファイルが含まれます。
   * `sw`: ZCU10x ターゲット ボード上のプロセッサ用のソフトウェア、ブートローダー、およびその他のコードとサポート ファイルが含まれます。
 * `petalinux`: デバイス ツリー情報、ハードウェア記述ファイル、その他のシステム セットアップ ファイルを含む PetaLinux BSP が含まれます。上級ユーザーは、独自のプラットフォームを作成するオプションもあります。
-
 
 ```
 zcu102-rv-min-2018-3
@@ -124,13 +119,14 @@ zcu102-rv-min-2018-3
     └── zcu102_rv_min.xpfm
 ```
 
-8 ストリーム VCU + CNN reVISION プラットフォームには、次のコンポーネントが含まれます。
+8 ストリーム VCU + CNN reVISION プラットフォーム (デザインの .zip ファイルは今後提供予定) には、次のコンポーネントが含まれます。
+
 * `zcu104` SDSoC プラットフォーム
   * `hw`: ハードウェア プラットフォームを記述する .dsa ファイルが含まれます。
   * `sw`: ZCU104 ターゲット ボード上のプロセッサ用のソフトウェア、ブートローダー、およびその他のコードとサポート ファイルが含まれます。
 * `petalinux`: デバイス ツリー情報、ハードウェア記述ファイル、その他のシステム セットアップ ファイルを含む PetaLinux BSP が含まれます。上級ユーザーは、独自のプラットフォームを作成するオプションもあります。
 * `SDcard`: 8 ストリーム VCU + CNN デモを実行できるようにするビルド済み SD カード イメージが含まれます。
-* `scripts`: 8 ストリーム VCU + CNN デモを実行するためのテスト スクリプトが含まれます。これらのスクリプトは `SDcard` にも含まれます。
+* `scripts`: 8 ストリーム VCU + CNN デモを実行するためのテスト スクリプトが含まれます。
 
 ```
 zcu104-rv-vcu-ml-2018-3
@@ -155,10 +151,12 @@ zcu104-rv-vcu-ml-2018-3
     │   └── zcu104.spfm
     └── zcu104.xpfm
 ```
+
 <hr/>
 
-:arrow_forward:**次のトピック:** [5. インストールおよび操作手順](operating-instructions.md)
+:arrow_forward:**次のトピック:**  [5. インストールおよび操作手順](operating-instructions.md)
 
-:arrow_backward:**前のトピック:** [3. ソフトウェア ツールおよびシステム要件](software-tools-system-requirements.md)
+:arrow_backward:**前のトピック:**  [3. ソフトウェア ツールおよびシステム要件](software-tools-system-requirements.md)
+
 <hr/>
-<p align="center"><sup>Copyright&copy; 2018-2019 Xilinx</sup></p>
+<p align="center"><sup>Copyright&copy; 2018&ndash;2019 Xilinx</sup></p>
