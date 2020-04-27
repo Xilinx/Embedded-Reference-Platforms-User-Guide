@@ -2,7 +2,7 @@
             Read this page in other languages:<a href="../docs-jp/Docs/tool-flow-tutorials.md">日本語</a>    <table style="width:100%"><table style="width:100%">
   <tr>
 
-<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.3 (UG1265)</h1>
+<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>Vitis Software Platform: Embedded Vision Reference Platforms User Guide 2019.2 (UG1265)</h1>
 </th>
 
   </tr>
@@ -26,261 +26,455 @@
 
 # 6. Tool Flow Tutorials
 
-The SDx™ development environment, version 2018.3, must be installed and working on your host computer, in either the Linux or the Windows version. This guide walks you through the process of building the sample designs. In the [Software](software-tools-system-requirements.md#32-software ) step, you unzipped your platform files, and noted the exact directory paths.
+To test the platforms, the Vitis™ software platform, version 2019.2, must be installed and working on your host computer in Linux only.
 
-The path to the extracted platform is required so that you can tell SDx where your custom platform resides. Set the `SYSROOT` environment variable to point to a directory inside the platform. The platform root directory is abbreviated to `<platform>` below and needs to be replaced with your local path:
+This guide walks you through the process of building the sample designs. In the [Software](software-tools-system-requirements.md#32-software) step, you unzipped your platform files, and noted the exact directory paths.
 
-* Linux: `export SYSROOT=<platform>/sw/a53_linux/a53_linux/sysroot/aarch64-xilinx-linux/`
-* Windows: Go to **Start** → **Control Panel** → **System** → **Advanced** → **Environment Variables**. Create an environment variable `SYSROOT` with the value `<platform>/sw/a53_linux/a53_linux/sysroot/aarch64-xilinx-linux/`.
+The path to the extracted platform is required so that you can tell the Vitis software platform where your custom platform resides. Set the sysroot environment variable to point to a directory where sysroot is present. The PetaLinux BSP section in <a href="platform-details.md">Platform Details</a></td> shows how to generate the sysroot with the help of the PetaLinux BSP file given for each platform. The platform root directory is abbreviated to `<platform>` below and needs to be replaced with your local path. In case of Linux, this environment setting has to be from the Linux terminal where you are opening the Vitis environment:
 
-You can also set `SYSROOT` for all projects in the SDx environment by opening the **Window** menu, selecting **Preferences**, and adding a `sysroot` variable to **C/C++** → **Build** → **Environment**.
+Vitis Platforms:
+* Linux: `export SYSROOT=<SYSROOT_PATH>/sysroot/aarch64-xilinx-linux/`
 
-![](images/sysroot.PNG)
+## 6.1. Single Sensor Platform
 
-## 6.1. Single Sensor Flow
-The single-sensor platform ships with five file I/O and three live I/O design examples demonstrating popular OpenCV functions accelerated on the programmable logic. A fourth live I/O example shows how to combine the other three live I/O designs into one design, allowing the three accelerated functions to reside and run in parallel in the FPGA.
+<details>
+<br>
+            
+            
+The Single Sensor platform ships with three live I/O design examples demonstrating popular OpenCV functions accelerated on the programmable logic. With this release of the embedded vision reference platforms, the live I/O sample design examples are based on [GStreamer](https://gstreamer.freedesktop.org). The open-source GStreamer framework code is included with the vision platform, and design examples are built as GStreamer plugins. Code for test applications is provided as well, allowing you to compile apps that set up and run video pipelines using the plugins. Pipelines can be run using the `gst-launch-1.0` utility.
 
-With this release of reVISION, the live I/O sample design examples are based on GStreamer (see [GStreamer](https://gstreamer.freedesktop.org/)). The open-source GStreamer framework code is included with the reVISION platform, and design examples are built as GStreamer plugins. Code for test applications is provided as well, allowing you to compile apps that set up and run video pipelines using the plugins. Pipelines can be run using the `gst-launch-1.0` utility, or by your own app compiled against the Gstreamer libraries. An example test app called ```gstdemo`` is provided for each of the platform samples. The four sample names are `filter2d`, `optical_flow`, `stereo`, and `triple`. See the `./workspaces/<name>/gst/apps/<name>` directory for each sample.
 
-A GStreamer plugin is a shared library. In the case of the reVISION sample designs, the GStreamer plugin consists of two linked parts. These top and bottom parts are separate shared libraries produced by separate project builds. The top part is the GStreamer plugin itself, containing the code for interfacing with the GStreamer framework. See the `./workspaces/<name>/gst/plugins/<name>` directory. The top part links with the bottom part, which contains the code for the hardware accelerated function(s). This bottom project generates the `BOOT.BIN` file containing the programmable logic used for the hardware function(s). These are SDx projects; see the `./samples/live_IO/<name>` directory.
+A GStreamer plugin is a shared library. In the case of the embedded vision reference platform sample designs, the GStreamer plugin consists of two linked parts. The top part is a set of shared libraries, and the bottom part generates the `*.xclbin` file, which contains information about the accelerator built on top of the platform. The top part is generated by importing workspaces for each sample from `./workspaces/<name>` and building them. The bottom part is generated by creating an application project in the Vitis software platform and building the sample in the `./workspaces/samples/live_IO/<name>` directory.
 
-### 6.1.1. Build the Live I/O Optical Flow Sample Application
+The shared libraries generated by the top part are for XRT base class, the XRT allocator for DMABUF, ``gstsdx`` base class, the XRT mapping layer with the GStreamer framework, and a sample-specific GStreamer plugin. See the `./workspaces/<name>` directory. This top part links with the bottom part, which contains the code for the hardware accelerated function(s). This bottom project generates the `BOOT.BIN` and `*.xclbin` file containing the programmable logic used for the hardware function(s).
 
-The following steps are virtually identical whether you are running the Linux or Windows version of SDx. There is a` ./workspaces/...` folder structure already set up for the four `live_IO` samples as part of the platform:
+### 6.1.1. Build the Live I/O Stereo Sample Application
+
+There is a` ./workspaces/...` folder structure already set up for the three `live_IO` samples as part of the platform package:
 ```
 ├── workspaces
 │   ├── ws_f2d
 │   ├── ws_of
 │   ├── ws_sv
-│   ├── ws_triple
-
 ```
 
-Copy these workspaces to the directory where you want to work. Look at the `optical_flow` workspace area supplied with the platform. All files under `./gst/` are supplied exactly as shown. The `./opticalflow` directory is the SDx project you create to build the low-level accelerator code. You create this ``opticalflow`` SDx project directly under the` ws_of` workspace. Note that `./gst/` is also directly under `./ws_of`:
+Copy these workspaces to the directory where you want to work. Go to one of the subdirectories under ``workspaces``. For an example, look at the `ws_sv` workspace area described in below tree supplied with the platform. The `./ws_sv/gst/`, `./ws_sv/xcl_stereo/`, and `./ws_sv/xrtutils/` directories are software workspaces required for GStreamer to communicate with a stereo kernel through an XRT mapping layer.
+
+:pushpin: **IMPORTANT**: Some of the projects are duplicated for these subdirectories (for example, ``xrtutils``, ``gstsdxbase``, and ``gstsdxallocator``). Go to one of the subdirectories (for example, ``ws_f2d``, ``ws_of``, or ``ws_sv``), open the Vitis software platform, and import the project under that subdirectory instead of opening the Vitis software platform from the ``workspaces`` directory.
+
+The `./ws_sv/stereo` directory shown below is the Vitis project you create to build the low-level stereo accelerator code. You create this stereo Vitis project directly under the ``ws_sv`` workspace.
+
 ```
-├── ws_of
+├── ws_sv
 │   ├── gst
-│   │   ├── apps
-│   │   │   └── optical_flow
-│   │   │       └── main.c
+│   │   └── allocators
+│   │        └── gstxclallocator.c
+│   │        └── gstxclallocator.h
+│   │   └── base
+│   │        └── gstsdxbase.c
+│   │        └── gstsdxbase.h
 │   │   └── plugins
-│   │       └── optical_flow
-│   │          ├── gstsdxopticalflow.cpp
-│   │          └── gstsdxopticalflow.h
-│   └── opticalflow
+│   │        └── gstsdxstereo
+│   │            └── gstsdxstereo.cpp
+│   │            └── gstsdxstereo.h
+│   │            └── stereo_cv.cpp
+│   │            └── stereo_cv.h
+│   │            └── BtoWrgb_table.h
+│   │            └── gstsdxstereo.cpp
+│   │            └── BtoWyuv_table.h
+│   ├── xcl_stereo
+│   │        └── stereo_sds.cpp
+│   │        └── stereo_sds.h
+│   ├── xrtutils
+│   │        └── xcl2.cpp
+│   │        └── xcl2.hpp
+│   │        └── xrt_mapping_buffer.h
+│   │        └── xrtutils.cpp
+│   │        └── xrtutils.hpp
+│   └── stereo
 │       └── src
-│           ├── optical_flow_sds.cpp
-│           └── optical_flow_sds.h
+│           ├── xf_stereo_pipeline_accel.cpp
+│           └── xf_stereo_pipeline_config.h
+│           └── xf_config_params.h
+│           └── BtoWyuv_table.h
 
 ```
 
-For a given workspace, such as `./ws_of/`, the arrangement of these subdirectories must be preserved. This is because the various projects depend on each other in that they need to know the paths to each other's include files and library files. As long as you keep this structure, you're OK; you can copy the `./ws_of/` tree with everything just as shown, and put it anywhere you want to work.
+For a given workspace, such as `./workspaces/`, where ``ws_sv`` is a subdirectory, the arrangement of these subdirectories must be preserved. This is because the various projects depend on each other in that they need to know the paths to each other's include files and library files. As long as you keep this structure, you're OK; you can copy the `./ws_sv/` tree with everything just as shown, and put it anywhere you want to work.
 
 **:pushpin: NOTE**
->If you are working on Linux, there is no restriction on where you put these workspaces. Some people want to work directly in the` ./workspaces/` directory under the platform itself, and others prefer to copy it elsewhere so that the original area remains untouched.
+>If you are working in Linux (the Vitis software platform is only supported by the Linux OS in 2019.2), there is no restriction on where you put these workspaces. Some people want to work directly in the` ./workspaces/` directory under the platform itself, and others prefer to copy it elsewhere so that the original area remains untouched.
 
->If you are working on Windows, there _is_ a restriction. File path lengths are restricted to 256 characters. The Xilinx build process creates deep directory structures with long names as it goes through the build process. You are advised, therefore, to keep the path to the workspace as short as possible, for example `C:\ws_of\...`.
+#### 6.1.1.1. Import Existing GStreamer Workspaces
 
-#### 6.1.1.1. Import Existing Gstreamer Workspaces
+This section uses the `stereo` sample workspaces to demonstrate how to import and compile the GStreamer workspaces.
 
-1. Start SDx and select workspace `./ws_of`. Make sure you use the same shell to run the SDx environment as the one where you have set `$SYSROOT`. Close the Welcome screen and select **File** → **Import** → **General** → **Existing Projects into Workspace** →**Next**.
+1. Start the Vitis software platform and select workspace `./workspaces`. Make sure you use the same shell to run the Vitis software tool as the one where you have set `$SYSROOT` using the `export` or `setenv` command.
 
-![](images/p22.png)
+![](images/ws_sv_1.JPG)
 
-![](images/p33.png)
+2. Close the **Welcome** screen and type "Import" into the **Quick Access** at the top of the window. Select the **Import (Existing Projects into Workspace) - Import** option.
 
-2. In the Import dialog, to the right of Select root directory, click **Browse**.
+![](images/ws_sv_2.JPG)
 
-![](images/p44.png)
+3. In the Import Projects dialog, to the right of Select root directory, click **Browse**.
 
-3.  By default, you are already in the directory you want; `./workspaces/ws_of`. Click **OK**.
+![](images/ws_sv_3.JPG)
 
-![](images/p55.png)
+4. Select the directory you want; `./workspaces/ws_sv`. Click **OK**.
 
-4. You should see a list of projects with ``gstdemo`` and ``gstopticalflow`` selected. Click **Finish**.
+![](images/ws_sv_4.JPG)
 
-![](images/p66.png)
+5. You should see a list of projects with ``gstsdxbase``, ``gstsdxstereo``,  ``gstsgstxclallocator``, ``xcl_stereo`` and ``xrtutils`` selected. Click **Finish**.
 
-5. Back at the main window, the imported project appears in the Project Explorer pane. Select **File** → **New** → **SDx Library Project...** from the menu bar.
+![](images/ws_sv_5.JPG)
 
-#### 6.1.1.2. Create Library Application Project
-![](images/p77.png)
+6. Back at the main window, the imported project appears in the Project Explorer pane. Wait for the projects to be loaded and indexed.
 
-1. In the Create a New SDx Library Project dialog, enter the project name, `opticalflow`, and click **Next**.
+![](images/ws_sv_6.JPG)
 
-![](images/p88.png)
+7. Right-click on the **xcl_stereo** workspace and select the **C++ Build Settings**. Select **Includes** under the g++ Compiler, click on **+**, and remove any existing text in the Add directory path window that opens. Add the ``xfopencv`` include directory that is present in the platform path using the **File System** button, and click **OK**.
 
-2. This brings up the Accelerated Library Type dialog box. Select **Shared Library**, and click **Next**.
+![](images/ws_sv_7.JPG)
 
-![](images/p99.png)
+![](images/ws_sv_8.JPG)
+
+**:pushpin: NOTE**
+> This ``xfopencv`` include path should be added for other sample XRT mapping layer workspaces as well. They are `xcl_filter2d` project for the filter2d sample, and the `xcl_opticalflow` project for the opticalflow sample.
+
+8. Click **Apply** → **Yes** → **Apply and Close**. Wait for the C/C++ indexer at the bottom right corner of the window to complete.
+
+![](images/ws_sv_9.JPG)
+
+9. Build all the five workspaces by selecting all and clicking the **Debug** button. Doing this creates .so files inside the `Debug` folder for each workspace. In this case, you should see five .so files created from the five projects. Resolve compilation errors (if any) by setting the Arm™ GCC compiler include path settings under C++ build settings for each workspace. You will need to transfer these .so files to your SD card.
+
+![](images/ws_sv_9_2.JPG)
+
+#### 6.1.1.2. Create Application Project
+
+This section uses the `stereo` sample kernel to demonstrate how to build the kernel.
+
+1. Select **File** → **New** → **Application Project...** from the menu bar.
+
+![](images/ws_sv_10.JPG)
+
+2. In the New Application Project dialog, enter the project name, `stereo`, and click **Next**.
+
+![](images/ws_sv_21.JPG)
+
+3. This brings up the platform selection window. Click **+**, and click **Next**.
+
+![](images/ws_sv_21_2.JPG)
 
 #### 6.1.1.3. Add Custom Platform
-1. In the Platform dialog, click **+**, and find your way to the top directory where you unzipped the single-sensor reVISION platform (for example, `zcu104_rv_ss`). Click **OK**.
 
-![](images/pAA1.PNG)
+1. Select **File System**, and find your way to the top directory where you unzipped the Single Sensor platform (for example, `zcu104_ss`). Click **OK**.
 
-![](images/pBB.png)
+![](images/ws_sv_21_3.JPG)
 
 2. Back in the Platform dialog, the new platform appears in the list, but is not selected. Select it, then click **Next**.
 
-![](images/pCC1.PNG)
+![](images/ws_sv_22.JPG)
 
-3. Click **Next** again in the next window.
+3. Click **Next** again in the following window, and give the sysroot path. Download the sysroot for the Arm™ AARch64 from the web where the pre-built platforms are present, and to refer that path here. Click **Next** again.
 
-![](images/pCCC.PNG)
+![](images/ws_sv_23.JPG)
+
+**:pushpin: NOTE**
+> Alternatively, the sysroot can be generated by running the script `./sdk.sh` in the PetaLinux folder of the pre-built platform.
 
 #### 6.1.1.4. Select the Live I/O Sample
-In the Templates dialog, under ``live_IO``, select **Dense Optical Flow** and click **Finish**.
 
-![](images/pEE1.PNG)
+1. In the Templates dialog, under ``live_IO``, select **Stereo Vision**, and click **Finish**.
 
-Back again at the main window, the new project `opticalflow` appears under the four imported projects in the Project Explorer pane.
+![](images/ws_sv_24.JPG)
 
-#### 6.1.1.5. Select the Release Build Configuration
-Switch the Active Build Configuration for the `opticalflow` project to **Release**. Note that three routines are marked as hardware functions.
+Back again at the main window, the new project `stereo` appears under the Project Explorer pane.
 
-![](images/pFF1.PNG)
+#### 6.1.1.5. Set the Build Settings for the C++ Compiler
+
+1. Change the Active build configuration to **Hardware**.
+
+![](images/ws_sv_24_2.JPG)
+
+2. Right-click on **stereo** and select **C++ Build Settings**.
+
+![](images/ws_sv_24_3.JPG)
+
+3. Under V++ Kernel Compiler, select **Symbols** , click on **+**, and add `__SDSVHLS__`.
+
+![](images/ws_sv_25.JPG)
+
+4. Under V++ Kernel Compiler, select  **Includes**, click on **+**, and remove any existing text in the Add directory path window. Add the xfOpenCV include directory that is present in the platform path using the **File System** button, and click **OK**. This path needs to be added for all the three live I/O samples (``filter2d``, ``optical_flow``, and ``stereo``) being built for the Vitis software platform.
+
+![](images/ws_sv_26.JPG)
+
+5. Click **Yes**, **Apply**, and then **Apply and Close**. Wait for the C/C++ indexer at the bottom right corner of the window to complete.
+
+![](images/ws_sv_28.JPG)
+
+**:pushpin: NOTE**
+> Please change the Active build configuration to **Hardware** before doing any C++ build settings. Doing settings first and selecting the Active build configuration later, does not retains the build settings.
 
 #### 6.1.1.6. Build the Project
 
-Build the ``opticalflow`` project by right-clicking and choosing **Build Project**, or by clicking the hammer (![](images/hammer.png)) icon.
+Build the ``stereo`` project by right-clicking on the **stereo** and choosing **Build Project**, or by clicking the (![](images/hammer.png)) icon.
 
-In the small Build Project dialog that opens, you can hit the **Run in Background** button. This causes the small dialog box to disappear, though you can still see a progress icon in the lower right part of the GUI, showing that work is in progress. Select the **Console** tab in the lower central pane of the GUI to observe the steps of the build process as it progresses. The build process can take up to several hours, depending on the power of your host machine, whether you are running on Linux or Windows, and the complexity of your design. By far, the most time is spent processing the routines that have been tagged for realization in hardware: note the HW functions window in the lower part of the SDx Application Project Settings pane. In the example above, the routines `read_optflow_input`, `DenseNonPyrLKOpticalFlow`, and `write_optflow_output` are tagged to be built in hardware. The synthesis of the C code found in these routines into the RTL, and the placement and routing of that RTL into the programmable logic in the Zynq® UltraScale+™ MPSoC, are the steps that take the most time.
+![](images/ws_sv_30.JPG)
 
-![](images/pGG1.PNG)
+In the small Build Project dialog that opens, click the **Run in Background** button. This causes the small dialog box to disappear, though you can still see a progress icon in the lower right part of the GUI, showing that work is in progress. Select the **Console** tab in the lower central pane of the GUI to observe the steps of the build process as it progresses. The build process can take up to several hours, depending on the power of your host machine, and the complexity of your design. The synthesis of the C code found in C kernel routines into the RTL, and the placement and routing of that RTL into the programmable logic in the Zynq® UltraScale+™ MPSoC, are the steps that take the most time.
 
-When the build completes, an `sd_card` directory is created containing the following files that you'll need to transfer to your SD card:
-  * `cp ./workspaces/ws_of/opticalflow/Release/sd_card/BOOT.BIN <sdcard>`
-  * `cp ./workspaces/ws_of/opticalflow/Release/sd_card/libopticalflow.so <sdcard>`
-  * `cp ./workspaces/ws_of/opticalflow/Release/sd_card/image.ub <sdcard>`
-  * `cp ./workspaces/ws_of/gst/plugins/optical_flow/Debug/libgstsdxopticalflow.so <sdcard>`
-  * `cp ./workspaces/ws_of/gst/apps/optical_flow/Debug/gstdemo <sdcard>`
+When the build completes, an `sd_card` directory is created (`./workspaces/ws_sv/stereo/System/sd_card/) containing the following files that you'll need to transfer to your SD card:
 
+  * `cp ./workspaces/ws_sv/stereo/System/sd_card/binary_container_1.xclbin <sdcard>`
+  * `cp ./workspaces/ws_sv/stereo/System/sd_card/BOOT.BIN <sdcard>`
+  * `cp ./workspaces/ws_sv/stereo/System/sd_card/image.ub <sdcard>`
 
-Now that the bottom shared library is built, you can build the top part that will be linked with it. Select the `gstdemo` project and build it. Doing this builds both of the `gst---` projects.
+### 6.1.2 Build the opticalflow and filter2D Applications
 
-![](images/pHH1.PNG)
+The ``opticalflow`` and ``filter2D`` projects can be created and built using the method just detailed for the ``stereo`` vision project, with the following differences:
 
-### 6.1.2 Build the Stereo, Filter2D, and Triple Sample Applications
-
-The Stereo, Filter2D, and Triple projects can be created and built using the method just detailed for the Optical Flow project, with the following differences:
-
-1. Launch the SDx environment, starting in the appropriate workspace directory: `./workspaces/ws_sv`, `./workspaces/ws_f2d`, or `./workspaces/ws_triple`, respectively.
-2. In the Templates dialog, select **Stereo Vision**, **Filter2D**, or **Optical Flow and Stereo**, respectively.
+1. Launch the Vitis software platform, starting in the appropriate workspace directory: `./workspaces/ws_of`, or `./workspaces/ws_f2d`, respectively.
+2. In the Templates dialog, select **Optical Flow** or **Filter2D** respectively.
 3. All the other steps are analogous.
+</details>
 
-### 6.1.3 Build the File I/O Sample Applications
+## 6.2. 8-Stream VCU + CNN Platform
 
-1. Start the SDx environment and create a new workspace. Make sure you use the same shell to run SDx as the one where you have set ``$SYSROOT``.
+<details>
+            
+<br>
 
-2. Close the Welcome screen and select **File** → **New** → **SDx Project...** from the menu bar. Select **Application Project** and click **Next**. This brings up the Create a New SDx Project dialog box. Enter a name for the project (for example, ``bil_fil``, which stands for bilateral filter).
-
-![](images/fio1_crp.jpg)
-
-3. Leave the Use default location box checked and hit **Next** to open the Platform page.
-4. Select the platform. The very first time you do this for a new workspace, you must hit **Add Custom Platform** (see [Add Custom Platform](#6113-add-custom-platform)) and select the custom platform.
-
-![](images/scr2_crp.jpg)
-
-5. Select the custom platform (for example, ``zcu102_es2_rv_ss (custom)``), and hit **Next**. This opens the System Configuration page.
-
-![](images/scr3_crp.png)
-
-6. Leave everything as-is, and hit **Next** to opens the Templates page. Select **bilateral – File I/O** from the set of templates and click **Finish**.
-
-![](images/pII.png)
-
-7. The dialog box closes, and you now see the Application Project Settings pane in the center of the SDx integrated development environment (IDE). Notice the C/C++ Indexer progress bar in the lower right border of the pane, and wait a few moments for this to finish. In the upper-right corner of the pane, you can see that the current active build configuration is set to Debug. Click on **Debug** and change it to **Release**. Your window should now look like this:
-
-![](images/fio3_crp.jpg)
-
-8. In the Project Explorer pane on the left hand side, select the ``bil_fil`` project, right-click on it, and select **Build Project**. The hammer (![](images/hammer.png)) icon in the menu bar also performs Build Project. In the small Build Project dialog that opens, you can hit the **Run in Background** button. This causes the small dialog box to disappear, though you can still see a progress icon in the lower right part of the GUI, showing that work is in progress. Select the Console tab in the lower central pane of the GUI to observe the steps of the build process as it progresses. The build process can take up to several hours, depending on the power of your host machine, whether you are running on Linux or Windows, and the complexity of your design. By far the most time is spent processing the routines that have been tagged for realization in hardware - note the Hardware Functions window in the lower part of the SDx Application Project Settings pane. You can see that ``bilateralFilter`` is listed as a function tagged to be moved to hardware.
-
-9. When the Build completes, an ``sd_card`` directory is created in the `.\<workspace>\bil_fil\Release\sd_card` directory. To run the function on the board, mount the SD card on the board and power it on.
-  * At the prompt, go to the ``/media/card`` directory. Use the ``cd /media/card`` command.
-  * Run the executable using the ``./bil_fil.elf im0.jpg`` command.
-  * If the run is successful, the following text appears at the terminal:
-```
-
-sigma_color: 7.72211 sigma_space: 0.901059 elapsed time 9133271 Minimum error in intensity = 0 Maximum error in intensity = 1 Percentage of pixels above error threshold = 0.00168789 Count: 35
-
-```
-
-10. Follow the same procedure for other file I/O samples: Harris corner detection, optical flow, stereo block matching, and warpTransform.
-
-## 6.2. 8-Stream VCU + CNN Traffic Detect Example
-This 8-stream VCU + CNN platform traffic detection example demonstrates machine learning capabilities on programmable logic.
-
-This example is based on [GStreamer](https://gstreamer.freedesktop.org/). The open-source GStreamer framework code is included with the reVISION platform, and design examples are built as GStreamer plugins. Code for test applications is provided as well, allowing you to compile apps that will set up and run video pipelines using the plugins. Pipelines can be run by using the `gst-launch-1.0` utility.
-
-In the case of the reVISION sample designs, the GStreamer plugin consists of two linked parts. These top and bottom parts are separate shared libraries produced by separate project builds. The top part is the GStreamer plugin itself, containing the code for interfacing with the GStreamer framework. See the `gstsdxtrafficdetect` directory. The top part links with the bottom part which contains the code for the hardware accelerated function(s). This bottom project generates the `BOOT.BIN` file containing the programmable logic used for the hardware function(s). These are C-callable SDx projects: see the `dpucore130_4096` directory.
-
-### 6.2.1. Build Existing Gstreamer and C-Callable Projects
-Copy the ``ws_dpu`` workspaces to the directory where you want to work. The directory structure of this workspace is as follows:
-```
-ws_dpu
-|-- dpucore130_4096
-|-- gstsdxtrafficdetect
-|-- include
-`-- libs
-```
-
-- ``dpucore130_4096``  : C-callable project with DPU
-- ``gstsdxtrafficdetect``  : a Gstreamer plugin project for traffic detection
-- ``include`` : DNNDK head files
-- ``libs``  : DNNDK libraries
-
-You can switch to this workspace, or you can import these two projects to your current workspace. If you choose the second way, make sure to copy the ``include`` and ``libs`` folder to the root path of your workspace (the ``gstsdxtrafficdetect`` project depends on the root path of your workspace to locate the DNNDK headers and libraries).
-
-#### 6.2.1.1. Import Existing Gstreamer Workspaces
-1. Start SDx and select your workspace. Make sure you use the same shell to run the SDx environment as the one where you have set ``$SYSROOT`` – or you can set up this environment variable in the property page of ``gstsdxtrafficdetect`` later.
-
-2. Close the Welcome screen and select **File** → **Import** → **General** → **Existing Projects into Workspace** → **Next**.
-
-![](images/p22.png)
-
-![](images/p33.png)
-
-3. In the Import dialog, to the right of Select root directory, click **Browse**.
-
-![](images/p44.png)
-
-4. By default, you're already in the directory you want: `ws_dpu`. Click **OK**.
-
-![](images/p551.PNG)
-
-5. You should see a list of projects, with ``dpucore130_4096`` and ``gstsdxtrafficdetect`` selected. Click **Finish**.
-
-![](images/p661.PNG)
-
-6. Back at the main window, the two imported projects appear in the Project Explorer pane.  Select **File** → **New** → **SDx Library Project...** from the menu bar.
-
-#### 6.2.1.2. Add Custom Platform
-
-Follow the same step as explained in the single-sensor section (see [Add Custom Platform](#6113-add-custom-platform)), and select the 8-stream VCU + CNN platform.
-
-#### 6.2.1.3. Build Project
-
-Build the `dpucore130_4096` project by right-clicking and choosing **Build Project**, or by clicking the hammer (![](images/hammer.png)) icon.
-
-In the small Build Project dialog that opens, you can hit the **Run in Background** button. This causes the small dialog box to disappear, but you can still see a progress icon in the lower right part of the GUI, showing that work is in progress. Select the **Console tab** in the lower central pane of the GUI to observe the steps of the build process as it progresses. The build process can take up to several hours, depending on the power of your host machine, whether you are running on Linux or Windows, and the complexity of your design. By far, the most time is spent processing the routines that have been tagged for realization in hardware: note the Hardware Function window in the lower part of the SDx Application Project Settings pane. In the example above, the routines `dpu_cache_sync`, `dpu_memcpy`, and `dpu_memset` are tagged to be built in hardware. The synthesis of the C code found in these routines into the RTL, and the placement and routing of that RTL into the programmable logic in the Zynq UltraScale+ MPSoC, are the steps that take the most time.
-
-![](images/pGG2.PNG)
-
-When the build completes, an `sd_card` directory is created containing these files that you'll need to transfer to your SD card:
+This 8-stream VCU + CNN platform traffic detection and face detection example demonstrates the machine learning capabilities of DeePhi Densebox and SSD neural networks on programmable logic. The DPU Vitis kernel and DNNDK libraries to build with the 8-stream VCU + CNN platform are available in the platform package itself: `zcu104_vcu_ml_2019_2/DPU`.
 
 
-  * `cp ./dpucore130_4096/Debug/sd_card/BOOT.BIN <sdcard>`
-  * `cp ./dpucore130_4096/Debug/sd_card/libdpucore130_4096.so <sdcard>/libdpucore.so`
-  * `cp ./dpucore130_4096/Debug/sd_card/image.ub <sdcard>`
-  * `cp ./dpucore130_4096/Debug/sd_card/uEnv.txt <sdcard>`
+This example is based on GStreamer. The open-source GStreamer framework code is included with this platform, and design examples are built as GStreamer plugins. Code for test applications is provided as well, allowing you to compile apps that set up and run video pipelines using the plugins. Pipelines can be run by using the gst-launch-1.0 utility.
 
-  **:pushpin: NOTE:** When using ``libdpucore130_4096.so``, rename it to ``libdpucore.so``, or create a soft link that points to it.
 
-Now that the DPU C-callable workspace is built, you can build the Gstreamer plugin that will be linked with it. Select the `gstsdxtrafficdetect` project and build it. When the build completes, the plugin ``libgstsdxtrafficdetect.so`` is created.
+The GStreamer facedetect and traffic detect plugins have two components each. One component interfaces with the GStreamer framework, and the other links with the DNNDK, which provides C/C++ APIs for deep learning application programming. The build flow for the 8-stream VCU + CNN solution describes using this platform to build a DNNDK project.
 
-![](images/pHH2.PNG)
 
+### 6.2.1. Build the DPU Project with the 8-Stream VCU + CNN platform
+
+In the current release, the approach to building the DPU project is available through the command line only
+
+1. Copy the DPU project workspace to the directory you want to work on.
+
+2. ``cd`` to ``workspaces/DPU/prj/``.
+
+3. Edit the ``VITIS_PLATFORM`` variable in a zcu104_vcu_ml_2019_2/DPU/prj/Makefile to use the 8-Stream VCU + CNN platform:
+
+  ````
+  VITIS_PLATFORM = <pre-built platform path>/zcu104_vcu_ml/zcu104_vcu_ml.xpfm
+
+  ````
+
+4. If needed, update the `workspaces/DPU/prj/config_file/prj_config` and `workspaces/DPU/prj/dpu_conf.vh` files to change the DPU configuration and set the platform port connections to DPU.
+
+5. Ensure the Vivado, Vitis, and XRT environments are properly set to build this. This ensures the required variables in the Makefile are properly set.
+
+   ```
+   source <vitis_intstall_path>/installs/lin64/Vitis/2019.2/settings64.csh
+   source <vitis_intstall_path>/xbb/xrt/packages/setenv.csh
+   
+   ```
+6. Run ``make`` in the command line. This builds the DPU project for the 8-Stream VCU + CNN platform.
+
+7. When the build completes, copy the built images to ``sdcard``:
+
+* `cp <DPU_workspace>/binary_container_1/sd_card/BOOT.BIN <sdcard>`
+* `cp <DPU_workspace>/binary_container_1/sd_card/image.ub <sdcard>`
+* `cp <DPU_workspace>/binary_container_1/sd_card/dpu.xclbin <sdcard>`
+
+### 6.2.2. Build the Libraries and GStreamer Plugin
+
+Copy the required prebuilt libraries that are present in the ``workspaces/sdcard`` directory to the SD card for booting on the ZCU104 board for evaluating the 8-Stream VCU + CNN platform:
+
+* `cp workspaces/sdcard/libn2cube.so <sdcard>`
+* `cp zworkspaces/sdcard/libdpuaol.so <sdcard>`
+* `cp workspaces/sdcard/libhineon.so <sdcard>`
+* `cp workspaces/sdcard/libgstsdxtrafficdetect.so <sdcard>`
+* `cp workspaces/sdcard/libdpumodelssd.so <sdcard>`
+* `cp workspaces/sdcard/libgstxclallocator.so <sdcard>`
+* `cp workspaces/sdcard/libgstsdxbase.so <sdcard>`
+* `cp workspaces/sdcard/libxrtutils.so <sdcard>`
+* `cp workspaces/sdcard/libgstsdxfacedetect.so <sdcard>`
+* `cp workspaces/sdcard/libdpumodeldensebox.so <sdcard>`
+
+Some of these libraries can be created from the workspaces given with this package, as described in the following section. The generated libraries can be used instead of the pre-built libraries from the SD card.
+
+#### 6.2.2.1. Import Existing GStreamer Workspaces
+
+Follow the below steps to build workspaces ``libgstxclallocator.so``, ``libgstsdxbase.so``, ``libxrtutils.so``, ``libgstsdxfacedetect.so``, and ``libgstsdxtrafficdetect.so``. This step is required if you want to build workspaces and generate .so files instead of using the ones present in the ``workspaces//sdcard`` prebuilt directory. The model libraries for facedetect, trafficdetect, `libdpumodeldensebox.so`, and `libdpumodelssd.so` respectively are available as pre-built only.
+
+1. Extract the sysroots by following the [Platform Build Instructions](design-file-hierarchy.md#42-platform-build-instructions). This extracts the following components:
+
+* ``environment-setup-aarch64-xilinx-linux``
+* ``site-config-aarch64-xilinx-linux``
+* ``sysroots``
+* ``version-aarch64-xilinx-linux``
+
+Alternatively, download the [``zynqmp`` sysroot](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html) from the Xilinx website.
+
+2. Set the ``SYSROOT`` path in the shell, or add the following code to your startup script:
+
+* `setenv SYSROOT <sysrootextractdir>/sysroots/aarch64-xilinx-linux` (for csh)
+* `export SYSROOT=<sysrootextractdir>/sysroots/aarch64-xilinx-linux` (for bash)
+
+3. Create your own workspace, and copy the contents of ``zcu104_vcu_ml_2019_2/workspaces/`` to your workspace.
+
+`cp -rf zcu104_vcu_ml_2019_2/workspaces/* <workspace>`
+
+4. Make sure you set the sysroot from the terminal where you are invoking the Vitis GUI, as shown in the previous step. Start the Vitis IDE, and select the workspace directory where you have copied the contents of `workspaces` to build the library from sources. Click the **Launch** button. 
+
+![](images/zcu104_vcu_ml_1.JPG)
+
+5. Close the Welcome screen and type **import** into the quick access toolbar. Click on **Import (Existing Projects into Workspace) - Import**.
+
+![](images/zcu104_vcu_ml_2.JPG)
+
+6. In the Import Projects window, to the right of the Select root directory, click **Browse**.
+
+![](images/zcu104_vcu_ml_3.JPG)
+
+7. Select your workspace directory where all the GStreamer projects are present and click **OK**.
+
+![](images/zcu104_vcu_ml_4.JPG)
+
+8. Select the projects to add for the build, and click **Finish**. Wait for the `C/C++ Indexer` to be completed to 100%.
+
+![](images/zcu104_vcu_ml_5.JPG)
+
+![](images/zcu104_vcu_ml_6.JPG)
+
+9. Select all the projects and build by clicking the hammer (![](images/hammer.png)) icon. This generates the required libraries and application executables in the respective **Debug** folders of each of the projects. These projects are interdependent on other projects. If you are building any of the projects independently instead of building all projects at once, check the build errors in the Vitis GUI console to see if looking for a dependent library is mentioned, and then build that project accordingly.
+
+![](images/zcu104_vcu_ml_7.JPG)
+
+#### 6.2.3. Final Steps
+
+1. Copy the ``libgstxclallocator.so``, ``libgstsdxbase.so``, ``libxrtutils.so``, ``libgstsdxfacedetect.so``, and ``libgstsdxtrafficdetect.so`` libraries along with the ``rtsp`` application executable to the `<sdcard>` directory generated by building the workspaces in the previous step.
+
+2. Copy the pre-built facedetect and trafficdetect models (for 480x360 resolution) from the `sdcard` folder to `<sdcard>`:
+
+* `cp workspaces/sdcard/libdpumodeldensebox.so <sdcard>`
+* `cp workspaces/sdcard/libdpumodelssd.so <sdcard>`
+
+These models must be rebuilt if the DPU configuration or input resolution is different from what is provided with this package. Refer to the [AI Model Zoo](https://github.com/Xilinx/Vitis-AI/tree/master/AI-Model-Zoo) and the Vitis AI User Guide ([UG1414](https://www.xilinx.com/cgi-bin/docs/rdoc?d=vitis_ai/1_0/ug1414-vitis-ai.pdf) for information on how to rebuild the models.
+
+3. Copy the pre-built DNNDK libraries from the `sdcard` folder to `<sdcard>`:
+
+* `cp workspaces/sdcard/libn2cube.so <sdcard>`
+* `cp workspaces/sdcard/libhineon.so <sdcard>`
+* `cp workspaces/sdcard/libdpuaol.so <sdcard>`
+
+You are now ready to boot the device with the 8-stream VCU + CNN design.
+
+</details>
+
+## 6.3. ZCU104 Smart Camera Platform
+
+<details>
+<br>
+            
+The ZCU104 Smart Camera example demonstrates the DeePhi Densebox neural network capability with face detection on programmable logic. The DNNDK project to build with the ZCU104 Smart Camera platform is available for free download in the Xilinx AI developer hub (not yet available).
+
+
+
+This example is based on [GStreamer](https://gstreamer.freedesktop.org/). The open-source GStreamer framework code is included with the reVISION platform, and design examples are built as GStreamer plugins. Code for test applications is provided as well, allowing you to compile apps that set up and run video pipelines using the plugins. Pipelines can be run by using the `gst-launch-1.0` utility.
+
+
+
+The GStreamer facedetect plugin has two components. One component interfaces with the GStreamer framework, and the other links with the DNNDK, which provides C/C++ APIs for deep learning application programming. The build flow for the ZCU104 Smart Camera solution describes using this platform to build a DNNDK project.
+
+
+The platform is only provided with Xilinx ISP. For Regulus ISP, only the SD card images are available for evaluation.
+
+### 6.3.1. Build the DNNDK Project with the Xilinx ISP platform
+
+In the current release, the approach to building the Smart Camera project is available through the command line only. The GUI approach to building the DNNDK project in the Vitis software platform is not yet available.
+
+1. Download the package, and extract it to the directory you want to work in.
+2. Use a Linux command terminal and ``cd`` to the directory containing the ``zcu104_smart_camera_xilinxisp_2019_2`` package.
+3. ``cd`` to ``workspaces//dpu/prj/Vitis``.
+4. Set up the Vitis software platform:
+
+   ```
+   source <vitis_intstall_path>/installs/lin64/Vitis/2019.2/settings64.csh
+   source <vitis_intstall_path>/xbb/xrt/packages/setenv.csh
+   ```
+5. Run ``make KERNEL=DPU DEVICE=zcu104`` in the command line. This builds the DNNDK project for the Smart Camera platform.
+
+6. When the build completes, the images to be copied to ``sdcard`` are available in the following directories. Copy these images to ``sdcard``.
+
+* `workspaces/dpu/prj/Viti/binary_container_1/sd_card/BOOT.BIN`
+* `workspaces/dpu/prj/Viti/binary_container_1/sd_card/image.ub`
+* `workspaces/dpu/prj/Viti/binary_container_1/sd_card/dpu.xclbin`
+
+7. Copy the ``xmedia-ctl`` utilities from the ``workspaces`` package to ``sdcard``:
+
+* `cp workspaces/sdcard/xmedia-ctl <sdcard>`
+
+   The source to build the ``xmedia-ctl`` application is available under ``workspaces/xmedia-ctl``.
+
+### 6.3.1. Build the Libraries and GStreamer Plugin
+
+Copy the required prebuilt libraries that are present in the ``workspaces/sdcard`` directory. These can be copied directly to the ``sdcard`` directory for evaluating the Smart Camera platform:
+
+* `cp workspaces/sdcard/libn2cube.so <sdcard>`
+* `cp workspaces/sdcard/libhineon.so <sdcard>`
+* `cp workspaces/sdcard/libdpuaol.so <sdcard>`
+* `cp workspaces/sdcard/libgstxclallocator.so <sdcard>`
+* `cp workspaces/sdcard/libgstsdxbase.so <sdcard>`
+* `cp workspaces/sdcard/libxrtutils.so <sdcard>`
+* `cp workspaces/sdcard/libgstsdxfacedetect.so <sdcard>`
+* `cp workspaces/sdcard/libdpumodeldensebox.so <sdcard>`
+
+#### 6.3.1.1. Import Existing GStreamer Workspaces
+
+Follow the below steps to build ``libgstxclallocator.so``, ``libgstsdxbase.so``, ``libxrtutils.so``, ``libgstsdxfacedetect.so``, and the RTSP application. The model library `libdpumodeldensebox.so` is available as prebuilt only.
+
+1. Extract the sysroots by following the [Platform Build Instructions](design-file-hierarchy.md#42-platform-build-instructions). This extracts the following components:
+
+* ``environment-setup-aarch64-xilinx-linux``
+* ``site-config-aarch64-xilinx-linux``
+* ``sysroots``
+* ``version-aarch64-xilinx-linux``
+
+2. Set the ``SYSROOT`` path in the shell, or add the following code to your startup script:
+
+`setenv SYSROOT <sysrootextractdir>/sysroots/aarch64-xilinx-linux`
+
+3. Create your own workspace, and copy the contents of ``zcu104_smart_camera_xilinxisp_2019_2/workspaces/`` to your workspace.
+
+`cp -rf zcu104_smart_camera_xilinxisp_2019_2/workspaces/* <workspace>`
+
+4. Use ``cd`` to go to each of the projects, and then run the ``make`` command in a sequence to build the dependencies before building the facedetect plugin:
+
+* Run the ``make`` command inside ``xrtutils``. 
+* Run the ``make`` command inside ``gst/base/``.
+* Run the ``make`` command inside ``gst/allocators/``.
+            
+Respectively, these ``make`` commands generate ``libxrtutils.so``, ``libgstsdxbase.so``, and ``libgstxclallocator.so``. These are required for the facedetect plugin.
+   
+5. To build the facedetect plugin, ``cd`` to ``gstsdxfacedetect/src/`` and run the ``make`` command.
+
+**:pushpin: Note:** Ensure that the correct ``SYSROOT`` path is set in the respective Makefile before running the ``make`` command for each of the library projects.
+
+6. If you wish to modify the RTSP application, you can edit and build it using the ``make`` command.
+
+#### 6.3.2. Final Steps
+
+1. Copy the RTSP application to ``sdcard``:
+
+* `cp workspaces/sdcard/rtsp <sdcard>`
+
+2. Copy the ``demo.sh`` file to ``sdcard``:
+
+* `cp workspaces/sdcard/demo.sh <sdcard>`
+
+You are now ready to boot the device with the Smart Camera design.
+</details>
 
 :arrow_forward:**Next Topic:**  [7. Run the Application](run-application.md)
 

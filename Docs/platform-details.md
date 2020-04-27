@@ -2,7 +2,7 @@
             Read this page in other languages:<a href="../docs-jp/Docs/platform-details.md">日本語</a>    <table style="width:100%"><table style="width:100%">
   <tr>
 
-<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.3 (UG1265)</h1>
+<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>Vitis Software Platform: Embedded Vision Reference Platforms User Guide 2019.2 (UG1265)</h1>
 </th>
 
   </tr>
@@ -26,46 +26,50 @@
 
 # 8. Platform Details
 
-The below instructions refer to the `zcu102_rv_ss` platform. Follow the same instructions, replacing only the file name, for the `zcu104_rv_ss`, `zcu102_rv_min`, `zcu104_rv_min`, and `8-stream VCU + CNN` platforms.
+The below instructions refer to the ZCU104 Single Sensor platform. Follow the same instructions, replacing only the file name, for the 8-stream VCU + CNN and ZCU104 Smart Camera platforms.
 
 ## 8.1. Vivado Hardware Design
 
-The Vivado® hardware design is packaged inside the DSA located in the `hw` folder of the platform (example: `zcu102_rv_ss/hw/zcu102_rv_ss.dsa`). The DSA also includes the `hpfm` file that describes the available AXI interfaces, clocks, resets, and interrupts. To open the hardware design in Vivado, run the following command from the Tcl console:
+The Vivado® hardware design is packaged as source and XSA. Using platform sources to generate the pre-built platform, the XSA is generated in the `hw` folder of the platform (example: `zcu104_ss/hw/zcu104_ss.xsa`). The XSA also includes the `hpfm` file that describes the available AXI interfaces, clocks, resets, and interrupts. To open the hardware design in Vivado, run the following command from the Tcl console in Vivado:
 
 ```
-% open_dsa <platform>/hw/<platform>.dsa
+% cd <proj>/vivado
+% vivado
+% Run below command in vivado tcl console 
+source <pfm_name>_xsa.tcl
 ```
+Vivado will recreate the hardware block design. Feel free to check the details in hardware designs. The hardware design of a Vitis platform provides I/O interfaces, enable bus interfaces, clocks, and interrupts for acceleration kernels. Platform I/O details are described in  the [Overview](overview.md) chapter.
 
+## 8.2. PetaLinux Design
 
-## 8.2. PetaLinux BSP
-
-The PetaLinux BSP is located at `<platform>/sw/petalinux_bsp`. The `.hdf` file exported from the corresponding Vivado project is available in the `project-spec/hw-description/` subfolder inside the PetaLinux BSP.
+PetaLinux design is distributed as source with the platforms. The sources can be found at ``<proj>/petalinux`` for each of the platforms.
 
 To configure and build the PetaLinux BSP, run the following commands:
 
 ```
-% cd petalinux
-% petalinux-create -t project -s zcu102-prod-rv-ss.bsp -n bsp
-% petalinux-config --get-hw-description=../zcu102_base_trd/hw --oldconfig
+% cd <proj>/petalinux
+% petalinux-config --get-hw-description=../pre-built/<pfm>/hw/<pfm>.xsa --silentconfig
 % petalinux-build
 ```
 
-**:pushpin: NOTE** The `tmp` directory might relocate to a different folder, especially if your PetaLinux project is located on an NFS mount. Check your PetaLinux configuration.
+**:pushpin: NOTE** The `tmp` directory might relocate to a different folder, especially if your PetaLinux project is located on an NFS mount. Check your PetaLinux configuration at `<proj>/petalinux/project-spec/configs/config` to update the `CONFIG_TMP_DIR_LOCATION` switch.
 
-The generated output products are located inside the `images/linux/` subfolder. The relevant files that are packaged as part of the platform are listed below:
+The generated output products are located in the `<proj>/petalinux/images/linux/` subfolder. The relevant files that are packaged as part of the platform are listed below:
+
 * ``bl31.elf``
 * ``pmufw.elf``
 * ``u-boot.elf``
 * ``zynqmp_fsbl.elf``
 * ``image.ub``
 
-To generate the SDK/sysroot, run the following command:
+To generate the sysroot, run the following command:
 
 ```
 % petalinux-build -s
+% petalinux-package --sysroot -d ../
 ```
 
-The generated SDK installer will be located at `images/linux/sdk.sh`.
+The generated sysroot installer is located in ``<proj>/petalinux/images/linux/sdk.sh``. The sysroot is generated under the directory ``../``. Alternatively, the sysroot can be downloaded from [Embedded Platforms page](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html).
 
 <hr/>
 

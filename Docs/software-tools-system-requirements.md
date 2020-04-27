@@ -2,7 +2,7 @@
             Read this page in other languages:<a href="../docs-jp/Docs/software-tools-system-requirements.md">日本語</a>    <table style="width:100%"><table style="width:100%">
   <tr>
 
-<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.3 (UG1265)</h1>
+<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>Vitis Software Platform: Embedded Vision Reference Platforms User Guide 2019.2 (UG1265)</h1>
 </th>
 
   </tr>
@@ -28,12 +28,12 @@
 
 ## 3.1. Hardware
 
-## 3.1.1. Single-Sensor Platform
+## 3.1.1. Single Sensor Platform
 
 **Required:**
-* [ZCU104 Evaluation Board](https://www.xilinx.com/products/boards-and-kits/zcu104.html) or [ZCU102 Evaluation Board](https://www.xilinx.com/products/boards-and-kits/ek-u1-zcu102-g.html) (rev 1.0 with production silicon for ZCU102)
+* [ZCU104 Evaluation Board Rev 1.0](https://www.xilinx.com/products/boards-and-kits/zcu104.html)
 * Micro USB cable, connected to laptop or desktop computer for the terminal emulator
-* SD card (for ZCU102) or Micro SD card (for ZCU104)
+* Micro SD card
 
 **Optional (required for live I/O examples):**
 * Monitor with DisplayPort or HDMI input supporting one of the following resolutions:
@@ -44,10 +44,6 @@
 * [Leopard LI-IMX274MIPI-FMC](https://leopardimaging.com/product/li-imx274mipi-fmc/)
 * [Stereolabs ZED USB stereo camera](https://zedstore.stereolabs.com/products/zed)
 * [e-con Systems See3CAM_CU30_CHL_TC USB camera](https://www.e-consystems.com/ar0330-lowlight-usb-cameraboard.asp)
-* [USB3 Micro B adapter](http://www.whizzsystems.com/usb3-micro-b-plug-adapter)
-  * Adapter shipped with ZCU102 rev 1.0 and production silicon.
-  * The adapter needs to be purchased separately from Whizz for ZCU102 rev 1.0 with ES2 silicon.
-  * This adapter is _not_ required for the ZCU104 board.
 * HDMI video source with output supporting one of the following resolutions:
   * 3840x2160
   * 1920x1080
@@ -56,47 +52,78 @@
 ## 3.1.2. 8-Stream VCU + CNN Platform
 
 **Required:**
-* [ZCU104 Evaluation Board](https://www.xilinx.com/products/boards-and-kits/zcu104.html)
+* [ZCU104 Evaluation Board Rev 1.0](https://www.xilinx.com/products/boards-and-kits/zcu104.html)
 * Micro USB cable, connected to laptop or desktop computer for the terminal emulator
-* Micro SD card
-* Monitor with HDMI input supporting one of the following resolutions:
-  * 1600x1200
+* Micro SD card (>= 4 GB)
+* Monitor with HDMI input supporting the following resolutions:
   * 1920x1080
 * HDMI cable
+* 8-port Gigabit Ethernet switch (for example, TP-LINK TL-SG108E)
+* Four IP cameras capable of sending H264 1080p@15fps live video streams over RTSP over Ethernet
+* Windows 10 laptop
+* Six Ethernet cables
+
+## 3.1.3. ZCU104 Smart Camera Platform
+
+**Required:**
+* [ZCU104 Evaluation Board](https://www.xilinx.com/products/boards-and-kits/zcu104.html)
+* [Leopard LI-IMX274MIPI-FMC](https://leopardimaging.com/product/li-imx274mipi-fmc/)
+* Micro USB cable, connected to laptop or desktop computer for the terminal emulator
+* Micro SD card
+* Monitor with DP input supporting one of the following resolutions:
+  * 3840x2160
+  * 1920x1080
+* DisplayPort cable (DP certified)
 
 ## 3.2. Software
 
 **Required:**
-* Linux or Windows host machine with a minimum memory of 32GB for tool flow tutorials (see [UG1238](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2018_3/ug1238-sdx-rnil.pdf) for supported OS version).
-* [SDSoC™ Development Environment](https://www.xilinx.com/products/design-tools/software-zone/sdsoc.html) version 2018.3 (see [UG1238](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2018_3/ug1238-sdx-rnil.pdf) for installation instructions).
+(see [UG1416](https://www.xilinx.com/html_docs/xilinx2019_2/vitis_doc/vhc1571429852245.html) for installation instructions).
+* [Vitis™ Software Platform](https://www.xilinx.com/products/design-tools/vitis/vitis-platform.html) version 2019.2.
 * Serial terminal emulator (for example, Tera Term)
 * [7zip](http://www.7-zip.org/) utility to extract the design .zip file (Windows only).
 
   **:pushpin: CAUTION:** Other zip utilities might produce incorrect results!
 
 * Design .zip files:
-  * Single-sensor ZCU102 production silicon: [zcu102-rv-ss-2018-3.zip](https://www.xilinx.com/member/forms/download/design-license-xef.html?filename=zcu102-rv-ss-2018-3.zip)
-  * Single-sensor ZCU104 production silicon: [zcu104-rv-ss-2018-3.zip](https://www.xilinx.com/member/forms/download/design-license-xef.html?filename=zcu104-rv-ss-2018-3.zip)
-  * MIN ZCU102 production silicon: [zcu102-rv-min-2018-3.zip](https://www.xilinx.com/member/forms/download/design-license-xef.html?filename=zcu102-rv-min-2018-3.zip)
-  * MIN ZCU104 production silicon: [zcu104-rv-min-2018-3.zip](https://www.xilinx.com/member/forms/download/design-license-xef.html?filename=zcu104-rv-min-2018-3.zip)
-  * The design .zip file for the 8-stream VCU + CNN ZCU104 production silicon is not yet available.
+   * Single Sensor ZCU104 platform and demo for Vitis:
+            [zcu104_ss_2019_2_platform.zip](https://www.xilinx.com/member/forms/download/design-license-zcu104-rv-ss.html?filename=zcu104_ss_2019_2_platform.zip),
+            [zcu104_ss_2019_2_demo.zip](https://www.xilinx.com/member/forms/download/design-license-zcu104-rv-ss.html?filename=zcu104_ss_2019_2_demo.zip)
+ 
+  * 8-stream VCU + CNN ZCU104 platform and demo for Vitis:
+            [zcu104_vcu_ml_2019_2_platform.zip](https://www.xilinx.com/member/forms/download/design-license-zcu104-vcu-8channel.html?filename=zcu104_vcu_ml_2019_2_platform.zip),
+            [zcu104_vcu_ml_2019_2_demo.zip](https://www.xilinx.com/member/forms/download/design-license-zcu104-vcu-8channel.html?filename=zcu104_vcu_ml_2019_2_demo.zip)
+
+  * ZCU104 Smart Camera platform and demo for Vitis:
+            [zcu104_smart_camera_xilinxisp_2019_2_platform.zip](https://www.xilinx.com/member/forms/download/design-license-zcu104-smart-camera.html?filename=zcu104_smart_camera_xilinxisp_2019_2_platform.zip),
+            [zcu104_smart_camera_xilinxisp_2019_2_demo.zip](https://www.xilinx.com/member/forms/download/design-license-zcu104-smart-camera.html?filename=zcu104_smart_camera_xilinxisp_2019_2_demo.zip)
+    
+   * ZCU104 Smart Camera demo for Vitis with Regulus ISP:
+            [zcu104_smart_camera_regulusisp_2019_2.zip](https://www.xilinx.com/member/forms/download/design-license-zcu104-smart-camera-regulusisp.html?filename=zcu104_smart_camera_regulusisp_2019_2.zip)
+
+**:pushpin: Note:**
+The platform sources used to generate the above pre-built platforms can be found at the [platform generation sources web page](https://github.com/Xilinx/Vitis_Embedded_Platform_Source/tree/2019.2/Xilinx_Official_Platforms). After you have installed the Vitis software platform and the PetaLinux tools, the pre-built platforms can be generated by following the Read Me instructions given in the source page.
 
 ## 3.3. Licensing
 
-  **:pushpin: IMPORTANT:** Certain material in this reference design is separately licensed by third parties and may be subject to the GNU General Public License version 2, the GNU Lesser General License version 2.1, or other licenses. The [Third Party Library Sources](https://www.xilinx.com/member/forms/download/design-license-xef.html?filename=zcu10x-rv-ss-2018-3-tpl-sources.zip) file provides a copy of separately licensed material that is not included in the reference design.
+  **:pushpin: IMPORTANT:** Certain material in this reference design is separately licensed by third parties and may be subject to the GNU General Public License version 2, the GNU Lesser General License version 2.1, or other licenses. The Third Party Library Sources files provide a copy of separately licensed material that is not included in the platform designs. For each platorm design mentioned above, there is a corresponding Third Party Library Sources folder with the name ``DesignName-ThirdPartySources.zip``
 
-You only need the SDSoC license to build the design. You can evaluate it for 60 days, or purchase it [here](https://www.xilinx.com/products/design-tools/software-zone/sdsoc.html#buy).
+### 3.3.1 Third Party Sources Zip Files:
+  
+   * Single Sensor ZCU104 platform for the Vitis environment:  [zcu104_ss_ThirdPartySources.zip](https://www.xilinx.com/member/forms/download/design-license-zcu104-rv-ss.html?filename=zcu104_ss_ThirdPartySources.zip)
+  * 8-stream VCU + CNN ZCU104 platform for the Vitis environment: [zcu104_vcu_ml_2019_2_ThirdPartySources.zip](https://www.xilinx.com/member/forms/download/design-license-zcu104-vcu-8channel.html?filename=zcu104_vcu_ml_2019_2_ThirdPartySources.zip)
+  * ZCU104 Smart Camera platform for the Vitis environment with Xilinx ISP: [zcu104_smart_camera_xilinxisp_ThirdPartySources_2019_2.zip](https://www.xilinx.com/member/forms/download/design-license-zcu104-smart-camera.html?filename=zcu104_smart_camera_xilinxisp_ThirdPartySources_2019_2.zip)
+  * ZCU104 Smart Camera platform for the Vitis environment with Regulus ISP: [zcu104_smart_camera_regulusisp_ThirdPartySources_2019_2.zip](https://www.xilinx.com/member/forms/download/design-license-zcu104-smart-camera-regulusisp.html?filename=zcu104_smart_camera_regulusisp_ThirdPartySources_2019_2.zip)
 
-### 3.3.1. Steps to Generate the License
+You need the Vitis tool to build the Single Sensor, 8-Stream VCU + CNN, and Smart Camera designs. You can access it from [here](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vitis.html).
+
+### 3.3.2. Downloading the Vitis Software Platform
+
+If you experience any issues with the following steps, refer to the [Vitis area on the Xilinx website](https://www.xilinx.com/member/vitis.html).
+
 1. Log in [here](http://www.xilinx.com/getproduct) with your work e-mail address (if you do not yet have an account, follow the steps listed under Create Account).
-1. Generate a license from Create New Licenses by checking **SDSoC Environment, 60 Day Evaluation License**.
-
-   ![](images/license.png)
-
-1. Under system information, give the host details.
-1. Proceed until you get the license agreement and accept it.
-1. The license (`.lic` file) will be sent to the email mentioned in the login details.
-1. Copy the license file locally and give the same path in the SDSoC license manager.
+2. Download the Vitis software platform from the download page [here](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vitis.html).
+3. Download the PetaLinux tools available [here](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools.html).
 
 ## 3.4. Compatibility
 

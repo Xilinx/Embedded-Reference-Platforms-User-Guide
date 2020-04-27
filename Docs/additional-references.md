@@ -2,7 +2,7 @@
             Read this page in other languages:<a href="../docs-jp/Docs/additional-references.md">日本語</a>    <table style="width:100%"><table style="width:100%">
   <tr>
 
-<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION Getting Started Guide 2018.3 (UG1265)</h1>
+<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>Vitis Software Platform: Embedded Vision Reference Platforms User Guide 2019.2 (UG1265)</h1>
 </th>
 
   </tr>
@@ -26,9 +26,9 @@
 
 # 10. Additional References
 
-* [Base TRD User Guide](https://www.xilinx.com/support/documentation/boards_and_kits/zcu102/2018_3/ug1221-zcu102-base-trd.pdf): Contains information about system, software and hardware architecture which is similar to the reVISION platform.
+* [Base TRD User Guide](https://www.xilinx.com/support/documentation/boards_and_kits/zcu102/2019_2/ug1221-zcu102-base-trd.pdf): Contains information about system, software and hardware architecture which is similar to the embedded reference platforms.
 * [Xilinx OpenCV User Guide](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2018_3/ug1233-xilinx-opencv-user-guide.pdf): Contains a detailed description of Xilinx OpenCV functions and file I/O design examples.
-* [Xilinx Fast OpenCV on Github](https://github.com/Xilinx/xfopencv/tree/2018.3_release)
+* [Xilinx Fast OpenCV on Github](https://github.com/Xilinx/Vitis_Libraries/tree/master/vision/L1)
 * Xilinx Linux Drivers:
   * [Frame Buffer Write](http://www.wiki.xilinx.com/Video%20Framebuffer%20Write)
   * [Video PHY](http://www.wiki.xilinx.com/Xilinx%20Phy%20VideoPhy%20Driver)
@@ -41,10 +41,11 @@
   * [HDMI RX](http://www.wiki.xilinx.com/Xilinx%20V4L2%20hdmirx%20driver)
   * [Xilinx DRM](http://www.wiki.xilinx.com/Xilinx%20DRM%20KMS%20driver)
   * [Video Mixer](https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/69140488/Video+Mixer+2018.1+2018.3)
+  * [Multi-Scaler](https://www.xilinx.com/products/intellectual-property/v-multi-scaler.html)
   * [HDMI TX](http://www.wiki.xilinx.com/Xilinx%20DRM%20KMS%20HDMI-Tx%20Driver)
   * [DP159](http://www.wiki.xilinx.com/Misc%20DP159%20Driver)
   * [SI5324](http://www.wiki.xilinx.com/CCF%20SI5324%20Driver)
-
+  * [IMX274](https://leopardimaging.com/product/li-imx274mipi-fmc)
 
 <hr/>
 
