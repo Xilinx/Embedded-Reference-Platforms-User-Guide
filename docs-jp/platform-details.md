@@ -1,8 +1,8 @@
-<p align="right">
+﻿<p align="right">
             別の言語で表示: <a href="../platform-details.md">英語</a>    <table style="width:100%"><table style="width:100%">
   <tr>
 
-<th width="100%" colspan="6"><img src="https://www.xilinx.com/content/dam/xilinx/imgs/press/media-kits/corporate/xilinx-logo.png" width="30%"/><h1>reVISION 入門ガイド 2018.2</h1>
+<th width="100%" colspan="6"><img src="https://github.com/Xilinx/Image-Collateral/blob/main/xilinx-logo.png?raw=true" width="30%"/><h1>reVISION 入門ガイド 2018.2</h1>
 </th>
 
   </tr>
