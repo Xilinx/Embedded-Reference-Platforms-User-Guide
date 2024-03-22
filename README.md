@@ -33,7 +33,7 @@ The Vitis™ unified software platform is a new software development product bas
 This guide covers the following embedded vision reference platforms for the Vitis environment. These reference platforms enable you to build computer vision and machine learning accelerators using Vitis platforms which have video source and video sink pipelines running on Zynq® SoCs and MPSoCs:
 
   - ZCU104 Single Sensor
-  - 8-stream VCU + CNN
+  - 8-stream VCU and CNN
   - ZCU104 Smart Camera
 
 These Vitis embedded platforms can be generated using [sources](https://github.com/Xilinx/Vitis_Embedded_Platform_Source/tree/2019.2). The [pre-built platforms](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html) are also available if you wish to use them directly to build the accelerators.
